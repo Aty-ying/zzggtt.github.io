@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-03-11T08:56:44.343Z</updated>
+    <updated>2020-03-11T08:59:54.668Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
-    <subtitle>&lt;img src=1&gt;</subtitle>
+    <subtitle>温故而知新</subtitle>
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
