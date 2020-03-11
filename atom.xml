@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-03-11T09:17:19.329Z</updated>
+    <updated>2020-03-11T15:54:30.885Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,105 +10,4 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
-    <entry>
-        <title type="html"><![CDATA[Study Content]]></title>
-        <id>https://zzggtt.github.io/post/study-content/</id>
-        <link href="https://zzggtt.github.io/post/study-content/">
-        </link>
-        <updated>2020-03-11T09:06:21.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="渗透测试">渗透测试</h2>
-<h4 id="1信息收集">1.信息收集</h4>
-<ul>
-<li>
-<p>whois</p>
-<ul>
-<li>SEO综合查询</li>
-<li>whois信息</li>
-<li>同备案</li>
-<li>公司信息</li>
-</ul>
-</li>
-<li>
-<p>子域名收集</p>
-</li>
-<li>
-<p>Github\Gitee\Coding 第三方代码托管信息查询</p>
-</li>
-<li>
-<p>站点信息</p>
-<ul>
-<li>CMS</li>
-<li>C段查询</li>
-<li>旁站查询</li>
-</ul>
-</li>
-</ul>
-<h4 id="2漏洞扫描工具">2.漏洞扫描工具</h4>
-<ul>
-<li>
-<p>AWVS</p>
-</li>
-<li>
-<p>Xray</p>
-</li>
-<li>
-<p>Nessus</p>
-</li>
-</ul>
-<h4 id="3漏洞基础知识">3.漏洞基础知识</h4>
-<ul>
-<li>弱口令</li>
-<li>XSS</li>
-<li>CSRF</li>
-<li>IDOR</li>
-<li>逻辑漏洞</li>
-<li>文件包含、文件读取</li>
-<li>文件上传</li>
-<li>代码执行、命令执行</li>
-<li>SSRF</li>
-<li>CRLF</li>
-<li>XXE</li>
-<li>SQL Injection</li>
-<li>SSTI</li>
-<li>条件竞争</li>
-<li>目录遍历</li>
-<li>未授权访问</li>
-</ul>
-<h4 id="4常用工具">4.常用工具</h4>
-<ul>
-<li>
-<p>BurpSuite</p>
-</li>
-<li>
-<p>SQLMap</p>
-</li>
-<li>
-<p>浏览器Console</p>
-</li>
-</ul>
-<h4 id="5流行框架中间件cms漏洞">5.流行框架\中间件\CMS漏洞</h4>
-<p>5.1 Struts2<br>
-5.2 Jboss<br>
-5.3 Weblogic<br>
-5.4 Coremail<br>
-5.5 Shiro<br>
-5.6 Fastjson<br>
-5.7 Spring Boot Actuator</p>
-<h4 id="6代码审计先学习语言基础">6.代码审计（先学习语言基础）</h4>
-<p>6.1 PHP代码审计<br>
-6.2 JavaScript代码审计<br>
-6.3 Java代码审计<br>
-6.4 Python代码审计<br>
-6.5 ASP.NET代码审计</p>
-<h4 id="7其他端渗透">7.其他端渗透</h4>
-<p>7.1 APP<br>
-7.1.1 APP逆向<br>
-7.1.2 APP接口获取<br>
-7.2 PC客户端<br>
-7.2.1 PC客户端内存欺骗逻辑漏洞<br>
-7.2.2 PC客户端接口获取</p>
-<h4 id="8后渗透">8.后渗透</h4>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1583917695577.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
 </feed>
