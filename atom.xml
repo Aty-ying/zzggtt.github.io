@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-03-11T15:54:55.180Z</updated>
+    <updated>2020-03-11T15:55:59.965Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,4 +10,207 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[XSS Payload]]></title>
+        <id>https://zzggtt.github.io/post/study-content/</id>
+        <link href="https://zzggtt.github.io/post/study-content/">
+        </link>
+        <updated>2020-03-11T09:06:21.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="xss挖掘">xss挖掘</h2>
+<h3 id="10-反射型xss的挖掘">1.0 反射型xss的挖掘</h3>
+<h4 id="input">input</h4>
+<p>从反射型XSS的特性上来说，我们应该检查应用程序的请求中传递的<strong>每个参数</strong>。</p>
+<p>但是参数并不局限于我们在URL上所看见的，下面是一些寻找<strong>隐藏参数</strong>的思路：</p>
+<ul>
+<li>check view source</li>
+<li>links in the js files</li>
+<li>parameters from the error page</li>
+<li>github</li>
+<li>shodan</li>
+</ul>
+<p>一些<strong>案例</strong>：</p>
+<blockquote>
+<ul>
+<li>check view source：</li>
+</ul>
+<p><a href="https://medium.com/@modam3r5/reflected-xss-at-https-photos-shopify-com-ea696db3915c">Reflected XSS at hidden parameter</a></p>
+<ul>
+<li>links in the js files</li>
+</ul>
+<p><a href="https://medium.com/@fbotes2/try-harder-for-xss-7aa3657255a1">‘Try-Harder’ for XSS</a></p>
+<ul>
+<li>parameters from the error page</li>
+</ul>
+<p><a href="https://medium.com/@gguzelkokar.mdbf15/xss-on-sony-subdomain-feddaea8f5ac">XSS on Sony subdomain</a></p>
+<p><a href="https://noobe.io/articles/2019-06/reflected-xss-on-error-page">Reflected XSS on Error Page</a></p>
+<ul>
+<li>github</li>
+</ul>
+<p><a href="https://medium.com/@navne3t/150-xss-at-error-page-of-respository-code-4fc628892742">XSS at Respository Code Github</a></p>
+<ul>
+<li>shodan</li>
+</ul>
+<p><a href="https://medium.com/bugbountywriteup/how-i-found-xss-by-searching-in-shodan-6943b799e648">How I Found XSS By Searching In Shodan</a></p>
+</blockquote>
+<p>一些反射xss案例：</p>
+<blockquote>
+<p>​	<a href="https://medium.com/@pflash0x0punk/how-paypal-helped-me-to-generate-xss-9408c0931add">parameter size caused xss</a></p>
+<p>​	<a href="https://medium.com/@mehulcodes/stealing-login-credentials-with-reflected-xss-7cb450bf5710">Stealing login credentials with Reflected XSS</a></p>
+<p>​	<a href="https://medium.com/@valakeyur/xss-in-edmodo-within-5-minute-my-first-bug-bounty-889e3da6167d">XSS in Edmodo within 5 Minute</a></p>
+<p>​	<a href="https://medium.com/@parthshah14031998/how-i-stumbled-upon-a-stored-xss-my-first-bug-bounty-story-2793300d82bb">How I stumbled upon a Stored XSS delete function</a></p>
+<p>​	<a href="https://medium.com/@pflash0x0punk/how-paypal-helped-me-to-generate-xss-9408c0931add">How PayPal helped me to generate XSS</a></p>
+</blockquote>
+<h4 id="output">output</h4>
+<p>经过上一步，我们获得了许多的输入点，是否可以挖掘出xss漏洞，却由输出的环境而决定。</p>
+<pre><code class="language-html">- HTML标签之间：&lt;div id=&quot;&quot;body&quot;&gt; 【输出】&lt;/div&gt;
+
+- HTML标签之内：&lt;input type=&quot;text&quot; vaule=&quot;【输出】&quot;&gt;
+
+- 成为JavaScript代码的值：&lt;script&gt;a=&quot;【输出】&quot;;....&lt;/script&gt;
+
+- 成为CSS代码的值：&lt;style&gt;body{font-size:【输出】;.....}&lt;/style&gt;
+</code></pre>
+<ul>
+<li>
+<h5 id="输出在html标签之间">输出在HTML标签之间</h5>
+<p>首先我们得了解输出的环境：输出点在哪个标签之间、该标签的特性。</p>
+<blockquote>
+<ul>
+<li>可执行脚本的标签：</li>
+</ul>
+<p>大多数标签之间都是可执行脚本代，我们直接插入：</p>
+<pre><code class="language-html">&lt;script&gt;alert(1)&lt;/script&gt;
+</code></pre>
+<p>只要没有对&lt;&gt;进行过滤，我们就可以成功的插入payload。</p>
+<ul>
+<li>不可执行脚本的标签</li>
+</ul>
+<p>有些标签之间它是无法执行脚本的：</p>
+<pre><code class="language-html">&lt;title&gt;&lt;/title&gt;
+&lt;textarea&gt;&lt;/textarea&gt;
+&lt;xmp&gt;&lt;/xmp&gt;
+&lt;iframe&gt;&lt;/iframe&gt;
+&lt;noscript&gt;&lt;/noscript&gt;
+&lt;noframe&gt;&lt;/noframe&gt;
+&lt;plaintext&gt;&lt;/plaintext&gt;
+.......
+</code></pre>
+<p>这种情况下，我们只有采取闭合标签的方式才能进一步进行构造了。</p>
+<ul>
+<li>不可嵌套的标签：</li>
+</ul>
+<pre><code class="language-html">&lt;script&gt;&lt;/script&gt;
+&lt;style&gt;&lt;/style&gt;
+</code></pre>
+<p>这两类标签之间是无法嵌套其他标签的，除了闭合以外，还可以根据它们本身的特性来进行构造。</p>
+</blockquote>
+</li>
+<li>
+<h5 id="输出在html标签之内">输出在HTML标签之内</h5>
+<ul>
+<li>
+<p>输出在src、href、action等属性内</p>
+<pre><code class="language-html">&lt;a href=&quot;【输出】&quot;&gt;test&lt;/a&gt;
+</code></pre>
+<p>通常除了闭合以外，我们还可以通过伪协议的形式构造payload。</p>
+</li>
+<li>
+<p>输出在on*事件内</p>
+<pre><code class="language-html">&lt;a href=&quot;#&quot; onerror=&quot;【输出】&quot;&gt;test&lt;/a&gt;
+</code></pre>
+<p>on*事件的环境就是脚本环境，在这里的构造方式就简单多了。</p>
+<p>但是HTML标签有几十种，它们支持的on事件却尽不相同，而且不同的on事件的利用复杂的也不同。要视实际环境而定。</p>
+</li>
+<li>
+<p>输出在style属性内</p>
+<p>现在在style属性中执行脚本是IE浏览器的特性了，只要能注入expression关键词和进行适当的闭合就可以构造xss payload了。</p>
+</li>
+<li>
+<p>输出在其他属性内</p>
+<p>通常的思路也就是闭合了。</p>
+</li>
+</ul>
+</li>
+<li>
+<h5 id="成为javascript代码的值">成为JavaScript代码的值</h5>
+</li>
+<li>
+<h5 id="成为css代码的值">成为CSS代码的值</h5>
+</li>
+</ul>
+<p><strong>几个案例</strong>：</p>
+<blockquote>
+<p><a href="https://medium.com/@madguyyy/reflected-xss-in-ebay-com-60a9d61e26cd">Reflected XSS in Ebay.com</a></p>
+<p><a href="https://medium.com/@godofdarkness.msf/reflected-xss-in-at-t-7f1bdd10d8f7">Reflected XSS In AT&amp;T</a></p>
+<p><a href="https://medium.com/@valakeyur/xss-in-edmodo-within-5-minute-my-first-bug-bounty-889e3da6167d">XSS in Edmodo within 5 Minute </a></p>
+<p><a href="https://medium.com/@fbotes2/try-harder-for-xss-7aa3657255a1">‘Try-Harder’ for XSS</a></p>
+</blockquote>
+<p>总结一下：</p>
+<blockquote>
+<p>要合理的利用输出环境的上下文来进行payload的构造。主要关注以下几点：</p>
+<ul>
+<li>输出点环境</li>
+<li>防御情况</li>
+</ul>
+<p>通过不断的测试，找出可用应用在对应场景的利用payload。</p>
+</blockquote>
+<h3 id="20-存储型xss挖掘">2.0 存储型xss挖掘</h3>
+<p>对于存储型xss，输入点一般就是表单的提交，然后进入服务端存储中，最终会在某个页面上输出。</p>
+<p>而这个输出到底在哪里就是存储型xss挖掘的难题了。</p>
+<h4 id="编码-转义数据需要过滤但是未过滤或过滤不完整">【编码、转义】数据需要过滤，但是未过滤或过滤不完整。</h4>
+<blockquote>
+<p>​	<a href="https://medium.com/@reiss.r/writing-my-medium-blog-to-complete-account-takeover-e65d455c16b">XSS in Medium</a></p>
+<p>​	<a href="https://medium.com/@kang_ali/stored-xss-on-techprofile-microsoft-d21757588cc1">Stored XSS on Techprofile Microsoft</a></p>
+<p><a href="https://medium.com/@ZishanAdThandar/just-5-minute-to-get-my-2nd-stored-xss-on-edmodo-com-fe2ee559e00d">Just 5 minute to get my 2nd stored XSS on Edmodo.com</a></p>
+<p>​	<a href="https://medium.com/@futaacmcyber/stored-xss-on-edmodo-11a3fbc6b6d0">Stored XSS on Edmodo</a></p>
+<p>​	<a href="https://medium.com/@rohanchavan/a-unique-xss-scenario-1000-bounty-347f8f92fcc6">A Unique XSS Scenario in SmartSheet</a></p>
+<p>​	<a href="https://www.hackerinside.me/2018/11/critical-stored-xss-vulnerability.html">Stored XSS Vulnerability in Jotform</a></p>
+<p>​	<a href="https://medium.com/@rohanchavan/100-bounty-in-300-seconds-isnt-bad-4f4112c102ef">$100 Bounty in 300 seconds isn’t bad </a></p>
+<p>​</p>
+</blockquote>
+<h4 id="黑白名单业务需要使得只能过滤部分数据但是过滤规则不完整导致被绕过">【黑白名单】业务需要使得只能过滤部分数据，但是过滤规则不完整，导致被绕过。</h4>
+<blockquote>
+<p>​	[xss on Outlook](https://medium.com/@elmrhassel/xss-stored-on-outlook-web-outlook-and	roid-app-ad4bd46b8823)</p>
+<p>​	<a href="https://medium.com/@schopath/yeah-i-got-p2-in-1-minute-stored-xss-via-markdown-editor-7872dba3f158">Stored XSS via Markdown Editor</a></p>
+<p>​	<a href="https://apapedulimu.click/multiple-stored-xss-on-tokopedia/">Stored XSS On Complain Product</a></p>
+<p>​	<a href="https://www.hackerinside.me/2018/09/stored-xss-vulnerability-in-tumblr.html">Stored XSS Vulnerability in Tumblr</a></p>
+<p>​	<a href="https://medium.com/@jonathanbouman/stored-xss-unvalidated-embed-at-medium-com-528b0d6d4982">Persistent XSS at Medium.com</a></p>
+<p>​</p>
+</blockquote>
+<h4 id="filepload">Filepload：</h4>
+<blockquote>
+<ul>
+<li><strong>Content-Type：</strong></li>
+</ul>
+<p><a href="https://medium.com/@dekeeu/reposted-2017-linkedin-hackers-experience-8465c1848c88">LinkedIn Hacker’s Experience</a></p>
+<ul>
+<li>
+<p><strong>filename=“xxx.extension”</strong></p>
+</li>
+<li>
+<p>extension：</p>
+<p><a href="https://medium.com/@maxpasqua/xss-in-oculus-rifts-cdn-f5bac5ec7b9c">XSS in Oculus Rifts CDN</a></p>
+<p><a href="https://medium.com/@maxpasqua/xss-in-facebook-cdn-through-ar-studio-effects-6d3a670aa7fe">XSS in Facebook CDN through AR Studio Effects</a></p>
+<p><a href="https://anotherhackerblog.com/exploiting-file-uploads-pt1/">Exploiting File Uploads</a>【这篇思路很好】</p>
+</li>
+<li>
+<p>xxx</p>
+<p>文件的名称</p>
+</li>
+<li>
+<p><strong>Metada-xss</strong>：</p>
+</li>
+</ul>
+<p>我们在上传的时候也要测一下这个位置，可以用exiftool修改metada头，进行测试：</p>
+<pre><code class="language-html">exiftool -Artist=’ “&gt;&lt;img src=1 onerror=alert(document.domain)&gt;’ poc.jpg
+</code></pre>
+</blockquote>
+<h2 id="xss利用">xss利用</h2>
+<blockquote>
+<p><a href="https://gauravnarwani.com/admin-hijacked-by-sea-surf-pirates/">Stored XSS -&gt; CSRF -&gt; Admin Account Takeover</a></p>
+<p><a href="https://gauravnarwani.com/how-i-xssed-admin-account/">How I XSSed Admin Account</a></p>
+<p><a href="https://medium.com/@nandwanajatin25/story-of-a-stored-xss-to-full-account-takeover-vulnerability-n-a-to-accepted-8478aa5e0d8e">stored xss to full account takeover</a></p>
+</blockquote>
+]]></content>
+    </entry>
 </feed>
