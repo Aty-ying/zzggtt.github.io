@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-03-12T03:35:00.504Z</updated>
+    <updated>2020-03-12T03:37:04.252Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[How to prevent xss attacks]]></title>
+        <id>https://zzggtt.github.io/post/how-to-prevent-xss-attacks/</id>
+        <link href="https://zzggtt.github.io/post/how-to-prevent-xss-attacks/">
+        </link>
+        <updated>2020-03-12T03:35:45.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="1-到达时过滤输入">1. 到达时过滤输入</h4>
+<p>在对输入的数据进行处理和存储之前，应进行严格的过滤和验证。</p>
+<ul>
+<li><strong>始终遵循白名单优先于黑名单的做法</strong></li>
+<li><strong>waf</strong></li>
+</ul>
+<h4 id="2-在输出上编码数据">2. 在输出上编码数据</h4>
+<ul>
+<li>
+<p><strong>根据输出的环境进行编码转义</strong></p>
+<p>根据数据的环境的解析顺序来进行正确的编码。</p>
+</li>
+<li>
+<p><strong>固定字符编码</strong></p>
+<p>在HTML文档中，可以指定meta标签：&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html&quot;;charset=&quot;UTF-8&quot;&gt;</p>
+</li>
+</ul>
+<h4 id="3-使用适当的http响应头">3. 使用适当的HTTP响应头</h4>
+<p>为了防止HTTP响应中不包含任何HTML或JavaScript的XSS，可以使用Content-Type和X-Content-Type-Options标头来确保浏览器以您期望的方式解释响应。</p>
+<p><strong>推荐的http响应头</strong>：</p>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1583984212583.png" alt="" loading="lazy"></figure>
+<h4 id="4实施有效的csp内容安全策略">4.实施有效的CSP（内容安全策略）</h4>
+<p>CSP 或内容安全策略将在浏览器上强制执行策略，指定浏览器应该加载哪些资源，浏览器</p>
+<p>应该从哪里加载资源以及通过指令进行资源定义，指定资源加载行为。</p>
+<h4 id="5-禁止trace">5. 禁止TRACE</h4>
+<p>TRACE 是一种用于调试的 HTTP 方法，将反射来自客户端的请求头，在 HTTP 响应中返</p>
+<p>回给客户端。使用 TRACE 方法在请求头进行注入可以导致 XSS。</p>
+<h4 id="6-防止crlf注入">6. 防止CRLF注入</h4>
+<p>对所有用户提供的数据在它们传递通过 HTTP 头前进行正确的清洁和编码。CRLF 注入可</p>
+<p>以摧毁和绕过 CSP，X-XSS 等所有的安全响应头</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[XSS Payload]]></title>
         <id>https://zzggtt.github.io/post/study-content/</id>
