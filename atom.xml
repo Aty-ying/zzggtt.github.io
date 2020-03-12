@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-03-12T03:37:04.252Z</updated>
+    <updated>2020-03-12T03:43:57.652Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -46,6 +46,37 @@
 <h4 id="6-防止crlf注入">6. 防止CRLF注入</h4>
 <p>对所有用户提供的数据在它们传递通过 HTTP 头前进行正确的清洁和编码。CRLF 注入可</p>
 <p>以摧毁和绕过 CSP，X-XSS 等所有的安全响应头</p>
+<p><strong>参考资料：</strong></p>
+<blockquote>
+<ul>
+<li>浏览器加载、解析、渲染的过程：</li>
+</ul>
+<p>https://blog.csdn.net/XIAOZHUXMEN/article/details/52014901?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task</p>
+<ul>
+<li>
+<p>编码、转义：</p>
+<p>HTML url编码：https://www.runoob.com/tags/html-urlencode.html</p>
+<p>HTML实体编码：https://www.w3school.com.cn/html/html_entities.asp</p>
+<p>JavaScript特殊字符转义：https://www.w3school.com.cn/js/js_special_characters.asp?tdsourcetag=s_pctim_aiomsg</p>
+</li>
+<li>
+<p>浏览器编解码的过程：</p>
+<p>https://blog.csdn.net/u010726042/article/details/76259398</p>
+</li>
+<li>
+<p>字符集和字符编码、解码</p>
+</li>
+</ul>
+<p>https://www.cnblogs.com/skynet/archive/2011/05/03/2035105.html</p>
+<ul>
+<li>CSP</li>
+</ul>
+<p>https://portswigger.net/web-security/cross-site-scripting/content-security-policy</p>
+<ul>
+<li>《给开发者的终极XSS防护备忘录》</li>
+</ul>
+<p>https://xz.aliyun.com/t/1132/</p>
+</blockquote>
 ]]></content>
     </entry>
     <entry>
