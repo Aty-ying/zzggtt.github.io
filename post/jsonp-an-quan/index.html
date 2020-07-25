@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1595670992347">
+<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1595671057147">
 <link rel="stylesheet" href="https://zzggtt.github.io/styles/main.css">
 
 
@@ -37,7 +37,7 @@ https://blog.csd..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://zzggtt.github.io">
-        <img src="https://zzggtt.github.io/images/avatar.png?v=1595670992347" class="site-logo">
+        <img src="https://zzggtt.github.io/images/avatar.png?v=1595671057147" class="site-logo">
         <h1 class="site-title">ZG0T01</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -179,13 +179,11 @@ https://blog.csd..." />
 <h4 id="2-token">2、token</h4>
 <h4 id="3-严格定义content-typeapplicationjson">3、严格定义Content-Type:application/json</h4>
 <blockquote>
-<p>这个攻击过程其实是浏览器发起了一个 CSRF GET 请求。由于目标用户已登陆，所以浏览器发起请求会带上目标用户的cookie身份认证信息，并且服务端返回敏感信息。<br>
-这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码。</p>
+<p>这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码。</p>
 </blockquote>
 <h4 id="4-过滤callback以及json数据输出">4、过滤callback以及json数据输出</h4>
 <blockquote>
-<p>这个攻击过程其实是浏览器发起了一个 CSRF GET 请求。由于目标用户已登陆，所以浏览器发起请求会带上目标用户的cookie身份认证信息，并且服务端返回敏感信息。<br>
-还可以在 Callback 输出之前加入其他字符(如：/**/、回车换行)这样不影响 JSON 文件加载，又能一定程度预防其他文件格式的输出。</p>
+<p>还可以在 Callback 输出之前加入其他字符(如：/**/、回车换行)这样不影响 JSON 文件加载，又能一定程度预防其他文件格式的输出。</p>
 </blockquote>
 <p><strong>参考文章：</strong></p>
 <blockquote>
