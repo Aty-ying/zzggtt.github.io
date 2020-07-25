@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1595670629260">
+<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1595670724337">
 <link rel="stylesheet" href="https://zzggtt.github.io/styles/main.css">
 
 
@@ -37,7 +37,7 @@ https://blog.csd..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://zzggtt.github.io">
-        <img src="https://zzggtt.github.io/images/avatar.png?v=1595670629260" class="site-logo">
+        <img src="https://zzggtt.github.io/images/avatar.png?v=1595670724337" class="site-logo">
         <h1 class="site-title">ZG0T01</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -172,7 +172,10 @@ https://blog.csd..." />
 <pre><code class="language-html">http://example/ajax/services/search/web?v=1.0&amp;q=?&amp;callback=&lt;script&gt;alert(1)&lt;/script&gt;
 </code></pre>
 <h3 id="三-jsonp防御措施">三、JSONP防御措施</h3>
-<h4 id="1-跨域劫持-2">1、跨域劫持</h4>
+<h4 id="1-验证refere">1、验证Refere</h4>
+<h4 id="2-token">2、token</h4>
+<h4 id="3-严格定义content-typeapplicationjson">3、严格定义Content-Type:application/json</h4>
+<h4 id="4-过滤callback以及json数据输出">4、过滤callback以及json数据输出</h4>
 
             </div>
             
