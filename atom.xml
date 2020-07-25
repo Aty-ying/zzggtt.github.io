@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-07-25T09:40:40.607Z</updated>
+    <updated>2020-07-25T09:41:37.038Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -20,6 +20,13 @@
 <p>今天在亮神的博客看见一句话：</p>
 <blockquote>
 <p>在写的过程中，我深深体会到分享者才是学习中的最大受益者，由于需要成文章，所以需要查阅大量的资料。在整个过程中，又学习到很多知识点。</p>
+</blockquote>
+<h3 id="一-jsonp原理">一、JSONP原理</h3>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1595666965734.png" alt="" loading="lazy"></figure>
+<p><strong>参考文章</strong>：</p>
+<blockquote>
+<p>https://blog.csdn.net/hansexploration/article/details/80314948</p>
+<p>https://www.cnblogs.com/soyxiaobi/p/9616011.html</p>
 </blockquote>
 ]]></content>
     </entry>
