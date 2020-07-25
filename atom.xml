@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-07-25T09:44:31.096Z</updated>
+    <updated>2020-07-25T09:45:18.210Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -84,24 +84,6 @@
 <p>如果Content-Type（application / javascript）和callback未作过滤，直接返回。通过下面的payload就可以构造一个XSS：</p>
 <pre><code class="language-html">http://example/ajax/services/search/web?v=1.0&amp;q=?&amp;callback=&lt;script&gt;alert(1)&lt;/script&gt;
 </code></pre>
-<h3 id="三-jsonp防御措施">三、JSONP防御措施</h3>
-<h4 id="1-验证referer">1、验证referer</h4>
-<blockquote>
-<p>通过验证 JSON 文件调用的来源（ Referer ）。这个方案是主要利用了 <script> 远程加载 JSON 文件时会发送 Referer ，在网站输出 JSON 数据时判断 Referer 是不是白名单合法的就可以进行防御！</p>
-</blockquote>
-<h4 id="2-随机token">2、随机token</h4>
-<h4 id="3-严格定义-content-type-application-json">3、严格定义 Content-Type: application / json</h4>
-<blockquote>
-<p>这样的防御机制导致了浏览器不解析恶意插入的 XSS 代码。</p>
-</blockquote>
-<h4 id="4-过滤-callback-以及-json-数据输出">4、过滤 callback 以及 JSON 数据输出</h4>
-<blockquote>
-<p>还可以在 Callback 输出之前加入其他字符(如：/**/、回车换行)这样不影响 JSON 文件加载，又能一定程度预防其他文件格式的输出。</p>
-</blockquote>
-<p><strong>参考文章：</strong></p>
-<blockquote>
-<p>https://blog.knownsec.com/2015/03/jsonp_security_technic/</p>
-</blockquote>
 ]]></content>
     </entry>
 </feed>
