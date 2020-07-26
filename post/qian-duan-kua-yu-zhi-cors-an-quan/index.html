@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>前端跨域之cors安全 | ZG0T01</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1595754907669">
+<link rel="stylesheet" href="https://zzggtt.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="前景
+AJAX是严格遵守浏览器的同源策略（SOP）的，既不能跨域读取数据，也不能跨域发送数据（跨站请求可以正常发起，但是返回结果会被浏览器拦截）。
+随着Web应用的发展，Web开发者需要读取跨域网络资源内容(例如，电商网站想通过用户浏览器加..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://zzggtt.github.io">
+        <img src="https://zzggtt.github.io/images/avatar.png?v=1595754907669" class="site-logo">
+        <h1 class="site-title">ZG0T01</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+       | <a class="rss" href="https://zzggtt.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">前端跨域之cors安全</h2>
+            <div class="post-date">2020-07-26</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前景">前景</h2>
+<p>AJAX是严格遵守浏览器的同源策略（SOP）的，既不能跨域读取数据，也不能跨域发送数据（跨站请求可以正常发起，但是返回结果会被浏览器拦截）。</p>
+<p>随着Web应用的发展，Web开发者需要读取跨域网络资源内容(例如，电商网站想通过用户浏览器加载第三方快递网站的物流信息)，开发人员提出了一些临时折衷方案来满足需求，例如JSONP ，但是这些折衷方案带来了许多安全问题。</p>
+<p>于是W3C 设计了 CORS 协议标准，用于替代 JSONP，实现更安全规范地支持跨域网络资源共享。从2009年开始，CORS协议就已经被各大浏览器（如 Chrome， Firefox等）支持，目前已经被主流网站广泛部署使用。</p>
+<p>浏览器支持在 API 容器中（例如 <code>XMLHttpRequest</code>或 <code>Fetch</code> ）使用 CORS，以降低跨域 HTTP 请求所带来的风险。</p>
+<p><strong>以百度为例：</strong><br>
+<img src="https://zzggtt.github.io/post-images/1595754879551.png" alt="" loading="lazy"></p>
+<h3 id="一-cors">一、CORS</h3>
+<h4 id="1-cors工作流程">1、CORS工作流程</h4>
+<ol>
+<li>用户浏览器对资源服务器发起一个跨域请求，并在请求头中添加<code>Origin头</code>，用于声明请求方的来源。</li>
+<li>资源服务器根据Origin头返回访问控制策略(<code>Access-Control-Allow-Origin</code>响应头)，并在其中声明允许读取响应内容的源。</li>
+<li>浏览器检查资源服务器在<code>Access-Control-Allow-Origin</code>头中声明的源，是否与请求方的源相符，如果相符合，则允许请求方脚本读取响应内容，否则不允许。</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1595754886041.png" alt="" loading="lazy"></figure>
+<h4 id="2-附带身份凭证的请求">2、附带身份凭证的请求</h4>
+<p>一般而言，对于跨域 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest"><code>XMLHttpRequest</code></a> 或 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch</a> 请求，浏览器<strong>不会</strong>发送<code>credentials</code>（包括<code>Cookie</code>，TLS客户端证书和代理验证信息）。如果要发送凭证信息，需要设置 <code>XMLHttpRequest</code>的某个特殊标志位。</p>
+<pre><code class="language-html">var xml = new XMLHttpRequest();
+xml.withCredentials = true; //发送凭证
+</code></pre>
+<p>如果跨域请求中带了<code>credentials</code>，那么浏览器会检查资源服务器返回的响应头中<code>Access-Control-Allow-Credentials</code>头是否设置为<code>true</code>，如果是，则允许请求方读取响应内容，否则，不允许。</p>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1595754891917.png" alt="" loading="lazy"></figure>
+<blockquote>
+<p>为了Web开发者配置方便，W3C的CORS提供了<code>Access-Control-Allow-Origin:*</code>，用于表示允许任意域访问。考虑到这种权限过于宽松，CORS又规定，<code>Access-Control-Allow-Origin:*</code>与 <code>Access-Control-Allow-Credentials:true</code>不能同时使用。浏览器会对这种误配置报错。</p>
+</blockquote>
+<h2 id="二-cors配置安全问题">二、CORS配置安全问题</h2>
+<p>CORS协议的本质是由服务端配置的策略指导客户端浏览器，以实现跨域资源共享。但是一旦服务器端访问控制策略配置出现错误，就会出现浏览器SOP被绕过，导致用户的信息被劫持。</p>
+<h4 id="1-反射origin">1、反射Origin</h4>
+<p>因为CORS标准规定，<code>Access-Control-Allow-Origin</code>只能配置为单个<code>origin</code>, <code>null</code>或<code>*</code>。如果开发者想要实现同时与多个域名共享域名的需求，则需要专门编写代码或者使用framework来协助动态生成访问控制策略。这种动态生成的做法增加了开发者配置难度。</p>
+<p>最简单地动态生成访问控制策略的方法，就是在<code>Access-Control-Allow-Origin</code>中反射请求的<code>Origin</code>值。例如，下面是一个错误 Nginx 配置示例：</p>
+<pre><code class="language-nginx">add_header &quot;Access-Control-Allow-Origin&quot; $http_origin;
+add_header &quot;Access-Control-Allow-Credentials&quot; &quot;true&quot;;
+</code></pre>
+<h4 id="2-校验origin不严格">2、校验Origin不严格</h4>
+<h4 id="3-null">3、null</h4>
+<p>CORS协议复用了<code>Origin</code>头，但在CORS标准中同样缺乏对跨域请求<code>Origin</code>中<code>null</code>明确的定义和限制。有些开发者在网站上配置信任<code>null</code>，用于与本地file页面共享数据，如下所示：</p>
+<pre><code class="language-http">Access-Control-Allow-Origin: null
+Access-Control-Allow-Credentials:true
+</code></pre>
+<p>但是事实上，除了本地file页面的跨域请求Origin头为null外，攻击者还可以从任意域下通过iframe sandbox构造Origin为null的跨域请求，如下是一段示意代码：</p>
+<pre><code class="language-html">&lt;iframe
+    sandbox=&quot;allow-scripts allow-top-navigation allow-forms&quot;
+    src=&quot;data:text/html,&lt;script&gt;XMLHttpRequest here&lt;/script&gt;&quot;
+&gt;
+&lt;/iframe&gt;
+</code></pre>
+<p>这就意味着任何配置有<code>Access-Control-Allow-Origin: null</code>和<code>Access-Control-Allow-Credentials: true</code>的网站等同于没有浏览器SOP的保护，都可以被其他任意域以这种方式读取内容。</p>
+<h4 id="4-https域信任http域">4、HTTPS域信任HTTP域</h4>
+<p>HTTPS协议被设计用于在不安全的中间网络中进行安全通信。即使在中间人网络环境下，攻击者也应该无法读取HTTPS网站的内容。但是如果该HTTPS网站配置了CORS且信任HTTP域，那么中间人攻击者可以先劫持受信任HTTP域，然后通过这个域发送跨域请求到HTTPS网站，间接读取HTTPS域下的受保护内容。具体流程如图所示，中间人攻击者可以可以利用<code>http://example.com</code>网站为跳板，窃取 HTTPS 网站的内容。</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1595754899321.png" alt="" loading="lazy"></figure>
+<h2 id="三-参考资料">三、参考资料</h2>
+<blockquote>
+<p>https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</p>
+<p>https://research.qianxin.com/archives/290</p>
+</blockquote>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://zzggtt.github.io/post/jsonp-an-quan/">
+                  <h3 class="post-title">
+                    前端跨域之jsonp安全
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
