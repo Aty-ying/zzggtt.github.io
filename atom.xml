@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-08-02T07:41:18.682Z</updated>
+    <updated>2020-08-02T07:45:07.575Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,15 +10,6 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
-    <entry>
-        <title type="html"><![CDATA[URL跳转测试]]></title>
-        <id>https://zzggtt.github.io/post/ksyuncom/</id>
-        <link href="https://zzggtt.github.io/post/ksyuncom/">
-        </link>
-        <updated>2020-08-02T07:40:05.000Z</updated>
-        <content type="html"><![CDATA[<p>URL跳转测试</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[前端安全之XSS]]></title>
         <id>https://zzggtt.github.io/post/qian-duan-an-quan-zhi-xss/</id>
