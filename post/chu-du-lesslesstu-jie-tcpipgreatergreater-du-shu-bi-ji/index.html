@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>初读《图解TCP/IP》读书笔记 | ZG0T01</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1600074917420">
+<link rel="stylesheet" href="https://zzggtt.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、TCP/IP
+
+1、物理+数据链路层
+
+2、网络层
+
+3、传输层
+
+4、应用层
+
+HTTP协议
+
+SMPT协议
+
+FTP协议
+
+SSH、TELNET协议
+
+二、通信地址
+
+IP地址
+
+端口
+端口号：用来识别同一台计算机中进行通信的不用应..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://zzggtt.github.io">
+        <img src="https://zzggtt.github.io/images/avatar.png?v=1600074917420" class="site-logo">
+        <h1 class="site-title">ZG0T01</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+       | <a class="rss" href="https://zzggtt.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">初读《图解TCP/IP》读书笔记</h2>
+            <div class="post-date">2020-09-14</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="一-tcpip">一、TCP/IP</h2>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1600074215289.png" alt="" loading="lazy"></figure>
+<h3 id="1-物理数据链路层">1、物理+数据链路层</h3>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1600074830930.png" alt="" loading="lazy"></figure>
+<h3 id="2-网络层">2、网络层</h3>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1600074851767.png" alt="" loading="lazy"></figure>
+<h3 id="3-传输层">3、传输层</h3>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1600074856270.png" alt="" loading="lazy"></figure>
+<h3 id="4-应用层">4、应用层</h3>
+<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1600074861314.png" alt="" loading="lazy"></figure>
+<h4 id="http协议">HTTP协议</h4>
+<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1600074551521.png" alt="" loading="lazy"></figure>
+<h4 id="smpt协议">SMPT协议</h4>
+<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1600074555779.png" alt="" loading="lazy"></figure>
+<h4 id="ftp协议">FTP协议</h4>
+<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1600074559830.png" alt="" loading="lazy"></figure>
+<h4 id="ssh-telnet协议">SSH、TELNET协议</h4>
+<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1600074564230.png" alt="" loading="lazy"></figure>
+<h2 id="二-通信地址">二、通信地址</h2>
+<figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1600074641684.png" alt="" loading="lazy"></figure>
+<h3 id="ip地址">IP地址</h3>
+<figure data-type="image" tabindex="11"><img src="https://zzggtt.github.io/post-images/1600074647294.png" alt="" loading="lazy"></figure>
+<h3 id="端口">端口</h3>
+<p>端口号：用来识别同一台计算机中进行通信的不用应用程序。<br>
+<img src="https://zzggtt.github.io/post-images/1600074682956.png" alt="" loading="lazy"></p>
+<h2 id="三-互联网的现状">三、互联网的现状</h2>
+<p>一个互联网的现状：在IPV6并未得到普及，而IPV4地址又即将耗尽的情况，通过私有IP技术 +  NAT技术来解决问题。现在很多公司、学校内部采用在每个终端设置<strong>私有IP</strong>，而在路由器或必要的服务器上设置<strong>全局IP</strong>。而配置私有IP的终端则通过<strong>NAT</strong>与外部进行通信。</p>
+<p><strong>私有IP</strong>地址范围：</p>
+<figure data-type="image" tabindex="12"><img src="https://zzggtt.github.io/post-images/1600074687770.png" alt="" loading="lazy"></figure>
+<p>除此之外都是<strong>全局IP</strong>。</p>
+<p><strong>NAT</strong>（Network Address Translator）是用于在本地网络中使用私有IP，而在连接互联网时转而使用全局IP的技术。<br>
+工作机制如下：<br>
+<img src="https://zzggtt.github.io/post-images/1600074692830.png" alt="" loading="lazy"></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://zzggtt.github.io/post/windows-xia-shi-yong-wsl2-an-zhuang-docker/">
+                  <h3 class="post-title">
+                    Windows下使用WSL2安装Docker
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
