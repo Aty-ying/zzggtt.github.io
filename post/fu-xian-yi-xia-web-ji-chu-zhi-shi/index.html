@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>复现一下Web基础知识 | ZG0T01</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://zzggtt.github.io/favicon.ico?v=1601000946640">
+<link rel="stylesheet" href="https://zzggtt.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="前言
+在《图解TCP/IP》中，了解到WWW是促使互联网发展的重要动力，所以准备复习一下JavaWeb相关的基础知识。
+
+通信协议HTTP
+Web客户端（浏览器）和web服务器之间主要是通过http协议来进行交互。想要快速掌握HTTP协议，..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://zzggtt.github.io">
+        <img src="https://zzggtt.github.io/images/avatar.png?v=1601000946640" class="site-logo">
+        <h1 class="site-title">ZG0T01</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+       | <a class="rss" href="https://zzggtt.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">复现一下Web基础知识</h2>
+            <div class="post-date">2020-09-25</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="前言">前言</h3>
+<p>在《图解TCP/IP》中，了解到WWW是促使互联网发展的重要动力，所以准备复习一下JavaWeb相关的基础知识。</p>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1601000921816.png" alt="" loading="lazy"></figure>
+<h3 id="通信协议http">通信协议HTTP</h3>
+<p>Web客户端（浏览器）和web服务器之间主要是通过<code>http协议</code>来进行交互。想要快速掌握HTTP协议，推荐通过《图解HTTP》进行学习。掌握基础的<code>请求和响应流</code>。</p>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1601000926412.png" alt="" loading="lazy"></figure>
+<h3 id="web"><strong>Web</strong></h3>
+<h4 id="1-静态web">1、静态Web</h4>
+<p>静态Web对于每个用户来说，看到的都是相同的页面。例如：<a href="https://www.baidu.com/index.html">百度首页</a>，对于每个用户来说都是一样的。</p>
+<p>常见的静态Web资源有：html、css、js、image等。</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1601000933285.png" alt="" loading="lazy"></figure>
+<h4 id="2-动态web">2、动态Web</h4>
+<p>动态Web对于每个用户来说就因人而异。例如：<a href="http://i.baidu.com/">百度的个人中心</a>，就会从数据库中去加载不同用户的不同个人资料等数据。</p>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1601000937725.png" alt="" loading="lazy"></figure>
+<h3 id="web服务器">Web服务器</h3>
+<p>​	<code>Web服务器</code>处理来自客户端的HTTP请求，并返回HTTP响应。它<code>擅长</code>处理静态资源。而静态资源存储在Web<code>目录</code>中，Web服务器找到相应的静态资源后，响应给客户端。</p>
+<p>​	但如果想要提供动态页面和动态数据，例如，需要从数据库中取出个人中心的数据，Web服务器就显得有些力不从心了。这时就需要一个辅助应用，能够生成动态页面，而且这个应用能与Web服务器通信，并且能够和后端java语言进行交互，从而从数据库存取数据。这个辅助应用就是<code>servlet</code>。</p>
+<h3 id="servlet">Servlet</h3>
+<p>​	Servlet就是sun公司开发动态web的一门技术，Sun公司在这些API中提供一个接口叫做Servlet。我们一般把实现了Servlet接口的java类也称之为Servlet。在MVC设计模式中，servlet扮演着C（控制器）的角色，当客户请求到来，进入到Servlet，Servlet调用M（业务逻辑）从数据库中存取数据<br>
+  但Servlet也需要帮助。当请求到来时，必须有人加载、初始化和实例化Servlet，或者创建或分配一个新的线程处理这个请求，调用Servlet的doGet（）、doPost（）方法。并需要有人创建servlet必须的参数HTTPServletRequest和HTTPServletResponse。当请求处理结束后，有人销毁Servlet，管理着Servlet的生命周期。这个人就是<code>Web容器</code>也称<code>Web应用服务器</code>。</p>
+<h3 id="web容器">Web容器</h3>
+<p>​	Servlet没有main()方法，它们受控于另一个Java应用，这个Java应用称为容器。<br>
+<code>Tomcat</code>就是这样一个容器，如果Web服务器（如Apache）得到一个指向某Servlet的请求（而不是其他请求，如请求一个普通的静态页面），此时Web服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器向Servlet提供HTTP请求和响应，而且要由容器调用Servlet的方法，如doGet()和doPost()。</p>
+<p>用一个丑陋的图来形容就是：<br>
+<img src="https://zzggtt.github.io/post-images/1601000945479.png" alt="" loading="lazy"></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://zzggtt.github.io/post/chu-du-lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/">
+                  <h3 class="post-title">
+                    初读《图解TCP/IP》读书笔记
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
