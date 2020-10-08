@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-10-08T09:12:50.222Z</updated>
+    <updated>2020-10-08T09:15:23.752Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,46 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[谈谈对Webshell的学习]]></title>
+        <id>https://zzggtt.github.io/post/tan-tan-dui-webshell-de-xue-xi/</id>
+        <link href="https://zzggtt.github.io/post/tan-tan-dui-webshell-de-xue-xi/">
+        </link>
+        <updated>2020-10-08T09:13:07.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="webshell">Webshell</h2>
+<h3 id="1-shell">1、Shell</h3>
+<p><strong>Shell</strong>是一个 <code>命令解释器</code> ：用于接收使用者输入的指令，并送入内核去执行。解释使用者输入的指令。是一种为使用者提供操作界面的软件。</p>
+<p>基本上分为两大类：</p>
+<ul>
+<li>
+<p>图像界面shell</p>
+<p>应用最为广泛的 Windows Explorer （微软的windows系列操作系统），还有也包括广为人知的 Linux shell，其中<a href="https://baike.baidu.com/item/linux">linux</a> shell 包括 X window manager (BlackBox和FluxBox），以及功能更强大的CDE、GNOME、KDE、 XFCE。</p>
+</li>
+<li>
+<p>命令式shell</p>
+<p>Unix/linux 系统：bash / sh / ksh / csh / zsh</p>
+<p>Winodws系统：cmd.exe、PowerShell</p>
+</li>
+</ul>
+<h3 id="2-webshell">2、Webshell</h3>
+<p><strong>Webshell</strong>是一种Web形式的命令解释器，以asp、jsp、php或者cgi等动态脚本语言编写一种执行系统代码的环境。通过浏览器访问网站服务器Web目录下的Webshell，输入指令，来达到管理目标网站的服务器。</p>
+<p>以最常见的php webshell为例：</p>
+<pre><code class="language-php">&lt;?php
+    system($_GET('command'));
+?&gt;
+</code></pre>
+<p>通过GET方式comand参数来传递命令，由system函数执行。</p>
+<h3 id="3-webshell分类">3、Webshell分类</h3>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1602148502813.png" alt="" loading="lazy"></figure>
+<h3 id="4-webshell管理工具">4、Webshell管理工具</h3>
+<p>在以前菜刀没有出现的时候，我们想要获取 webshell 的时候，通常都是直接上传一个 web 木马并且直接用这个木马进行管理，由于这种大型木马的体量比较大，上传过程中容易被检测且不方便进行上传绕过测试，所以大家就想了一个办法，先上传一个体量小，功能少的小型木马然后再通过小马的简单的上传或者文件修改等单个功能进行大马的上传。小马的功能通常是围绕文件管理的功能，比较简单，如：文件上传、文件修改、新建文件等，都是围绕方便上传一个体量大的木马来做的。自从菜刀出现之后，渐渐的一句话木马成为了主流，体量小，还有一个界面版的客户端进行管理操作，极大的方便的大家对于 web 服务器的管理。</p>
+<p>上传完大马后，直接访问对应位置即可进行相应管理：</p>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1602148508404.png" alt="" loading="lazy"></figure>
+<p>而一句话木马则提供了一个界面版的客户端进行管理操作，极大的方便的大家对于Web服务器的管理：</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1602148514212.png" alt="" loading="lazy"></figure>
+<p>常见的Webshell管理工具：https://www.cnblogs.com/xiaozi/p/12397211.html</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[《图解TCP/IP》读书笔记]]></title>
         <id>https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/</id>
