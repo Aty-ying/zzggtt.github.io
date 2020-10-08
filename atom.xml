@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-10-08T09:01:36.191Z</updated>
+    <updated>2020-10-08T09:12:50.222Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -57,57 +57,6 @@
 <code>Tomcat</code>就是这样一个容器，如果Web服务器（如Apache）得到一个指向某Servlet的请求（而不是其他请求，如请求一个普通的静态页面），此时Web服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器向Servlet提供HTTP请求和响应，而且要由容器调用Servlet的方法，如doGet()和doPost()。</p>
 <p>用一个丑陋的图来形容就是：<br>
 <img src="https://zzggtt.github.io/post-images/1601000945479.png" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Windows下使用WSL2安装Docker]]></title>
-        <id>https://zzggtt.github.io/post/windows-xia-shi-yong-wsl2-an-zhuang-docker/</id>
-        <link href="https://zzggtt.github.io/post/windows-xia-shi-yong-wsl2-an-zhuang-docker/">
-        </link>
-        <updated>2020-09-11T10:20:06.000Z</updated>
-        <content type="html"><![CDATA[<p>以前复现漏洞，都是启动一个Linux虚拟机然后再安装Docker，极其占用内存资源。近期了解到Win10 2004正式版版本支持WSL2，通过在WSL 2上运行的Docker Desktop，完美解决了虚拟机中运行Docker占用内存资源问题。</p>
-<h2 id="docker-desktop-wsl2部署">Docker Desktop WSL2部署</h2>
-<p>Docker Desktop windows版已经能够支持WSL作为Docker Engine运行，可以同时支持在Linux和Windows命令行下操作docke。即简化了Docker的安装，又满足了喜欢在Linux中操作Docker的我。</p>
-<p>具体部署步骤<a href="https://docs.docker.com/docker-for-windows/wsl/">官网</a>写的很详细，自己下面做一个简单总结：</p>
-<h3 id="1-wsl2安装及配置">1、WSL2安装及配置</h3>
-<ol>
-<li>安装Windows 10版本2004或更高版本</li>
-<li>在Windows上<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">启用WSL 2功能</a>。</li>
-<li>下载并安装<a href="https://docs.microsoft.com/windows/wsl/wsl2-kernel">Linux内核更新程序包</a>。</li>
-</ol>
-<h3 id="2-docker-desktop安装及配置">2、Docker Desktop安装及配置</h3>
-<p><strong>安装</strong>：下载<a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows/">Docker Desktop Stable 2.3.0.2</a>或更高版本。</p>
-<p><strong>配置</strong>：</p>
-<ol>
-<li>
-<p>使用WSL2作为Docker Engine</p>
-<p>启动Docker后，右击图标选择Settings：</p>
-</li>
-</ol>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1599819760847.png" alt="" loading="lazy"></figure>
-<p>General ---&gt;&gt;&gt; 勾选Use the WSL2 based engine：</p>
-<p><img src="https://zzggtt.github.io/post-images/1599819814177.png" alt="" loading="lazy"><br>
-应用并重启</p>
-<ol>
-<li>
-<p>修改镜像源为国内镜像</p>
-<p>这里我使用的阿里云镜像，参考：<a href="https://blog.csdn.net/my__holiday/article/details/79111397">window10上docker修改镜像源</a>。</p>
-<p>结果如下：</p>
-</li>
-</ol>
-<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1599819831626.png" alt="" loading="lazy"></figure>
-<ol start="2">
-<li>
-<p>确保分发以WSL 2模式运行</p>
-<p>在cmd中输入一下命令，以进行检查：</p>
-</li>
-</ol>
-<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1599819838262.png" alt="" loading="lazy"></figure>
-<h3 id="3-快乐的进行漏洞复现">3、快乐的进行漏洞复现</h3>
-<blockquote>
-<p>https://vulhub.org/</p>
-<p>http://vulapps.evalbug.com/</p>
-</blockquote>
 ]]></content>
     </entry>
     <entry>
@@ -472,6 +421,19 @@ Access-Control-Allow-Credentials:true
 <blockquote>
 <p>https://research.qianxin.com/archives/290</p>
 </blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://zzggtt.github.io/post/about/</id>
+        <link href="https://zzggtt.github.io/post/about/">
+        </link>
+        <updated>2019-01-25T11:09:48.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>📝温故而知新</p>
+</blockquote>
+<h2 id="twitterhttpstwittercomzer0ney1">📒 twitter：https://twitter.com/Zer0ney1</h2>
+<h2 id="wechatz807852704">📙 wechat：z807852704</h2>
 ]]></content>
     </entry>
 </feed>
