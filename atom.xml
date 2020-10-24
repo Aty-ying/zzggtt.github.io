@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-10-19T03:54:33.747Z</updated>
+    <updated>2020-10-24T07:56:31.773Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -56,14 +56,95 @@
         <link href="https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/">
         </link>
         <updated>2020-10-08T08:56:32.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="内外网">内外网</h2>
-<p>一个互联网的现状：在IPV6并未得到普及，而IPV4地址又即将耗尽的情况。通过私有IP技术 +  NAT技术来解决上述问题。现在很多公司、学校内部采用在每个终端设置<strong>私有IP</strong>，而在路由器或必要的服务器上设置<strong>全局IP</strong>。而配置私有IP的终端则通过<strong>NAT</strong>与外部进行通信。</p>
-<p><strong>私有IP</strong>地址范围：</p>
-<p><img src="https://zzggtt.github.io/post-images/1602147475706.png" alt="" loading="lazy">!</p>
-<p>除此之外都是<strong>全局IP</strong>。</p>
-<p><strong>NAT</strong>（Network Address Translator）是用于在本地网络中使用私有IP，而在连接互联网时转而使用全局IP的技术。</p>
-<p>工作机制如下：</p>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1602147479591.png" alt="" loading="lazy"></figure>
+        <content type="html"><![CDATA[<h3 id="前言">前言</h3>
+<p>了解TCP/IP是对渗透测试很有必要的，下面是我阅读完《图解TCP/IP》后，记录的一些重要的知识点。</p>
+<p>（随着我的渗透测试学习，将会持续更新！！！）</p>
+<h3 id="tcpip概述">TCP/IP概述</h3>
+<h4 id="1-含义">1、含义</h4>
+<p>互联网在进行通信时，需要相应的网络协议，而在网络中被广泛使用的TCP/IP协议。TCP/IP协议在多数情况下指的是：利用IP进行通信时所必须用到的协议群的统称。</p>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1603526064488.png" alt="" loading="lazy"></figure>
+<h4 id="2-分层模型">2、分层模型</h4>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1603526073786.png" alt="" loading="lazy"></figure>
+<p>OSI参考模型注重“通信协议必要的功能是什么”，而TCP/IP则更强调“在计算机上实现协议应该开放哪种程序”</p>
+<ul>
+<li>
+<p><strong>硬件层</strong></p>
+<p>TCP/IP的最底层的主要作用是负责数据传递的硬件。</p>
+</li>
+<li>
+<p><strong>网卡层</strong></p>
+<p>网卡层也称网络接口层，可以理解为“驱动程序”。它是硬件与操作系统之间的桥梁。计算机的外设不是直接插上就能使用的，还需要“驱动程序”的支持。所以通常需要在操作系统上安装一些<code>驱动程序软件</code>，才能使用这些附加硬件。</p>
+</li>
+<li>
+<p><strong>互联网层</strong></p>
+<p>互联网层使用IP协议，IP协基于IP地址转发分发数据。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1603526079889.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>传输层</strong></p>
+<p>传输层的主要功能是让应用程序软件之间实现通信，它具有来个代表性的协议：TCP、UDP。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1603526084292.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>应用层</strong></p>
+<p>TCP/IP的应用层把OSI参考模型中的会话层、表示层、应用层的功能都集中到<code>应用程序软件</code>中来实现。TCP/IP应用的架构绝大数属于<code>C/S架构</code>。</p>
+<p>提供服务的应用程序叫做服务端，接收服务的应用程序叫做客户端。在这种通信模式中，提供服务的程序会被预先部署到<code>服务器主机</code>上，等待接收任何时刻客户端发送的请求。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1603526090062.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>WWW</p>
+<p>在WWW中，用户通过Web浏览器（客户端），就可以访问存储在Web服务器上的各种信息。Web浏览器和Web服务器之间的通信协议是<code>HTTP</code>（应用层协议），所传输的数据的主要格式是<code>HTML</code>（表示层协议）。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1603526103650.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>电子邮件</p>
+<p>电子邮件之在网络上发送邮件，发送邮件的通信协议是<code>SMPT</code>（应用层协议）。起初只能发送文本格式，然而现在电子邮件由MIME协议（表示层协议）拓展后，就可以发送声音、图片等各式各样的信息。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1603526113007.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>文件传输</p>
+<p>文件传输协议是指将保存在其他计算机硬盘上的文件传输到本地硬盘上，该过程使用的协议是<code>FTP</code>。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1603526118579.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>远程登陆</p>
+<p>远程登陆指的是登录到远程的计算机上。在TCP/IP中常用<code>TELNET</code>和<code>SSH</code>两种协议。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1603526123676.png" alt="" loading="lazy"></figure>
+<h4 id="3-通信示例">3、通信示例</h4>
+<figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1603526128849.png" alt="" loading="lazy"></figure>
+<h3 id="地址的唯一性">地址的唯一性</h3>
+<h4 id="基础概念">基础概念</h4>
+<ul>
+<li>
+<p>IP地址</p>
+<p>用于识别TCP/IP网络中互联的主机和路由器。</p>
+</li>
+<li>
+<p>MAC地址</p>
+<p>用于是被同一链路中不同的计算机。</p>
+</li>
+<li>
+<p>端口</p>
+<p>用于识别一台计算机中正在运行的不同的应用程序。</p>
+</li>
+</ul>
+<h3 id="通信识别">通信识别</h3>
+<p>在TCP/IP或UDP/IP通信中，通常采用5个信息来识别一个通信：源IP地址、目标IP地址、协议号、源端口号、目标端口号：</p>
+<figure data-type="image" tabindex="11"><img src="https://zzggtt.github.io/post-images/1603526138493.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
