@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-10-24T08:50:07.071Z</updated>
+    <updated>2020-10-24T13:28:29.625Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -87,24 +87,66 @@
 <h4 id="3-通信示例">3、通信示例</h4>
 <figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1603526128849.png" alt="" loading="lazy"></figure>
 <h3 id="地址的唯一性">地址的唯一性</h3>
+<blockquote>
+<p>在TCP/IP或UDP/IP通信中，通常采用5个信息来识别一个通信。分别是：“源IP地址”、“目标IP地址”、“协议号”、“源端口地址”、“目标端口地址”。</p>
+</blockquote>
 <h4 id="基础概念">基础概念</h4>
 <ul>
 <li>
+<p>端口</p>
+<p>在传输层中，用于识别一台计算机中正在运行的不同的应用程序。</p>
+</li>
+<li>
 <p>IP地址</p>
-<p>用于识别TCP/IP网络中互联的主机和路由器。</p>
+<p>在网络层中，用于识别TCP/IP网络中互联的主机和路由器。</p>
 </li>
 <li>
 <p>MAC地址</p>
-<p>用于是被同一链路中不同的计算机。</p>
-</li>
-<li>
-<p>端口</p>
-<p>用于识别一台计算机中正在运行的不同的应用程序。</p>
+<p>在数据链层路中，用于是被同一链路中不同的计算机。</p>
 </li>
 </ul>
-<h3 id="通信识别">通信识别</h3>
-<p>在TCP/IP或UDP/IP通信中，通常采用5个信息来识别一个通信：源IP地址、目标IP地址、协议号、源端口号、目标端口号：</p>
-<figure data-type="image" tabindex="11"><img src="https://zzggtt.github.io/post-images/1603526138493.png" alt="" loading="lazy"></figure>
+<h4 id="端口">端口</h4>
+<p>一台计算机中可以同时运行多个应用程序，例如Web浏览器、远程登陆用的SSH客户端等待。而传输层协议（TCP、UDP）正式利用端口号来<code>识别不同的应用程序</code>，并准确的将<code>数据传输</code>。</p>
+<figure data-type="image" tabindex="11"><img src="https://zzggtt.github.io/post-images/1603546021942.png" alt="" loading="lazy"></figure>
+<p>常见的端口对应的服务：https://www.shentoushi.top/Public/upload/images/2017-07-09/Baidu_translation_table.png</p>
+<h4 id="ip地址">IP地址</h4>
+<p>IP协议作为整个TCP/IP中至关重要的协议，主要作用是在复杂的网络环境中将<code>数据包发送</code>给最终的目标计算机。能够让任意两台计算机之间进行通讯。</p>
+<p>在TCP/IP通信中，所有主机或路由器必须设定IP地址。IP地址的作用在于从连接到互联网中的所有主机中，<code>识别</code>出进行通信的目标地址。</p>
+<figure data-type="image" tabindex="12"><img src="https://zzggtt.github.io/post-images/1603546036787.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>组成</strong></p>
+<p>IP地址由<code>“网络地址”</code>和<code>“主机地址”</code>两部分组成。</p>
+<p>网络地址代表<code>不同的网段</code>，而主机地址代表同一网段中的<code>不同的主机</code>。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="13"><img src="https://zzggtt.github.io/post-images/1603546042612.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://zzggtt.github.io/post-images/1603546047304.png" alt="" loading="lazy"></figure>
+<ul>
+<li><strong>分类</strong></li>
+</ul>
+<figure data-type="image" tabindex="15"><img src="https://zzggtt.github.io/post-images/1603546053182.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://zzggtt.github.io/post-images/1603546080736.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>全局地址和私有地址</strong></p>
+<p>随着互联网的普及，IP地址不足的问题日趋显著，于是出现了一种技术：在每个独立的网络中，只为相应的设备分配唯一的IP地址，对于哪些没有连接尽互联网中的主机，只需要保证在整个独立的网络中地址唯一即可。</p>
+<p>这些地址称为私有地址，范围如下：</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="17"><img src="https://zzggtt.github.io/post-images/1603546089041.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>NAT技术</strong></p>
+<p>私有IP地址最早没有计划连接互联网，而只是用于互联网之外的独立网络。然而随着NAT技术的出现，配置私有IP的主机也能与互联网中的主机进行通信。</p>
+<p>NAT技术是一种能够互换私有IP地址与全局IP地址的技术。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="18"><img src="https://zzggtt.github.io/post-images/1603546094513.png" alt="" loading="lazy"></figure>
+<p>当独立网络内部有多台机器同时要与外部通讯时，仅仅转换IP地址是不够用的，此时采用包含端口号一起转换的方式（NAPT）即可解决。</p>
+<figure data-type="image" tabindex="19"><img src="https://zzggtt.github.io/post-images/1603546098891.png" alt="" loading="lazy"></figure>
+<h4 id="mac地址">MAC地址</h4>
+<p>MAC地址用于识别数据链路中互连的节点。</p>
 ]]></content>
     </entry>
     <entry>
