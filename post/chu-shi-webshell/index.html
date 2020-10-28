@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
-    
-        <meta charset="utf-8" />
+    <meta charset="utf-8" />
 <title>
-    文章 | ZG0T01
+    ZG0T01
 </title>
 <!--[if lt IE 9]><script src="//cdn.bootcss.com/html5shiv/r29/html5.js"></script><![endif]-->
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -50,7 +49,6 @@
                                 })();
                             </script>
                             
-            
 </head>
 
 <body>
@@ -206,136 +204,135 @@
         })
     </script>
     
-            <div class="post-main">
-                <div class="post-list">
-                    
-    
-        
-                
-                    
-    
-        
-                
-                    
-    
-        
-                
-                    
-    
-        
-                
-                    
+            <div class="main">
+                <div class="container">
+                    <article class="post-wrap">
+                        <header class="post-header">
+                            <h1 class="post-title">
+                                初始Webshell
+                            </h1>
+                            
+                                    <!--zh-->
+                                    <div class="post-meta zh">
+                                        &#x4F5C;&#x8005;:
+                                        <a itemprop="author" rel="author" href="/">
+                                            ZG0T01
+                                        </a>
+                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-10-28</a></span>
+                                        <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
+                                    href="#">2.2
+                                    &#x5206;&#x949F;</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">611</a></span>
+                                        
+                                                阅读量:
+                                                <span data-hk-page="current"> - </span>
+                                                
+                                    </div>
+                                    
+                        </header>
                         
-                            
+                        <div class="post-content">
+                            <h2 id="webshell">Webshell</h2>
+<h3 id="1-shell">1、Shell</h3>
+<p><strong>Shell</strong>是一个 <code>命令解释器</code> ：用于接收使用者输入的指令，并送入内核去执行。解释使用者输入的指令。是一种为使用者提供操作界面的软件。</p>
+<p>基本上分为两大类：</p>
+<ul>
+<li>
+<p>图像界面shell</p>
+<p>应用最为广泛的 Windows Explorer （微软的windows系列操作系统），还有也包括广为人知的 Linux shell，其中linux shell 包括 X window manager (BlackBox和FluxBox），以及功能更强大的CDE、GNOME、KDE、 XFCE。</p>
+</li>
+<li>
+<p>命令式shell</p>
+<p>Unix/linux 系统：bash / sh / ksh / csh / zsh</p>
+<p>Winodws系统：cmd.exe、PowerShell</p>
+</li>
+</ul>
+<h3 id="2-webshell">2、Webshell</h3>
+<p><strong>Webshell</strong>是一种Web形式的命令解释器，以asp、jsp、php或者cgi等动态脚本语言编写一种<code>执行系统代码</code>的环境。通过浏览器访问网站服务器Web目录下的Webshell，输入指令，来达到管理目标网站的服务器。</p>
+<p>以最简单的php webshell为例：</p>
+<pre><code class="language-php">&lt;?php
+    system($_GET('command'));
+?&gt;
+</code></pre>
+<p>通过GET方式comand参数来接收传递命令，然后交由system函数执行命令。</p>
+<h3 id="3-webshell分类">3、Webshell分类</h3>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1603846217988.png" alt="" loading="lazy"></figure>
+<h3 id="4-webshell管理工具">4、Webshell管理工具</h3>
+<p>在以前菜刀没有出现的时候，我们想要获取 webshell 的时候，通常都是直接上传一个 web 木马并且直接用这个木马进行管理，由于这种大型木马的体量比较大，上传过程中容易被检测且不方便进行上传绕过测试，所以大家就想了一个办法，先上传一个体量小，功能少的小型木马然后再通过小马的简单的上传或者文件修改等单个功能进行大马的上传。小马的功能通常是围绕文件管理的功能，比较简单，如：文件上传、文件修改、新建文件等，都是围绕方便上传一个体量大的木马来做的。自从菜刀出现之后，渐渐的一句话木马成为了主流，体量小，还有一个界面版的客户端进行管理操作，极大的方便的大家对于 web 服务器的管理。</p>
+<p>上传完大马后，直接访问对应位置即可进行相应管理：</p>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1603846222969.png" alt="" loading="lazy"></figure>
+<p>而一句话木马则提供了一个界面版的客户端进行管理操作，极大的方便的大家对于Web服务器的管理：</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1603846229853.png" alt="" loading="lazy"></figure>
+<p>常见的Webshell管理工具：https://www.cnblogs.com/xiaozi/p/12397211.html</p>
+<p>参考：https://mp.weixin.qq.com/s/x2Tw3ukaTFDJvZ0YCuZBog</p>
+
+                        </div>
+                        
                                 
-                                    <section class="post-item">
-                                        <div class="content">
-                                            <a href="https://zzggtt.github.io/post/chu-shi-webshell/">
-                                                <h2 class="post-title">
-                                                    初始Webshell
-                                                </h2>
-                                            </a>
-                                            <div class="post-abstract">
-                                                
-                                            </div>
-                                            <div class="post-info">
-                                                <span><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-28</span>
-                                                
-                                            </div>
-                                        </div>
-                                        
-                                    </section>
                                     
-                                        
+                                            <!--zh-->
+                                            <section class="post-copyright zh">
+                                                <p class="copyright-item ">
+                                                    <span>&#x4F5C;&#x8005;:</span>
+                                                    <span>ZG0T01</span>
+                                                </p>
+
+                                                <p class="copyright-item">
+                                                    <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
+                                                    <span><a href="https://zzggtt.github.io/post/chu-shi-webshell/">https://zzggtt.github.io/post/chu-shi-webshell/</a></span>
+                                                </p>
+
+                                                <p class="copyright-item">
+                                                    <span>&#x534F;&#x8BAE;:</span>
+                                                    <span>MIT License</span>
+                                                </p>
+                                            </section>
                                             
-                            
-                                
-                                    <section class="post-item">
-                                        <div class="content">
-                                            <a href="https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/">
-                                                <h2 class="post-title">
-                                                    《图解TCP/IP》读书笔记
-                                                </h2>
-                                            </a>
-                                            <div class="post-abstract">
                                                 
-                                            </div>
-                                            <div class="post-info">
-                                                <span><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-08</span>
-                                                
-                                                    <span>
-        <i class="fa fa-tags" aria-hidden="true"></i>
-        
-        <a href="https://zzggtt.github.io/tag/mCepNBSW4/">
-          基础知识
-          
-        </a>
-        
-      </span>
                                                     
-                                            </div>
-                                        </div>
-                                        
-                                    </section>
-                                    
-                                        
-                                            
-                            
-                                
-                                    <section class="post-item">
-                                        <div class="content">
-                                            <a href="https://zzggtt.github.io/post/fu-xian-yi-xia-web-ji-chu-zhi-shi/">
-                                                <h2 class="post-title">
-                                                    复习一下Web基础知识
-                                                </h2>
-                                            </a>
-                                            <div class="post-abstract">
-                                                
-                                            </div>
-                                            <div class="post-info">
-                                                <span><i class="fa fa-calendar" aria-hidden="true"></i> 2020-09-25</span>
-                                                
-                                                    <span>
-        <i class="fa fa-tags" aria-hidden="true"></i>
-        
-        <a href="https://zzggtt.github.io/tag/mCepNBSW4/">
-          基础知识
-          
-        </a>
-        
-      </span>
-                                                    
-                                            </div>
-                                        </div>
-                                        
-                                    </section>
-                                    
-                                        
-                                            
-                            
-                                
-                                    <section class="post-item">
-                                        <div class="content">
-                                            <a href="https://zzggtt.github.io/post/about/">
-                                                <h2 class="post-title">
-                                                    关于
-                                                </h2>
-                                            </a>
-                                            <div class="post-abstract">
-                                                
-                                            </div>
-                                            <div class="post-info">
-                                                <span><i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-25</span>
-                                                
-                                            </div>
-                                        </div>
-                                        
-                                    </section>
-                                    
-                                        
-                                            
+                                                                    <!--Share-->
+                                                                    <span style="margin-right:15px">
+                        <i class="post-share"></i>
+                        <span>&#x5206;&#x4EAB;:</span>
+                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/chu-shi-webshell/"><i class="fa fa-qrcode"></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/chu-shi-webshell/&sharesource=qzone&title=初始Webshell&pics=https://zzggtt.github.io/images/avatar.png?v=1603846240684&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/chu-shi-webshell/&sharesource=weibo&title=初始Webshell + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1603846240684 "><i class="fa fa-weibo "></i></a>
+
+                                                                    </span>
+                                                                    
+                                                                            <!--zh-->
+                                                                            <section class="post-tags zh ">
+                                                                                <div>
+                                                                                    <span>&#x6807;&#x7B7E;:</span>
+                                                                                    <span class="tag ">
+                        
+                                </span>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <a href="javascript:window.history.back();">
+                        &#x8FD4;&#x56DE;</a>
+                                                                                    <span>&dot;</span>
+                                                                                    <a href="#">&#x4E3B;&#x9875;</a>
+                                                                                </div>
+                                                                            </section>
+
+                                                                            
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                            
+                                                                                                <a class="next" rel="next" href="https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/">
+                                                                                                    《图解TCP/IP》读书笔记
+                                                                                                </a>
+                                                                                                
+                                                                                </section>
+                    </article>
                 </div>
+                
+                                            
             </div>
+    </div>
+    </div>
     </div>
     
     <div id="player"></div>
@@ -419,6 +416,10 @@
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>
+        </div>
 </body>
+<script>
+    scroll();
+</script>
 
 </html>
