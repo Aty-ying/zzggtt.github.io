@@ -209,7 +209,7 @@
                     <article class="post-wrap">
                         <header class="post-header">
                             <h1 class="post-title">
-                                复习一下Web基础知识
+                                内网渗透基础
                             </h1>
                             
                                     <!--zh-->
@@ -218,15 +218,15 @@
                                         <a itemprop="author" rel="author" href="/">
                                             ZG0T01
                                         </a>
-                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-09-25</a></span>
+                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-11-03</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">2.6
+                                    href="#">4.8
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">733</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1336</a></span>
                                         
                                             <span class="post-category">&#x5206;&#x7C7B;:
                                 
-                                <a href="https://zzggtt.github.io/tag/mCepNBSW4/">基础知识</a>
+                                <a href="https://zzggtt.github.io/tag/kAnd86P1Q/">渗透测试</a>
                                 
                             </span>
                                             
@@ -238,31 +238,112 @@
                         </header>
                         
                         <div class="post-content">
-                            <h3 id="前言">前言</h3>
-<p>在《图解TCP/IP》中，了解到WWW是促使互联网发展的重要动力，所以准备复习一下JavaWeb相关的基础知识。</p>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1601000921816.png" alt="" loading="lazy"></figure>
-<h3 id="通信协议http">通信协议HTTP</h3>
-<p>Web客户端（浏览器）和web服务器之间主要是通过<code>http协议</code>来进行交互。想要快速掌握HTTP协议，推荐通过《图解HTTP》进行学习。掌握基础的<code>请求和响应流</code>。</p>
-<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1601000926412.png" alt="" loading="lazy"></figure>
-<h3 id="web"><strong>Web</strong></h3>
-<h4 id="1-静态web">1、静态Web</h4>
-<p>静态Web对于每个用户来说，看到的都是相同的页面。例如：<a href="https://www.baidu.com/index.html">百度首页</a>，对于每个用户来说都是一样的。</p>
-<p>常见的静态Web资源有：html、css、js、image等。</p>
-<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1601000933285.png" alt="" loading="lazy"></figure>
-<h4 id="2-动态web">2、动态Web</h4>
-<p>动态Web对于每个用户来说就因人而异。例如：<a href="http://i.baidu.com/">百度的个人中心</a>，就会从数据库中去加载不同用户的不同个人资料等数据。</p>
-<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1601000937725.png" alt="" loading="lazy"></figure>
-<h3 id="web服务器">Web服务器</h3>
-<p>​	<code>Web服务器</code>处理来自客户端的HTTP请求，并返回HTTP响应。它<code>擅长</code>处理静态资源。而静态资源存储在Web<code>目录</code>中，Web服务器找到相应的静态资源后，响应给客户端。</p>
-<p>​	但如果想要提供动态页面和动态数据，例如，需要从数据库中取出个人中心的数据，Web服务器就显得有些力不从心了。这时就需要一个辅助应用，能够生成动态页面，而且这个应用能与Web服务器通信，并且能够和后端java语言进行交互，从而从数据库存取数据。这个辅助应用就是<code>servlet</code>。</p>
-<h3 id="servlet">Servlet</h3>
-<p>​	Servlet就是sun公司开发动态web的一门技术，Sun公司在这些API中提供一个接口叫做Servlet。我们一般把实现了Servlet接口的java类也称之为Servlet。在MVC设计模式中，servlet扮演着C（控制器）的角色，当客户请求到来，进入到Servlet，Servlet调用M（业务逻辑）从数据库中存取数据<br>
-  但Servlet也需要帮助。当请求到来时，必须有人加载、初始化和实例化Servlet，或者创建或分配一个新的线程处理这个请求，调用Servlet的doGet（）、doPost（）方法。并需要有人创建servlet必须的参数HTTPServletRequest和HTTPServletResponse。当请求处理结束后，有人销毁Servlet，管理着Servlet的生命周期。这个人就是<code>Web容器</code>也称<code>Web应用服务器</code>。</p>
-<h3 id="web容器">Web容器</h3>
-<p>​	Servlet没有main()方法，它们受控于另一个Java应用，这个Java应用称为容器。<br>
-<code>Tomcat</code>就是这样一个容器，如果Web服务器（如Apache）得到一个指向某Servlet的请求（而不是其他请求，如请求一个普通的静态页面），此时Web服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器向Servlet提供HTTP请求和响应，而且要由容器调用Servlet的方法，如doGet()和doPost()。</p>
-<p>用一个丑陋的图来形容就是：<br>
-<img src="https://zzggtt.github.io/post-images/1601000945479.png" alt="" loading="lazy"></p>
+                            <h2 id="企业网络架构">企业网络架构</h2>
+<p>传统的三层模型网络拓扑图：</p>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1604406002989.png" alt="" loading="lazy"></figure>
+<p>参考链接：</p>
+<p>http://www.dengfm.com/15224178393493.html</p>
+<p>https://blog.csdn.net/qq_36119192/article/details/84427267</p>
+<h2 id="nat地址转换">NAT地址转换</h2>
+<p>NAT技术让少数公有IP地址被使用私有地址的大量主机所共享。这一机制允许远多于IP地址空间所支持的主机共享网络。同时，由于NAT屏蔽了内部网络，也为局域网内的机器提供了安全保障。</p>
+<p>参考链接：</p>
+<p>https://wizardforcel.gitbooks.io/network-basic/content/18.html</p>
+<h2 id="windows基础">Windows基础</h2>
+<h3 id="域和工作组">域和工作组</h3>
+<ul>
+<li>
+<p><strong>工作组</strong></p>
+<p>工作组是最简单的资源管理模式，它具有<code>分布式管理</code>功能。每个用户独立的管理自己的计算机，只能在其计算机上使用其登陆凭证进行登录。大多数存储是分布式的。每个设备都有自己的专用存储。</p>
+</li>
+<li>
+<p><strong>域</strong></p>
+<p>域是C/S网络资源管理模式，具有<code>集中管理</code>功能。用户使用其登陆凭证可以在域中的任何设备登录，所有设备都可以在集中设备（DC）上进行管理，所有用户数据都集中存储。</p>
+</li>
+</ul>
+<p><strong>区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">域</th>
+<th style="text-align:center">工作组</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1、</td>
+<td style="text-align:center">域中的计算机具有集中式数据库。</td>
+<td style="text-align:center">工作组中的计算机主要具有自己的本地数据库。</td>
+</tr>
+<tr>
+<td style="text-align:center">2、</td>
+<td style="text-align:center">域主要是仅传输和共享敏感的重要数据。</td>
+<td style="text-align:center">工作组仅由于安全性较低而用于共享安全性和个人数据较少的内容。</td>
+</tr>
+<tr>
+<td style="text-align:center">3、</td>
+<td style="text-align:center">域主要是大型公共和企业网络的首选。</td>
+<td style="text-align:center">工作组主要是小型局域网的首选，例如学校，学院，建筑物等。</td>
+</tr>
+<tr>
+<td style="text-align:center">4、</td>
+<td style="text-align:center">由于安全性，域用于传输和共享敏感的重要数据。</td>
+<td style="text-align:center">由于安全性较低，工作组用于共享个人数据。</td>
+</tr>
+<tr>
+<td style="text-align:center">5、</td>
+<td style="text-align:center">域对于大量设备可以更好地工作。</td>
+<td style="text-align:center">工作组对较少的计算机更好地工作。</td>
+</tr>
+<tr>
+<td style="text-align:center">6、</td>
+<td style="text-align:center">域名由域控制器根据IP地址提供。</td>
+<td style="text-align:center">在工作组中，没有任何依赖于硬件组件和服务器的名称分配。</td>
+</tr>
+<tr>
+<td style="text-align:center">7、</td>
+<td style="text-align:center">可以从集中式存储中的域中恢复数据。</td>
+<td style="text-align:center">由于每个设备的本地存储，因此无法在工作组中进行数据恢复。</td>
+</tr>
+<tr>
+<td style="text-align:center">8、</td>
+<td style="text-align:center">可以使用一个或多个不同网络域的设备并向其中添加所有预期的设备来形成域。</td>
+<td style="text-align:center">同一网络中的设备只能添加到工作组中。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dcdomain-controller">DC（Domain Controller）</h3>
+<p>在域管理模式下，负责响应Windows Server域中的安全身份验证请求的服务器称为“域控制器（Domain Controller，简写为DC）。网络管理员通过在<code>域控制器</code>上集中管理大量的pc机。</p>
+<p>域控制器中包含了由这个域的账户、密码、属于这个域的计算机等信息构成的<code>数据库</code>。当电脑联入网络时，域控制器首先要鉴别这台电脑是否是属于这个域的，用户使用的登录账号是否存在、密码是否正确。如果以上信息有一样不正确，那么域控制器就会拒绝这个用户从这台电脑登录。</p>
+<h3 id="adactive-directory">AD（Active Directory）</h3>
+<p>Active Directory（AD）是Microsoft专有的<code>目录服务</code>。它在Windows Server上运行，用于管理网络上的设备和资源。</p>
+<p>目录是一种分层结构，用于存储有关网络上对象的信息。而目录服务，例如Active Directory域服务（AD DS），提供了用于<code>存储目录数据</code>，并使网络用户和管理员可以<code>使用此数据</code>的方法。</p>
+<p>域内所有的计算机共享一个集中式的目录数据库（又称为AD数据库），它包含着整个域内的<code>对象</code>（用户账户、计算机账户、打印机、共享文件等）和安全信息等等，而活动目录负责目录数据库的操作（增删修改）。</p>
+<p>所以建立域控制器服务器的过程，其实就是安装AD的过程。</p>
+<h3 id="域-树-林-组织单位">域、树、林、组织单位</h3>
+<p>Active Directory域服务使用由域，树和林组成的分层布局来协调网络元素。</p>
+<ul>
+<li>
+<p>域</p>
+<p>域是一组对象。如用户或设备，共享相同AD数据库。域具有域名系统（DNS）结构。</p>
+</li>
+<li>
+<p>树</p>
+<p>树是是组合在一起的一个或多个域。树结构使用连续的名称空间来收集逻辑层次结构中的域集合。可以将树视为信任关系，其中在两个域之间共享安全连接或信任。</p>
+</li>
+<li>
+<p>林</p>
+<p>林是有一棵或多棵域树组成的，每棵域树独享连续的命名空间，不同域树之间没有命名空间的连续性。林中第一棵域树的根域也整个林的根域，同时也是林的名称。</p>
+</li>
+<li>
+<p>组织单位</p>
+<p>组织用户，组和设备。每个域可以包含自己的OU。但是，OU不能具有单独的名称空间，因为域中的每个用户或对象都必须是唯一的。例如，无法创建具有相同用户名的用户帐户。</p>
+</li>
+</ul>
+<p>参考链接：</p>
+<p>https://www.geeksforgeeks.org/difference-between-domain-and-workgroup/</p>
+<p>https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview</p>
+<p>https://blog.csdn.net/qq_39101049/article/details/99678671</p>
 
                         </div>
                         
@@ -277,7 +358,7 @@
 
                                                 <p class="copyright-item">
                                                     <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
-                                                    <span><a href="https://zzggtt.github.io/post/fu-xian-yi-xia-web-ji-chu-zhi-shi/">https://zzggtt.github.io/post/fu-xian-yi-xia-web-ji-chu-zhi-shi/</a></span>
+                                                    <span><a href="https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/">https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/</a></span>
                                                 </p>
 
                                                 <p class="copyright-item">
@@ -292,9 +373,9 @@
                                                                     <span style="margin-right:15px">
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
-                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/fu-xian-yi-xia-web-ji-chu-zhi-shi/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/fu-xian-yi-xia-web-ji-chu-zhi-shi/&sharesource=qzone&title=复习一下Web基础知识&pics=https://zzggtt.github.io/images/avatar.png?v=1604406013693&summary="><i class="fa fa-qq"></i></a>
-                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/fu-xian-yi-xia-web-ji-chu-zhi-shi/&sharesource=weibo&title=复习一下Web基础知识 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1604406013693 "><i class="fa fa-weibo "></i></a>
+                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/"><i class="fa fa-qrcode"></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/&sharesource=qzone&title=内网渗透基础&pics=https://zzggtt.github.io/images/avatar.png?v=1604406013693&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/&sharesource=weibo&title=内网渗透基础 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1604406013693 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -305,8 +386,8 @@
                                                                                     <span class="tag ">
                         
                         
-                        <a href="https://zzggtt.github.io/tag/mCepNBSW4/">#
-                    基础知识
+                        <a href="https://zzggtt.github.io/tag/kAnd86P1Q/">#
+                    渗透测试
                         </a>
                         
                             
@@ -324,13 +405,9 @@
                                                                                 <!---->
                                                                                 <section class="post-nav">
                                                                                     
-                                                                                        <a class="prev" rel="prev" href="https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/">
-                                                                                            《图解TCP/IP》读书笔记
-                                                                                        </a>
-                                                                                        
                                                                                             
-                                                                                                <a class="next" rel="next" href="https://zzggtt.github.io/post/about/">
-                                                                                                    关于
+                                                                                                <a class="next" rel="next" href="https://zzggtt.github.io/post/mysql-zhu-ru-dian-xie-webshell/">
+                                                                                                    Mysql注入点写Webshell
                                                                                                 </a>
                                                                                                 
                                                                                 </section>
