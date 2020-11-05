@@ -206,53 +206,139 @@
     
             <div class="main">
                 <div class="container">
-                    <div class="post-wrap archive">
-                        
+                    <article class="post-wrap">
+                        <header class="post-header">
+                            <h1 class="post-title">
+                                端口转发与边界代理
+                            </h1>
                             
-                                <h3>
-                                    2020
-                                </h3>
+                                    <!--zh-->
+                                    <div class="post-meta zh">
+                                        &#x4F5C;&#x8005;:
+                                        <a itemprop="author" rel="author" href="/">
+                                            ZG0T01
+                                        </a>
+                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-11-05</a></span>
+                                        <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
+                                    href="#">1.7
+                                    &#x5206;&#x949F;</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">488</a></span>
+                                        
+                                                阅读量:
+                                                <span data-hk-page="current"> - </span>
+                                                
+                                    </div>
+                                    
+                        </header>
+                        
+                        <div class="post-content">
+                            <h3 id="为什么要用端口转发和代理"><strong>为什么要用端口转发和代理？</strong></h3>
+<ul>
+<li>
+<p>更加安全</p>
+<p>直接远程登录会留下比较明显的痕迹，而且有时候权限也不够。</p>
+</li>
+<li>
+<p>更好的接触目标</p>
+<p>内网渗透的过程中，需要工具和环境的辅助，如果目标机器上缺少对应的环境变量或者组件，会导致渗透受阻。</p>
+</li>
+<li>
+<p>使用已有shell的机器，作为跳板，扩大战果</p>
+</li>
+</ul>
+<h3 id="正向和反向连接"><strong>正向和反向连接</strong></h3>
+<p>首先要理解两种不同的连接方式：</p>
+<ul>
+<li>Client-&gt;Transit server-&gt;Server：Client能够正向连接Transit server。Transit server直接转发即可（<strong>Tansit Server对外开放</strong>）</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1604587044214.png" alt="" loading="lazy"></figure>
+<ul>
+<li>Client&lt;-Transit server-&gt;Server：Client无法正向连接Transit server，但Transit server能够反向连接Client。（<strong>Tansit Server不对外开放，但是可以对外访问</strong>）</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1604587048694.png" alt="" loading="lazy"></figure>
+<p>例如常见的Windows远程登陆、SSH、Telnet、Web服务（连接webshell）等等都是<strong>正向连接</strong>。而我们打点拿下的机器在局域网内、ip动态改变、有防火墙等限制下则需要<strong>反向连接</strong>，例如反弹shell就是典型的反向连接。</p>
+<h3 id="端口转发和代理"><strong>端口转发和代理</strong></h3>
+<p>在渗透测试中，经常会使用到端口转发和代理。</p>
+<p>端口转发是转发一个网络端口从一个网络节点到另一个网络节点的行为。通过拿下shell的机器作为Tansit Server把攻击机的流量转发给内网其他机器。</p>
+<p>如果攻击机需要对内网多个端口进行扫描（或是多台机器的多个端口），逐个配置转发规则不现实，为了提高效率，可以使用代理，配置一次规则即可。</p>
+<p>转发工具：</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1604587054023.png" alt="" loading="lazy"></figure>
+<p>推荐大佬们总结好的链接：</p>
+<p><a href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86/">渗透基础-端口转发与代理</a></p>
+<p><a href="https://mp.weixin.qq.com/s/6Q_i34ND-Epcu-71LHZRlA">内网渗透之代理转发</a></p>
+<p><a href="https://payloads.online/archivers/2018-02-02/1">内网渗透常见的端口转发方式</a></p>
+<h3 id="反弹shell"><strong>反弹shell</strong></h3>
+<p>推荐看先知大佬总结的：</p>
+<p><a href="https://xz.aliyun.com/t/2549">Linux反弹shell的本质</a></p>
+<p>[Linux反弹shell基础](</p>
+
+                        </div>
+                        
                                 
                                     
+                                            <!--zh-->
+                                            <section class="post-copyright zh">
+                                                <p class="copyright-item ">
+                                                    <span>&#x4F5C;&#x8005;:</span>
+                                                    <span>ZG0T01</span>
+                                                </p>
 
-                                        <article class="archive-item">
-                                            <a class="archive-item-link" href="https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/">
-                                                域环境搭建
-                                            </a>
-                                            <span class="archive-item-date">2020-11-03 </span>
-                                        </article>
-                                        
-                                            
-                                    
+                                                <p class="copyright-item">
+                                                    <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
+                                                    <span><a href="https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/">https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/</a></span>
+                                                </p>
 
-                                        <article class="archive-item">
-                                            <a class="archive-item-link" href="https://zzggtt.github.io/post/mysql-shou-gong-zhu-ru-jian-ce-he-ji-chu-han-shu/">
-                                                Mysql手工注入检测和基础函数
-                                            </a>
-                                            <span class="archive-item-date">2020-10-28 </span>
-                                        </article>
-                                        
-                                            
-                                    
-
-                                        <article class="archive-item">
-                                            <a class="archive-item-link" href="https://zzggtt.github.io/post/chu-shi-webshell/">
-                                                初识Webshell
-                                            </a>
-                                            <span class="archive-item-date">2020-10-28 </span>
-                                        </article>
-                                        
+                                                <p class="copyright-item">
+                                                    <span>&#x534F;&#x8BAE;:</span>
+                                                    <span>MIT License</span>
+                                                </p>
+                                            </section>
                                             
                                                 
-                    </div>
-                    <div class="pagination-container">
+                                                    
+                                                                    <!--Share-->
+                                                                    <span style="margin-right:15px">
+                        <i class="post-share"></i>
+                        <span>&#x5206;&#x4EAB;:</span>
+                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/"><i class="fa fa-qrcode"></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/&sharesource=qzone&title=端口转发与边界代理&pics=https://zzggtt.github.io/images/avatar.png?v=1604587063284&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/&sharesource=weibo&title=端口转发与边界代理 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1604587063284 "><i class="fa fa-weibo "></i></a>
+
+                                                                    </span>
+                                                                    
+                                                                            <!--zh-->
+                                                                            <section class="post-tags zh ">
+                                                                                <div>
+                                                                                    <span>&#x6807;&#x7B7E;:</span>
+                                                                                    <span class="tag ">
                         
-                            
-                                    
-                                            
-                    </div>
+                                </span>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <a href="javascript:window.history.back();">
+                        &#x8FD4;&#x56DE;</a>
+                                                                                    <span>&dot;</span>
+                                                                                    <a href="#">&#x4E3B;&#x9875;</a>
+                                                                                </div>
+                                                                            </section>
+
+                                                                            
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                            
+                                                                                                <a class="next" rel="next" href="https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/">
+                                                                                                    域环境搭建
+                                                                                                </a>
+                                                                                                
+                                                                                </section>
+                    </article>
                 </div>
+                
+                                            
             </div>
+    </div>
+    </div>
     </div>
     
     <div id="player"></div>
@@ -339,5 +425,8 @@
                 </script>
         </div>
 </body>
+<script>
+    scroll();
+</script>
 
 </html>

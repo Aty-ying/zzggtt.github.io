@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-11-05T08:38:42.845Z</updated>
+    <updated>2020-11-05T14:37:45.330Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,53 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[端口转发与边界代理]]></title>
+        <id>https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/</id>
+        <link href="https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/">
+        </link>
+        <updated>2020-11-05T14:35:18.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="为什么要用端口转发和代理"><strong>为什么要用端口转发和代理？</strong></h3>
+<ul>
+<li>
+<p>更加安全</p>
+<p>直接远程登录会留下比较明显的痕迹，而且有时候权限也不够。</p>
+</li>
+<li>
+<p>更好的接触目标</p>
+<p>内网渗透的过程中，需要工具和环境的辅助，如果目标机器上缺少对应的环境变量或者组件，会导致渗透受阻。</p>
+</li>
+<li>
+<p>使用已有shell的机器，作为跳板，扩大战果</p>
+</li>
+</ul>
+<h3 id="正向和反向连接"><strong>正向和反向连接</strong></h3>
+<p>首先要理解两种不同的连接方式：</p>
+<ul>
+<li>Client-&gt;Transit server-&gt;Server：Client能够正向连接Transit server。Transit server直接转发即可（<strong>Tansit Server对外开放</strong>）</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1604587044214.png" alt="" loading="lazy"></figure>
+<ul>
+<li>Client&lt;-Transit server-&gt;Server：Client无法正向连接Transit server，但Transit server能够反向连接Client。（<strong>Tansit Server不对外开放，但是可以对外访问</strong>）</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1604587048694.png" alt="" loading="lazy"></figure>
+<p>例如常见的Windows远程登陆、SSH、Telnet、Web服务（连接webshell）等等都是<strong>正向连接</strong>。而我们打点拿下的机器在局域网内、ip动态改变、有防火墙等限制下则需要<strong>反向连接</strong>，例如反弹shell就是典型的反向连接。</p>
+<h3 id="端口转发和代理"><strong>端口转发和代理</strong></h3>
+<p>在渗透测试中，经常会使用到端口转发和代理。</p>
+<p>端口转发是转发一个网络端口从一个网络节点到另一个网络节点的行为。通过拿下shell的机器作为Tansit Server把攻击机的流量转发给内网其他机器。</p>
+<p>如果攻击机需要对内网多个端口进行扫描（或是多台机器的多个端口），逐个配置转发规则不现实，为了提高效率，可以使用代理，配置一次规则即可。</p>
+<p>转发工具：</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1604587054023.png" alt="" loading="lazy"></figure>
+<p>推荐大佬们总结好的链接：</p>
+<p><a href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86/">渗透基础-端口转发与代理</a></p>
+<p><a href="https://mp.weixin.qq.com/s/6Q_i34ND-Epcu-71LHZRlA">内网渗透之代理转发</a></p>
+<p><a href="https://payloads.online/archivers/2018-02-02/1">内网渗透常见的端口转发方式</a></p>
+<h3 id="反弹shell"><strong>反弹shell</strong></h3>
+<p>推荐看先知大佬总结的：</p>
+<p><a href="https://xz.aliyun.com/t/2549">Linux反弹shell的本质</a></p>
+<p>[Linux反弹shell基础](</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[域环境搭建]]></title>
         <id>https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/</id>
