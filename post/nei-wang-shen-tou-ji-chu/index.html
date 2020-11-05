@@ -87,7 +87,7 @@
                         <input id="switch_default" type="checkbox" class="switch_default">
                         <label for="switch_default" class="toggleBtn"></label>
             </div>
-            <form id="gridea-search-form" data-update="1604406045640" action="/search/index.html">
+            <form id="gridea-search-form" data-update="1604564693095" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
             </form>
         </div>
@@ -106,7 +106,7 @@
                         <!--zh-->
                         <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
                     </div>
-                    <form id="gridea-search-form" data-update="1604406045640" action="/search/index.html">
+                    <form id="gridea-search-form" data-update="1604564693095" action="/search/index.html">
                         <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
                     </form>
                     <!--en-->
@@ -209,7 +209,7 @@
                     <article class="post-wrap">
                         <header class="post-header">
                             <h1 class="post-title">
-                                内网渗透基础
+                                域环境搭建
                             </h1>
                             
                                     <!--zh-->
@@ -220,9 +220,9 @@
                                         </a>
                                         <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-11-03</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">4.8
+                                    href="#">4.5
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1336</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1271</a></span>
                                         
                                             <span class="post-category">&#x5206;&#x7C7B;:
                                 
@@ -238,26 +238,17 @@
                         </header>
                         
                         <div class="post-content">
-                            <h2 id="企业网络架构">企业网络架构</h2>
-<p>传统的三层模型网络拓扑图：</p>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1604406002989.png" alt="" loading="lazy"></figure>
-<p>参考链接：</p>
-<p>http://www.dengfm.com/15224178393493.html</p>
-<p>https://blog.csdn.net/qq_36119192/article/details/84427267</p>
-<h2 id="nat地址转换">NAT地址转换</h2>
-<p>NAT技术让少数公有IP地址被使用私有地址的大量主机所共享。这一机制允许远多于IP地址空间所支持的主机共享网络。同时，由于NAT屏蔽了内部网络，也为局域网内的机器提供了安全保障。</p>
-<p>参考链接：</p>
-<p>https://wizardforcel.gitbooks.io/network-basic/content/18.html</p>
-<h2 id="windows基础">Windows基础</h2>
+                            <h3 id="前言">前言</h3>
+<p>本想记录一下搭建域环境的学习过程，但是发现倾旋师傅的文章<a href="https://payloads.online/archivers/2019-04-13/1">最快的方式搭建域环境</a>写的非常详细，于是准备写一写有关于域的相关基础知识。</p>
 <h3 id="域和工作组">域和工作组</h3>
 <ul>
 <li>
 <p><strong>工作组</strong></p>
-<p>工作组是最简单的资源管理模式，它具有<code>分布式管理</code>功能。每个用户独立的管理自己的计算机，只能在其计算机上使用其登陆凭证进行登录。大多数存储是分布式的。每个设备都有自己的专用存储。</p>
+<p>工作组是最简单的Windows资源管理模式，它具有<code>分布式管理</code>功能。每个用户独立的管理自己的计算机，只能在其计算机上使用其登陆凭证进行登录。大多数存储是分布式的。每个设备都有自己的专用存储。</p>
 </li>
 <li>
 <p><strong>域</strong></p>
-<p>域是C/S网络资源管理模式，具有<code>集中管理</code>功能。用户使用其登陆凭证可以在域中的任何设备登录，所有设备都可以在集中设备（DC）上进行管理，所有用户数据都集中存储。</p>
+<p>域是客户端/服务器的网络资源管理模式，具有<code>集中管理</code>功能。用户使用其登陆凭证可以在域中的任何设备登录，所有设备都可以在集中设备（DC）上进行管理，所有用户数据都集中存储。</p>
 </li>
 </ul>
 <p><strong>区别</strong>：</p>
@@ -340,7 +331,7 @@
 <p>组织用户，组和设备。每个域可以包含自己的OU。但是，OU不能具有单独的名称空间，因为域中的每个用户或对象都必须是唯一的。例如，无法创建具有相同用户名的用户帐户。</p>
 </li>
 </ul>
-<p>参考链接：</p>
+<p><strong>参考链接：</strong></p>
 <p>https://www.geeksforgeeks.org/difference-between-domain-and-workgroup/</p>
 <p>https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview</p>
 <p>https://blog.csdn.net/qq_39101049/article/details/99678671</p>
@@ -374,8 +365,8 @@
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
                                                                     <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/&sharesource=qzone&title=内网渗透基础&pics=https://zzggtt.github.io/images/avatar.png?v=1604406045640&summary="><i class="fa fa-qq"></i></a>
-                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/&sharesource=weibo&title=内网渗透基础 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1604406045640 "><i class="fa fa-weibo "></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/&sharesource=qzone&title=域环境搭建&pics=https://zzggtt.github.io/images/avatar.png?v=1604564693095&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/&sharesource=weibo&title=域环境搭建 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1604564693095 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -498,7 +489,7 @@
                     CheckVersion();
                     
                     var newDate = new Date();
-                    newDate.setTime(1604406045640);
+                    newDate.setTime(1604564693095);
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>

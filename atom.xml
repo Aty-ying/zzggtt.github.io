@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-11-03T12:20:49.708Z</updated>
+    <updated>2020-11-05T08:24:55.100Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -11,31 +11,22 @@
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
     <entry>
-        <title type="html"><![CDATA[内网渗透基础]]></title>
+        <title type="html"><![CDATA[域环境搭建]]></title>
         <id>https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/</id>
         <link href="https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/">
         </link>
         <updated>2020-11-03T12:19:05.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="企业网络架构">企业网络架构</h2>
-<p>传统的三层模型网络拓扑图：</p>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1604406002989.png" alt="" loading="lazy"></figure>
-<p>参考链接：</p>
-<p>http://www.dengfm.com/15224178393493.html</p>
-<p>https://blog.csdn.net/qq_36119192/article/details/84427267</p>
-<h2 id="nat地址转换">NAT地址转换</h2>
-<p>NAT技术让少数公有IP地址被使用私有地址的大量主机所共享。这一机制允许远多于IP地址空间所支持的主机共享网络。同时，由于NAT屏蔽了内部网络，也为局域网内的机器提供了安全保障。</p>
-<p>参考链接：</p>
-<p>https://wizardforcel.gitbooks.io/network-basic/content/18.html</p>
-<h2 id="windows基础">Windows基础</h2>
+        <content type="html"><![CDATA[<h3 id="前言">前言</h3>
+<p>本想记录一下搭建域环境的学习过程，但是发现倾旋师傅的文章<a href="https://payloads.online/archivers/2019-04-13/1">最快的方式搭建域环境</a>写的非常详细，于是准备写一写有关于域的相关基础知识。</p>
 <h3 id="域和工作组">域和工作组</h3>
 <ul>
 <li>
 <p><strong>工作组</strong></p>
-<p>工作组是最简单的资源管理模式，它具有<code>分布式管理</code>功能。每个用户独立的管理自己的计算机，只能在其计算机上使用其登陆凭证进行登录。大多数存储是分布式的。每个设备都有自己的专用存储。</p>
+<p>工作组是最简单的Windows资源管理模式，它具有<code>分布式管理</code>功能。每个用户独立的管理自己的计算机，只能在其计算机上使用其登陆凭证进行登录。大多数存储是分布式的。每个设备都有自己的专用存储。</p>
 </li>
 <li>
 <p><strong>域</strong></p>
-<p>域是C/S网络资源管理模式，具有<code>集中管理</code>功能。用户使用其登陆凭证可以在域中的任何设备登录，所有设备都可以在集中设备（DC）上进行管理，所有用户数据都集中存储。</p>
+<p>域是客户端/服务器的网络资源管理模式，具有<code>集中管理</code>功能。用户使用其登陆凭证可以在域中的任何设备登录，所有设备都可以在集中设备（DC）上进行管理，所有用户数据都集中存储。</p>
 </li>
 </ul>
 <p><strong>区别</strong>：</p>
@@ -118,7 +109,7 @@
 <p>组织用户，组和设备。每个域可以包含自己的OU。但是，OU不能具有单独的名称空间，因为域中的每个用户或对象都必须是唯一的。例如，无法创建具有相同用户名的用户帐户。</p>
 </li>
 </ul>
-<p>参考链接：</p>
+<p><strong>参考链接：</strong></p>
 <p>https://www.geeksforgeeks.org/difference-between-domain-and-workgroup/</p>
 <p>https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview</p>
 <p>https://blog.csdn.net/qq_39101049/article/details/99678671</p>
