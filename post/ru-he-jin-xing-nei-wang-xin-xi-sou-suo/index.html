@@ -209,7 +209,7 @@
                     <article class="post-wrap">
                         <header class="post-header">
                             <h1 class="post-title">
-                                《图解TCP/IP》读书笔记
+                                如何进行内网信息搜索
                             </h1>
                             
                                     <!--zh-->
@@ -218,18 +218,12 @@
                                         <a itemprop="author" rel="author" href="/">
                                             ZG0T01
                                         </a>
-                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-10-08</a></span>
+                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-11-12</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">4.9
+                                    href="#">5.9
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1399</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1545</a></span>
                                         
-                                            <span class="post-category">&#x5206;&#x7C7B;:
-                                
-                                <a href="https://zzggtt.github.io/tag/mCepNBSW4/">基础知识</a>
-                                
-                            </span>
-                                            
                                                 阅读量:
                                                 <span data-hk-page="current"> - </span>
                                                 
@@ -239,136 +233,143 @@
                         
                         <div class="post-content">
                             <h3 id="前言">前言</h3>
-<p>了解TCP/IP是对渗透测试很有必要的，下面是我阅读完《图解TCP/IP》后，记录的一些重要的知识点。</p>
-<p>（随着我的渗透测试学习，将会持续更新！！！）</p>
-<h3 id="tcpip概述">TCP/IP概述</h3>
-<h4 id="1-含义">1、含义</h4>
-<p>互联网在进行通信时，需要相应的网络协议，而在网络中被广泛使用的TCP/IP协议。TCP/IP协议在多数情况下指的是：利用IP进行通信时所必须用到的协议群的统称。</p>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1603526064488.png" alt="" loading="lazy"></figure>
-<h4 id="2-分层模型">2、分层模型</h4>
-<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1603526073786.png" alt="" loading="lazy"></figure>
-<p>OSI参考模型注重“通信协议必要的功能是什么”，而TCP/IP则更强调“在计算机上实现协议应该开放哪种程序”</p>
-<ul>
-<li>
-<p><strong>硬件层</strong></p>
-<p>TCP/IP的最底层的主要作用是负责数据传递的硬件。</p>
-</li>
-<li>
-<p><strong>网卡层</strong></p>
-<p>网卡层也称网络接口层，可以理解为“驱动程序”。它是硬件与操作系统之间的桥梁。计算机的外设不是直接插上就能使用的，还需要“驱动程序”的支持。所以通常需要在操作系统上安装一些<code>驱动程序软件</code>，才能使用这些附加硬件。</p>
-</li>
-<li>
-<p><strong>互联网层</strong></p>
-<p>互联网层使用IP协议，IP协基于IP地址转发分发数据。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1603526079889.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>传输层</strong></p>
-<p>传输层的主要功能是让应用程序软件之间实现通信，它具有来个代表性的协议：TCP、UDP。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1603526084292.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>应用层</strong></p>
-<p>TCP/IP的应用层把OSI参考模型中的会话层、表示层、应用层的功能都集中到<code>应用程序软件</code>中来实现。TCP/IP应用的架构绝大数属于<code>C/S架构</code>。</p>
-<p>提供服务的应用程序叫做服务端，接收服务的应用程序叫做客户端。在这种通信模式中，提供服务的程序会被预先部署到<code>服务器主机</code>上，等待接收任何时刻客户端发送的请求。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1603526090062.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>WWW</p>
-<p>在WWW中，用户通过Web浏览器（客户端），就可以访问存储在Web服务器上的各种信息。Web浏览器和Web服务器之间的通信协议是<code>HTTP</code>（应用层协议），所传输的数据的主要格式是<code>HTML</code>（表示层协议）。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1603526103650.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>电子邮件</p>
-<p>电子邮件之在网络上发送邮件，发送邮件的通信协议是<code>SMPT</code>（应用层协议）。起初只能发送文本格式，然而现在电子邮件由MIME协议（表示层协议）拓展后，就可以发送声音、图片等各式各样的信息。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1603526113007.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>文件传输</p>
-<p>文件传输协议是指将保存在其他计算机硬盘上的文件传输到本地硬盘上，该过程使用的协议是<code>FTP</code>。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1603526118579.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>远程登陆</p>
-<p>远程登陆指的是登录到远程的计算机上。在TCP/IP中常用<code>TELNET</code>和<code>SSH</code>两种协议。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1603526123676.png" alt="" loading="lazy"></figure>
-<h4 id="3-通信示例">3、通信示例</h4>
-<figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1603526128849.png" alt="" loading="lazy"></figure>
-<h3 id="地址的唯一性">地址的唯一性</h3>
+<p>从亮神分享的文章中学到了很多，记录了下来：</p>
 <blockquote>
-<p>在TCP/IP或UDP/IP通信中，通常采用5个信息来识别一个通信。分别是：“源IP地址”、“目标IP地址”、“协议号”、“源端口地址”、“目标端口地址”。</p>
+<p>目标<code>资产信息</code>搜集的程度，决定<code>渗透过程</code>的复杂程度。</p>
+<p>目标<code>主机信息</code>搜集的深度，决定后渗透<code>权限持续把控</code>。</p>
+<p>渗透的本质是信息搜集，而信息搜集整理为后续的情报跟进提供了强大的保证。</p>
+<p>——Micropoor</p>
 </blockquote>
-<h4 id="基础概念">基础概念</h4>
-<ul>
-<li>
-<p>端口</p>
-<p>在传输层中，用于识别一台计算机中正在运行的不同的应用程序。</p>
-</li>
-<li>
-<p>IP地址</p>
-<p>在网络层中，用于识别TCP/IP网络中互联的主机和路由器。</p>
-</li>
-<li>
-<p>MAC地址</p>
-<p>在数据链层路中，用于是被同一链路中不同的计算机。</p>
-</li>
-</ul>
-<h4 id="端口">端口</h4>
-<p>一台计算机中可以同时运行多个应用程序，例如Web浏览器、远程登陆用的SSH客户端等待。而传输层协议（TCP、UDP）正式利用端口号来<code>识别不同的应用程序</code>，并准确的将<code>数据传输</code>。</p>
-<figure data-type="image" tabindex="11"><img src="https://zzggtt.github.io/post-images/1603546021942.png" alt="" loading="lazy"></figure>
-<p>常见的端口对应的服务：https://www.shentoushi.top/Public/upload/images/2017-07-09/Baidu_translation_table.png</p>
-<h4 id="ip地址">IP地址</h4>
-<p>IP协议作为整个TCP/IP中至关重要的协议，主要作用是在复杂的网络环境中将<code>数据包发送</code>给最终的目标计算机。能够让任意两台计算机之间进行通讯。</p>
-<p>在TCP/IP通信中，所有主机或路由器必须设定IP地址。IP地址的作用在于从连接到互联网中的所有主机中，<code>识别</code>出进行通信的目标地址。</p>
-<figure data-type="image" tabindex="12"><img src="https://zzggtt.github.io/post-images/1603546036787.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>组成</strong></p>
-<p>IP地址由<code>“网络地址”</code>和<code>“主机地址”</code>两部分组成。</p>
-<p>网络地址代表<code>不同的网段</code>，而主机地址代表同一网段中的<code>不同的主机</code>。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="13"><img src="https://zzggtt.github.io/post-images/1603546042612.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="14"><img src="https://zzggtt.github.io/post-images/1603546047304.png" alt="" loading="lazy"></figure>
-<ul>
-<li><strong>分类</strong></li>
-</ul>
-<figure data-type="image" tabindex="15"><img src="https://zzggtt.github.io/post-images/1603546053182.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="16"><img src="https://zzggtt.github.io/post-images/1603546080736.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>全局地址和私有地址</strong></p>
-<p>随着互联网的普及，IP地址不足的问题日趋显著，于是出现了一种技术：在每个独立的网络中，只为相应的设备分配唯一的IP地址，对于哪些没有连接尽互联网中的主机，只需要保证在整个独立的网络中地址唯一即可。</p>
-<p>这些地址称为私有地址，范围如下：</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="17"><img src="https://zzggtt.github.io/post-images/1603546089041.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>NAT技术</strong></p>
-<p>私有IP地址最早没有计划连接互联网，而只是用于互联网之外的独立网络。然而随着NAT技术的出现，配置私有IP的主机也能与互联网中的主机进行通信。</p>
-<p>NAT技术是一种能够互换私有IP地址与全局IP地址的技术。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="18"><img src="https://zzggtt.github.io/post-images/1603546094513.png" alt="" loading="lazy"></figure>
-<p>当独立网络内部有多台机器同时要与外部通讯时，仅仅转换IP地址是不够用的，此时采用包含端口号一起转换的方式（NAPT）即可解决。</p>
-<figure data-type="image" tabindex="19"><img src="https://zzggtt.github.io/post-images/1603546098891.png" alt="" loading="lazy"></figure>
-<h4 id="mac地址">MAC地址</h4>
-<p>MAC地址用于识别数据链路中互连的节点。</p>
+<p>一次完整的网络渗透，不仅仅是与目标管理人员的权限争夺，一次完整的网络渗透，它分为两大块，技 术业务与信息分析业务。</p>
+<p>而技术业务要辅助并且要为信息分析业务提供强大的支撑与保证。同时信息分析业务要为技术业务提供 关键的目标信息分析逻辑关系与渗透方向。</p>
+<p>在得到一个webshell时，非root/administrator权限的情况下，对目标信息搜集至关重要，它会影响到后期的渗透是否顺利，以及渗透方向。</p>
+<h3 id="主机信息">主机信息</h3>
+<p><strong>查询用户信息：</strong></p>
+<p>了解当前用户权限，判断是否需要进一步提升权限。</p>
+<pre><code class="language-bash">win：
+	whoami：显示当前用户信息
+	net user：显示主机系统中所有用户信息
+linux：
+	whoami
+	id
+	cat /etc/shadow、cat /etc/passwd
+</code></pre>
+<p><strong>查询网络信息：</strong></p>
+<p>确认目标主机所连接的网络情况：</p>
+<pre><code class="language-bash">win：
+	TCP/IP配置：ipconfig、ipconfig /all
+	端口：netstat -ano
+	ARP表：arp -a 
+	路由表: route print
+	dns缓存记录：ipconfig/displaydns
+linux：
+	ifconfig、netstat -anplt
+    ARP表:arp -a 
+    路由表:route -n
+    查看登录日志获取登录来源ip：lastlog
+</code></pre>
+<p><strong>查询系统信息：</strong></p>
+<p>确认主机操作系统名称和版本信息</p>
+<pre><code class="language-bash">win:
+	systeminfo | findstr /B /C:&quot;OS Name&quot; /C:&quot;OS Version&quot;
+	systeminfo | findstr /B /C:&quot;OS 名称&quot; /C:&quot;OS 版本&quot;
+Linux: 
+	uname -a ：通过查看内核版本 
+</code></pre>
+<p><strong>查询补丁更新信息：</strong></p>
+<p>获取当前主机补丁更新情况，可用来辅助<strong>提升权限</strong>。</p>
+<pre><code class="language-bash">win：
+	systeminfo
+	wmic qfe get Caption,Description,HotFixID,InstalledOn
+Linux: uname -a ：通过查看内核版本 
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1605170574964.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1605170579520.png" alt="" loading="lazy"></figure>
+<p><strong>查询进程列表：</strong></p>
+<p>查看当前进程列表，重点关注安全软件，为了后续免杀做准备。</p>
+<pre><code class="language-bash">win：
+	tasklist
+    wmic process list brief
+linux: 
+	ps
+	top
+</code></pre>
+<p>注：要熟悉国内常见点杀软。</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1605170664939.png" alt="" loading="lazy"></figure>
+<p><strong>查询安装的软件及版本、路径等</strong></p>
+<pre><code class="language-bash">win:
+	wmic product get name,version &gt; ins.txt : 通过wmic将命令信息导出
+	powershell &quot;Get-WmiObject -class Win32_Product |Select-Object -Property name,version&quot; ：通过powershell命令收集软件的版本信息
+	
+linux:
+	rpm -q：来查询安装了哪些软件包
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1605170621708.png" alt="" loading="lazy"></figure>
+<p><strong>查询主机服务信息</strong></p>
+<pre><code class="language-bash">wmic service list brief
+</code></pre>
+<h3 id="资产信息">资产信息</h3>
+<p>服务器端存有敏感信息，通过收集各种登录凭证以便扩大战果。</p>
+<pre><code class="language-bash">Windows：
+	本地密码Hash和明文密码/抓取浏览器密码/服务端明文密码
+linux：
+	history记录敏感操作/shadow文件破解/mimipenguin抓取密码/使用Strace收集登录凭证/全盘搜索敏感信息
+</code></pre>
+<h3 id="域内信息收集"><strong>域内信息收集</strong></h3>
+<p>搜集完本机相关信息后，就需要判断当前主机是否在域内，如果在域内，就需要进一步收集域内信息</p>
+<p><strong>判断是否有域</strong><br>
+一般域服务器都会同时作为时间服务器，所以使用下面命令判断：</p>
+<pre><code class="language-bash">运行 net time /domain 该命令后，一般会有如下三种情况:
+1、存在域，但当前用户不是域用户，提示说明权限不够
+ 	 C:\Users&gt;WWW&gt;net time /domain
+ 	 System error 5 has occurred.
+ 	 Access is denied.
+ 	 
+2、存在域，并且当前用户是域用户
+  	 C:\Windows\system32&gt;net time /domain
+  	 Current time at \\owa.god.org is 2020/11/12 16:05:49
+  	 The command completed successfully.
+	
+3、当前网络环境为工作组，不存在域
+  	 C:\Users\Administrator&gt;net time /domain
+  	 The domain controller for the domain WORKGROUP could not 	   be found.
+</code></pre>
+<p><strong>域用户信息搜集：</strong></p>
+<pre><code class="language-bash">net user /domain //获取域用户列表
+net group /domain  //查询域内所有用户组列表
+net group “Domain Admins” /domain //查询“域管理员组用户”列表
+net group &quot;Domain Controllers&quot; /domain  //查看“域控制器组”用户
+net localgroup administrators /domain  //查询“本地管理员组”用户
+</code></pre>
+<p>正如上面所说，技术业务需要辅助分析业务。在域组中，其中有几个组需要特别关注，在一般的大型内 网渗透中，需要关注大致几个组</p>
+<p>（1）IT组/研发组 他们掌握在大量的内网密码，数据库密码等。</p>
+<p>（2）秘书组 他们掌握着大量的目标机构的内部传达文件，为信息分析业务提供信息，在反馈给技术业 务来确定渗透方向</p>
+<p>（3）domain admins组 root/administrator</p>
+<p>（4）财务组 他们掌握着大量的资金往来与目标企业的规划发展，并且可以通过资金，来判断出目标组 织的整体架构</p>
+<p>（5）CXX组 ceo cto coo等，不同的目标组织名字不同，如部长，厂长，经理等。</p>
+<p>以xxx组为例：xxx组共计x人。</p>
+<p>并且开始规划信息刺探等级：</p>
+<p>等级1：确定某部门具体人员数量 如研发中心4人</p>
+<p>等级2：确定该部门的英文用户名的具体信息，如姓名，联系方式，邮箱，职务等。以便确定下一步攻 击方向</p>
+<p>等级3：分别刺探白天/夜间 内网中所存活机器并且对应IP地址</p>
+<p>等级4： 对应人员的工作机内网IP，以及工作时间</p>
+<p>等级5： 根据信息业务反馈，制定目标安全时间，以便拖拽指定人员文件，或登录目标机器</p>
+<p>等级6： 制定目标机器后渗透与持续渗透的方式以及后门</p>
+<p>以上只是思路，后续内容可就不搬运了，详细内容可直接去GitHub：<a href="https://github.com/Micropoor/Micro8/blob/master/%E6%B8%97%E9%80%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%EF%BC%88%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E8%AF%BE%EF%BC%89%EF%BC%89.pdf">渗透的本质是信息收集</a></p>
+<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1605170709895.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1605170713702.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1605170717677.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1605170721876.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1605170726984.png" alt="" loading="lazy"></figure>
+<p><strong>找到域控</strong><br>
+一般来说，域控服务器IP地址为DNS服务器地址，找到DNS服务器地址就可以定位域控</p>
+<pre><code class="language-bash">nslookup/ping 域名,解析到域控服务器IP地址
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1605170731898.png" alt="" loading="lazy"></figure>
+<h3 id="参考链接">参考链接</h3>
+<p><a href="https://www.mi1k7ea.com/2020/02/27/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%AC%E6%9C%BA%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">内网信息收集之本机信息收集</a></p>
+<p><a href="https://mp.weixin.qq.com/s/o19f28x50dDICcActdvqXw">如何进行内网信息收集</a></p>
+<p><a href="https://github.com/Micropoor/Micro8/blob/master/%E6%B8%97%E9%80%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%EF%BC%88%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E8%AF%BE%EF%BC%89%EF%BC%89.pdf">渗透的本质是信息收集（第五十二课）</a></p>
 
                         </div>
                         
@@ -383,7 +384,7 @@
 
                                                 <p class="copyright-item">
                                                     <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
-                                                    <span><a href="https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/">https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/</a></span>
+                                                    <span><a href="https://zzggtt.github.io/post/ru-he-jin-xing-nei-wang-xin-xi-sou-suo/">https://zzggtt.github.io/post/ru-he-jin-xing-nei-wang-xin-xi-sou-suo/</a></span>
                                                 </p>
 
                                                 <p class="copyright-item">
@@ -398,9 +399,9 @@
                                                                     <span style="margin-right:15px">
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
-                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/&sharesource=qzone&title=《图解TCP/IP》读书笔记&pics=https://zzggtt.github.io/images/avatar.png?v=1605170743101&summary="><i class="fa fa-qq"></i></a>
-                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/&sharesource=weibo&title=《图解TCP/IP》读书笔记 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1605170743101 "><i class="fa fa-weibo "></i></a>
+                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/ru-he-jin-xing-nei-wang-xin-xi-sou-suo/"><i class="fa fa-qrcode"></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/ru-he-jin-xing-nei-wang-xin-xi-sou-suo/&sharesource=qzone&title=如何进行内网信息搜索&pics=https://zzggtt.github.io/images/avatar.png?v=1605170743101&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/ru-he-jin-xing-nei-wang-xin-xi-sou-suo/&sharesource=weibo&title=如何进行内网信息搜索 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1605170743101 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -410,12 +411,6 @@
                                                                                     <span>&#x6807;&#x7B7E;:</span>
                                                                                     <span class="tag ">
                         
-                        
-                        <a href="https://zzggtt.github.io/tag/mCepNBSW4/">#
-                    基础知识
-                        </a>
-                        
-                            
                                 </span>
                                                                                 </div>
                                                                                 <div>
@@ -430,13 +425,9 @@
                                                                                 <!---->
                                                                                 <section class="post-nav">
                                                                                     
-                                                                                        <a class="prev" rel="prev" href="https://zzggtt.github.io/post/chu-shi-webshell/">
-                                                                                            初识Webshell
-                                                                                        </a>
-                                                                                        
                                                                                             
-                                                                                                <a class="next" rel="next" href="https://zzggtt.github.io/post/about/">
-                                                                                                    关于
+                                                                                                <a class="next" rel="next" href="https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/">
+                                                                                                    端口转发与边界代理
                                                                                                 </a>
                                                                                                 
                                                                                 </section>

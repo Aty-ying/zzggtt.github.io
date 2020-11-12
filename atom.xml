@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-11-08T14:21:48.189Z</updated>
+    <updated>2020-11-12T08:45:45.499Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,152 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[如何进行内网信息搜索]]></title>
+        <id>https://zzggtt.github.io/post/ru-he-jin-xing-nei-wang-xin-xi-sou-suo/</id>
+        <link href="https://zzggtt.github.io/post/ru-he-jin-xing-nei-wang-xin-xi-sou-suo/">
+        </link>
+        <updated>2020-11-12T08:41:55.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="前言">前言</h3>
+<p>从亮神分享的文章中学到了很多，记录了下来：</p>
+<blockquote>
+<p>目标<code>资产信息</code>搜集的程度，决定<code>渗透过程</code>的复杂程度。</p>
+<p>目标<code>主机信息</code>搜集的深度，决定后渗透<code>权限持续把控</code>。</p>
+<p>渗透的本质是信息搜集，而信息搜集整理为后续的情报跟进提供了强大的保证。</p>
+<p>——Micropoor</p>
+</blockquote>
+<p>一次完整的网络渗透，不仅仅是与目标管理人员的权限争夺，一次完整的网络渗透，它分为两大块，技 术业务与信息分析业务。</p>
+<p>而技术业务要辅助并且要为信息分析业务提供强大的支撑与保证。同时信息分析业务要为技术业务提供 关键的目标信息分析逻辑关系与渗透方向。</p>
+<p>在得到一个webshell时，非root/administrator权限的情况下，对目标信息搜集至关重要，它会影响到后期的渗透是否顺利，以及渗透方向。</p>
+<h3 id="主机信息">主机信息</h3>
+<p><strong>查询用户信息：</strong></p>
+<p>了解当前用户权限，判断是否需要进一步提升权限。</p>
+<pre><code class="language-bash">win：
+	whoami：显示当前用户信息
+	net user：显示主机系统中所有用户信息
+linux：
+	whoami
+	id
+	cat /etc/shadow、cat /etc/passwd
+</code></pre>
+<p><strong>查询网络信息：</strong></p>
+<p>确认目标主机所连接的网络情况：</p>
+<pre><code class="language-bash">win：
+	TCP/IP配置：ipconfig、ipconfig /all
+	端口：netstat -ano
+	ARP表：arp -a 
+	路由表: route print
+	dns缓存记录：ipconfig/displaydns
+linux：
+	ifconfig、netstat -anplt
+    ARP表:arp -a 
+    路由表:route -n
+    查看登录日志获取登录来源ip：lastlog
+</code></pre>
+<p><strong>查询系统信息：</strong></p>
+<p>确认主机操作系统名称和版本信息</p>
+<pre><code class="language-bash">win:
+	systeminfo | findstr /B /C:&quot;OS Name&quot; /C:&quot;OS Version&quot;
+	systeminfo | findstr /B /C:&quot;OS 名称&quot; /C:&quot;OS 版本&quot;
+Linux: 
+	uname -a ：通过查看内核版本 
+</code></pre>
+<p><strong>查询补丁更新信息：</strong></p>
+<p>获取当前主机补丁更新情况，可用来辅助<strong>提升权限</strong>。</p>
+<pre><code class="language-bash">win：
+	systeminfo
+	wmic qfe get Caption,Description,HotFixID,InstalledOn
+Linux: uname -a ：通过查看内核版本 
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1605170574964.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1605170579520.png" alt="" loading="lazy"></figure>
+<p><strong>查询进程列表：</strong></p>
+<p>查看当前进程列表，重点关注安全软件，为了后续免杀做准备。</p>
+<pre><code class="language-bash">win：
+	tasklist
+    wmic process list brief
+linux: 
+	ps
+	top
+</code></pre>
+<p>注：要熟悉国内常见点杀软。</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1605170664939.png" alt="" loading="lazy"></figure>
+<p><strong>查询安装的软件及版本、路径等</strong></p>
+<pre><code class="language-bash">win:
+	wmic product get name,version &gt; ins.txt : 通过wmic将命令信息导出
+	powershell &quot;Get-WmiObject -class Win32_Product |Select-Object -Property name,version&quot; ：通过powershell命令收集软件的版本信息
+	
+linux:
+	rpm -q：来查询安装了哪些软件包
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1605170621708.png" alt="" loading="lazy"></figure>
+<p><strong>查询主机服务信息</strong></p>
+<pre><code class="language-bash">wmic service list brief
+</code></pre>
+<h3 id="资产信息">资产信息</h3>
+<p>服务器端存有敏感信息，通过收集各种登录凭证以便扩大战果。</p>
+<pre><code class="language-bash">Windows：
+	本地密码Hash和明文密码/抓取浏览器密码/服务端明文密码
+linux：
+	history记录敏感操作/shadow文件破解/mimipenguin抓取密码/使用Strace收集登录凭证/全盘搜索敏感信息
+</code></pre>
+<h3 id="域内信息收集"><strong>域内信息收集</strong></h3>
+<p>搜集完本机相关信息后，就需要判断当前主机是否在域内，如果在域内，就需要进一步收集域内信息</p>
+<p><strong>判断是否有域</strong><br>
+一般域服务器都会同时作为时间服务器，所以使用下面命令判断：</p>
+<pre><code class="language-bash">运行 net time /domain 该命令后，一般会有如下三种情况:
+1、存在域，但当前用户不是域用户，提示说明权限不够
+ 	 C:\Users&gt;WWW&gt;net time /domain
+ 	 System error 5 has occurred.
+ 	 Access is denied.
+ 	 
+2、存在域，并且当前用户是域用户
+  	 C:\Windows\system32&gt;net time /domain
+  	 Current time at \\owa.god.org is 2020/11/12 16:05:49
+  	 The command completed successfully.
+	
+3、当前网络环境为工作组，不存在域
+  	 C:\Users\Administrator&gt;net time /domain
+  	 The domain controller for the domain WORKGROUP could not 	   be found.
+</code></pre>
+<p><strong>域用户信息搜集：</strong></p>
+<pre><code class="language-bash">net user /domain //获取域用户列表
+net group /domain  //查询域内所有用户组列表
+net group “Domain Admins” /domain //查询“域管理员组用户”列表
+net group &quot;Domain Controllers&quot; /domain  //查看“域控制器组”用户
+net localgroup administrators /domain  //查询“本地管理员组”用户
+</code></pre>
+<p>正如上面所说，技术业务需要辅助分析业务。在域组中，其中有几个组需要特别关注，在一般的大型内 网渗透中，需要关注大致几个组</p>
+<p>（1）IT组/研发组 他们掌握在大量的内网密码，数据库密码等。</p>
+<p>（2）秘书组 他们掌握着大量的目标机构的内部传达文件，为信息分析业务提供信息，在反馈给技术业 务来确定渗透方向</p>
+<p>（3）domain admins组 root/administrator</p>
+<p>（4）财务组 他们掌握着大量的资金往来与目标企业的规划发展，并且可以通过资金，来判断出目标组 织的整体架构</p>
+<p>（5）CXX组 ceo cto coo等，不同的目标组织名字不同，如部长，厂长，经理等。</p>
+<p>以xxx组为例：xxx组共计x人。</p>
+<p>并且开始规划信息刺探等级：</p>
+<p>等级1：确定某部门具体人员数量 如研发中心4人</p>
+<p>等级2：确定该部门的英文用户名的具体信息，如姓名，联系方式，邮箱，职务等。以便确定下一步攻 击方向</p>
+<p>等级3：分别刺探白天/夜间 内网中所存活机器并且对应IP地址</p>
+<p>等级4： 对应人员的工作机内网IP，以及工作时间</p>
+<p>等级5： 根据信息业务反馈，制定目标安全时间，以便拖拽指定人员文件，或登录目标机器</p>
+<p>等级6： 制定目标机器后渗透与持续渗透的方式以及后门</p>
+<p>以上只是思路，后续内容可就不搬运了，详细内容可直接去GitHub：<a href="https://github.com/Micropoor/Micro8/blob/master/%E6%B8%97%E9%80%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%EF%BC%88%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E8%AF%BE%EF%BC%89%EF%BC%89.pdf">渗透的本质是信息收集</a></p>
+<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1605170709895.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1605170713702.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1605170717677.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1605170721876.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1605170726984.png" alt="" loading="lazy"></figure>
+<p><strong>找到域控</strong><br>
+一般来说，域控服务器IP地址为DNS服务器地址，找到DNS服务器地址就可以定位域控</p>
+<pre><code class="language-bash">nslookup/ping 域名,解析到域控服务器IP地址
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1605170731898.png" alt="" loading="lazy"></figure>
+<h3 id="参考链接">参考链接</h3>
+<p><a href="https://www.mi1k7ea.com/2020/02/27/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%AC%E6%9C%BA%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">内网信息收集之本机信息收集</a></p>
+<p><a href="https://mp.weixin.qq.com/s/o19f28x50dDICcActdvqXw">如何进行内网信息收集</a></p>
+<p><a href="https://github.com/Micropoor/Micro8/blob/master/%E6%B8%97%E9%80%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%EF%BC%88%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E8%AF%BE%EF%BC%89%EF%BC%89.pdf">渗透的本质是信息收集（第五十二课）</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[端口转发与边界代理]]></title>
         <id>https://zzggtt.github.io/post/duan-kou-zhuan-fa-yu-bian-jie-dai-li/</id>
