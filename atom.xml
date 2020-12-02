@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-11-24T09:49:14.424Z</updated>
+    <updated>2020-12-02T09:28:59.618Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,24 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[从mimkatz学习Windows本地hash抓取]]></title>
+        <id>https://zzggtt.github.io/post/cong-mimkatz-xue-xi-windows-ben-di-hash-zhua-qu/</id>
+        <link href="https://zzggtt.github.io/post/cong-mimkatz-xue-xi-windows-ben-di-hash-zhua-qu/">
+        </link>
+        <updated>2020-12-02T09:28:36.000Z</updated>
+        <content type="html"><![CDATA[<p>mark</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Windows本地认证]]></title>
+        <id>https://zzggtt.github.io/post/windows-ben-di-ren-zheng/</id>
+        <link href="https://zzggtt.github.io/post/windows-ben-di-ren-zheng/">
+        </link>
+        <updated>2020-12-02T09:28:11.000Z</updated>
+        <content type="html"><![CDATA[<p>mark</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Nmap基础使用]]></title>
         <id>https://zzggtt.github.io/post/nmap-ji-chu-shi-yong/</id>
@@ -1424,186 +1442,6 @@ $result=mysqli_query($con1, $sql);
 </code></pre>
 <figure data-type="image" tabindex="20"><img src="https://zzggtt.github.io/post-images/1603848406039.png" alt="" loading="lazy"></figure>
 <figure data-type="image" tabindex="21"><img src="https://zzggtt.github.io/post-images/1603848410717.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[初识Webshell]]></title>
-        <id>https://zzggtt.github.io/post/chu-shi-webshell/</id>
-        <link href="https://zzggtt.github.io/post/chu-shi-webshell/">
-        </link>
-        <updated>2020-10-28T00:50:01.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="webshell">Webshell</h2>
-<h3 id="1-shell">1、Shell</h3>
-<p><strong>Shell</strong>是一个 <code>命令解释器</code> ：用于接收使用者输入的指令，并送入内核去执行。解释使用者输入的指令。是一种为使用者提供操作界面的软件。</p>
-<p>基本上分为两大类：</p>
-<ul>
-<li>
-<p>图像界面shell</p>
-<p>应用最为广泛的 Windows Explorer （微软的windows系列操作系统），还有也包括广为人知的 Linux shell，其中linux shell 包括 X window manager (BlackBox和FluxBox），以及功能更强大的CDE、GNOME、KDE、 XFCE。</p>
-</li>
-<li>
-<p>命令式shell</p>
-<p>Unix/linux 系统：bash / sh / ksh / csh / zsh</p>
-<p>Winodws系统：cmd.exe、PowerShell</p>
-</li>
-</ul>
-<h3 id="2-webshell">2、Webshell</h3>
-<p><strong>Webshell</strong>是一种Web形式的命令解释器，以asp、jsp、php或者cgi等动态脚本语言编写一种<code>执行系统代码</code>的环境。通过浏览器访问网站服务器Web目录下的Webshell，输入指令，来达到管理目标网站的服务器。</p>
-<p>以最简单的php webshell为例：</p>
-<pre><code class="language-php">&lt;?php
-    system($_GET('command'));
-?&gt;
-</code></pre>
-<p>通过GET方式comand参数来接收传递命令，然后交由system函数执行命令。</p>
-<h3 id="3-webshell分类">3、Webshell分类</h3>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1603846217988.png" alt="" loading="lazy"></figure>
-<h3 id="4-webshell管理工具">4、Webshell管理工具</h3>
-<p>在以前菜刀没有出现的时候，我们想要获取 webshell 的时候，通常都是直接上传一个 web 木马并且直接用这个木马进行管理，由于这种大型木马的体量比较大，上传过程中容易被检测且不方便进行上传绕过测试，所以大家就想了一个办法，先上传一个体量小，功能少的小型木马然后再通过小马的简单的上传或者文件修改等单个功能进行大马的上传。小马的功能通常是围绕文件管理的功能，比较简单，如：文件上传、文件修改、新建文件等，都是围绕方便上传一个体量大的木马来做的。自从菜刀出现之后，渐渐的一句话木马成为了主流，体量小，还有一个界面版的客户端进行管理操作，极大的方便的大家对于 web 服务器的管理。</p>
-<p>上传完大马后，直接访问对应位置即可进行相应管理：</p>
-<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1603846222969.png" alt="" loading="lazy"></figure>
-<p>而一句话木马则提供了一个界面版的客户端进行管理操作，极大的方便的大家对于Web服务器的管理：</p>
-<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1603846229853.png" alt="" loading="lazy"></figure>
-<p>常见的Webshell管理工具：https://www.cnblogs.com/xiaozi/p/12397211.html</p>
-<p>参考：https://mp.weixin.qq.com/s/x2Tw3ukaTFDJvZ0YCuZBog</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[《图解TCP/IP》读书笔记]]></title>
-        <id>https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/</id>
-        <link href="https://zzggtt.github.io/post/lesslesstu-jie-tcpipgreatergreater-du-shu-bi-ji/">
-        </link>
-        <updated>2020-10-08T08:56:32.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="前言">前言</h3>
-<p>了解TCP/IP是对渗透测试很有必要的，下面是我阅读完《图解TCP/IP》后，记录的一些重要的知识点。</p>
-<p>（随着我的渗透测试学习，将会持续更新！！！）</p>
-<h3 id="tcpip概述">TCP/IP概述</h3>
-<h4 id="1-含义">1、含义</h4>
-<p>互联网在进行通信时，需要相应的网络协议，而在网络中被广泛使用的TCP/IP协议。TCP/IP协议在多数情况下指的是：利用IP进行通信时所必须用到的协议群的统称。</p>
-<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1603526064488.png" alt="" loading="lazy"></figure>
-<h4 id="2-分层模型">2、分层模型</h4>
-<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1603526073786.png" alt="" loading="lazy"></figure>
-<p>OSI参考模型注重“通信协议必要的功能是什么”，而TCP/IP则更强调“在计算机上实现协议应该开放哪种程序”</p>
-<ul>
-<li>
-<p><strong>硬件层</strong></p>
-<p>TCP/IP的最底层的主要作用是负责数据传递的硬件。</p>
-</li>
-<li>
-<p><strong>网卡层</strong></p>
-<p>网卡层也称网络接口层，可以理解为“驱动程序”。它是硬件与操作系统之间的桥梁。计算机的外设不是直接插上就能使用的，还需要“驱动程序”的支持。所以通常需要在操作系统上安装一些<code>驱动程序软件</code>，才能使用这些附加硬件。</p>
-</li>
-<li>
-<p><strong>互联网层</strong></p>
-<p>互联网层使用IP协议，IP协基于IP地址转发分发数据。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1603526079889.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>传输层</strong></p>
-<p>传输层的主要功能是让应用程序软件之间实现通信，它具有来个代表性的协议：TCP、UDP。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1603526084292.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>应用层</strong></p>
-<p>TCP/IP的应用层把OSI参考模型中的会话层、表示层、应用层的功能都集中到<code>应用程序软件</code>中来实现。TCP/IP应用的架构绝大数属于<code>C/S架构</code>。</p>
-<p>提供服务的应用程序叫做服务端，接收服务的应用程序叫做客户端。在这种通信模式中，提供服务的程序会被预先部署到<code>服务器主机</code>上，等待接收任何时刻客户端发送的请求。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1603526090062.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>WWW</p>
-<p>在WWW中，用户通过Web浏览器（客户端），就可以访问存储在Web服务器上的各种信息。Web浏览器和Web服务器之间的通信协议是<code>HTTP</code>（应用层协议），所传输的数据的主要格式是<code>HTML</code>（表示层协议）。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1603526103650.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>电子邮件</p>
-<p>电子邮件之在网络上发送邮件，发送邮件的通信协议是<code>SMPT</code>（应用层协议）。起初只能发送文本格式，然而现在电子邮件由MIME协议（表示层协议）拓展后，就可以发送声音、图片等各式各样的信息。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1603526113007.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>文件传输</p>
-<p>文件传输协议是指将保存在其他计算机硬盘上的文件传输到本地硬盘上，该过程使用的协议是<code>FTP</code>。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1603526118579.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>远程登陆</p>
-<p>远程登陆指的是登录到远程的计算机上。在TCP/IP中常用<code>TELNET</code>和<code>SSH</code>两种协议。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1603526123676.png" alt="" loading="lazy"></figure>
-<h4 id="3-通信示例">3、通信示例</h4>
-<figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1603526128849.png" alt="" loading="lazy"></figure>
-<h3 id="地址的唯一性">地址的唯一性</h3>
-<blockquote>
-<p>在TCP/IP或UDP/IP通信中，通常采用5个信息来识别一个通信。分别是：“源IP地址”、“目标IP地址”、“协议号”、“源端口地址”、“目标端口地址”。</p>
-</blockquote>
-<h4 id="基础概念">基础概念</h4>
-<ul>
-<li>
-<p>端口</p>
-<p>在传输层中，用于识别一台计算机中正在运行的不同的应用程序。</p>
-</li>
-<li>
-<p>IP地址</p>
-<p>在网络层中，用于识别TCP/IP网络中互联的主机和路由器。</p>
-</li>
-<li>
-<p>MAC地址</p>
-<p>在数据链层路中，用于是被同一链路中不同的计算机。</p>
-</li>
-</ul>
-<h4 id="端口">端口</h4>
-<p>一台计算机中可以同时运行多个应用程序，例如Web浏览器、远程登陆用的SSH客户端等待。而传输层协议（TCP、UDP）正式利用端口号来<code>识别不同的应用程序</code>，并准确的将<code>数据传输</code>。</p>
-<figure data-type="image" tabindex="11"><img src="https://zzggtt.github.io/post-images/1603546021942.png" alt="" loading="lazy"></figure>
-<p>常见的端口对应的服务：https://www.shentoushi.top/Public/upload/images/2017-07-09/Baidu_translation_table.png</p>
-<h4 id="ip地址">IP地址</h4>
-<p>IP协议作为整个TCP/IP中至关重要的协议，主要作用是在复杂的网络环境中将<code>数据包发送</code>给最终的目标计算机。能够让任意两台计算机之间进行通讯。</p>
-<p>在TCP/IP通信中，所有主机或路由器必须设定IP地址。IP地址的作用在于从连接到互联网中的所有主机中，<code>识别</code>出进行通信的目标地址。</p>
-<figure data-type="image" tabindex="12"><img src="https://zzggtt.github.io/post-images/1603546036787.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>组成</strong></p>
-<p>IP地址由<code>“网络地址”</code>和<code>“主机地址”</code>两部分组成。</p>
-<p>网络地址代表<code>不同的网段</code>，而主机地址代表同一网段中的<code>不同的主机</code>。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="13"><img src="https://zzggtt.github.io/post-images/1603546042612.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="14"><img src="https://zzggtt.github.io/post-images/1603546047304.png" alt="" loading="lazy"></figure>
-<ul>
-<li><strong>分类</strong></li>
-</ul>
-<figure data-type="image" tabindex="15"><img src="https://zzggtt.github.io/post-images/1603546053182.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="16"><img src="https://zzggtt.github.io/post-images/1603546080736.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>全局地址和私有地址</strong></p>
-<p>随着互联网的普及，IP地址不足的问题日趋显著，于是出现了一种技术：在每个独立的网络中，只为相应的设备分配唯一的IP地址，对于哪些没有连接尽互联网中的主机，只需要保证在整个独立的网络中地址唯一即可。</p>
-<p>这些地址称为私有地址，范围如下：</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="17"><img src="https://zzggtt.github.io/post-images/1603546089041.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p><strong>NAT技术</strong></p>
-<p>私有IP地址最早没有计划连接互联网，而只是用于互联网之外的独立网络。然而随着NAT技术的出现，配置私有IP的主机也能与互联网中的主机进行通信。</p>
-<p>NAT技术是一种能够互换私有IP地址与全局IP地址的技术。</p>
-</li>
-</ul>
-<figure data-type="image" tabindex="18"><img src="https://zzggtt.github.io/post-images/1603546094513.png" alt="" loading="lazy"></figure>
-<p>当独立网络内部有多台机器同时要与外部通讯时，仅仅转换IP地址是不够用的，此时采用包含端口号一起转换的方式（NAPT）即可解决。</p>
-<figure data-type="image" tabindex="19"><img src="https://zzggtt.github.io/post-images/1603546098891.png" alt="" loading="lazy"></figure>
-<h4 id="mac地址">MAC地址</h4>
-<p>MAC地址用于识别数据链路中互连的节点。</p>
 ]]></content>
     </entry>
 </feed>
