@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zzggtt.github.io</id>
     <title>ZG0T01</title>
-    <updated>2020-12-07T08:16:22.734Z</updated>
+    <updated>2020-12-14T14:15:07.746Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zzggtt.github.io"/>
     <link rel="self" href="https://zzggtt.github.io/atom.xml"/>
@@ -10,6 +10,52 @@
     <logo>https://zzggtt.github.io/images/avatar.png</logo>
     <icon>https://zzggtt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, ZG0T01</rights>
+    <entry>
+        <title type="html"><![CDATA[记录一下：第一个简单的爬虫]]></title>
+        <id>https://zzggtt.github.io/post/ji-lu-yi-xia-di-yi-ge-jian-dan-de-pa-chong/</id>
+        <link href="https://zzggtt.github.io/post/ji-lu-yi-xia-di-yi-ge-jian-dan-de-pa-chong/">
+        </link>
+        <updated>2020-12-14T13:56:42.000Z</updated>
+        <content type="html"><![CDATA[<p>抓取一下雨神的博客（简单款式）：</p>
+<pre><code class="language-python"># -*- coding:utf-8 -*-
+import requests
+import re
+
+def download(url):
+    headers = {
+      'authority': 'www.cnblogs.com',
+      'pragma': 'no-cache',
+      'cache-control': 'no-cache',
+      'upgrade-insecure-requests': '1',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
+      'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'none',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      'accept-language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
+    }
+    response = requests.request(&quot;GET&quot;, url, headers=headers)
+    response.encoding = 'utf-8'
+    return response.text
+
+def extract_url(source):
+    return re.findall(r'href=&quot;(https://www.cnblogs.com/Rain99-/p/\d+\.html)&quot;', source, re.I)
+
+def paras_title(source):
+    title = re.findall(r'&lt;span&gt;(.+?)&lt;/span&gt;', source, re.I)
+    print(title)
+
+if __name__ == '__main__':
+    u = &quot;https://www.cnblogs.com/Rain99-/p&quot;
+    html = download(u)
+    links = extract_url(html)
+    for l in links:
+        html_new = download(l)
+        paras_title(html_new)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[域认证-Kerbros]]></title>
         <id>https://zzggtt.github.io/post/yu-ren-zheng-kerbros/</id>
@@ -1039,111 +1085,6 @@ net localgroup administrators /domain  //查询“本地管理员组”用户
 <p><a href="https://www.mi1k7ea.com/2020/02/27/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%AC%E6%9C%BA%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">内网信息收集之本机信息收集</a></p>
 <p><a href="https://mp.weixin.qq.com/s/o19f28x50dDICcActdvqXw">如何进行内网信息收集</a></p>
 <p><a href="https://github.com/Micropoor/Micro8/blob/master/%E6%B8%97%E9%80%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%EF%BC%88%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E8%AF%BE%EF%BC%89%EF%BC%89.pdf">渗透的本质是信息收集（第五十二课）</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[域环境搭建]]></title>
-        <id>https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/</id>
-        <link href="https://zzggtt.github.io/post/nei-wang-shen-tou-ji-chu/">
-        </link>
-        <updated>2020-11-03T12:19:05.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="前言">前言</h3>
-<p>本想记录一下搭建域环境的学习过程，但是发现倾旋师傅的文章<a href="https://payloads.online/archivers/2019-04-13/1">最快的方式搭建域环境</a>写的非常详细，于是准备写一写有关于域的相关基础知识。</p>
-<h3 id="域和工作组">域和工作组</h3>
-<ul>
-<li>
-<p><strong>工作组</strong></p>
-<p>工作组是最简单的Windows资源管理模式，它具有<code>分布式管理</code>功能。每个用户独立的管理自己的计算机，只能在其计算机上使用其登陆凭证进行登录。大多数存储是分布式的。每个设备都有自己的专用存储。</p>
-</li>
-<li>
-<p><strong>域</strong></p>
-<p>域是客户端/服务器的网络资源管理模式，具有<code>集中管理</code>功能。用户使用其登陆凭证可以在域中的任何设备登录，所有设备都可以在集中设备（DC）上进行管理，所有用户数据都集中存储。</p>
-</li>
-</ul>
-<p><strong>区别</strong>：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">序号</th>
-<th style="text-align:center">域</th>
-<th style="text-align:center">工作组</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1、</td>
-<td style="text-align:center">域中的计算机具有集中式数据库。</td>
-<td style="text-align:center">工作组中的计算机主要具有自己的本地数据库。</td>
-</tr>
-<tr>
-<td style="text-align:center">2、</td>
-<td style="text-align:center">域主要是仅传输和共享敏感的重要数据。</td>
-<td style="text-align:center">工作组仅由于安全性较低而用于共享安全性和个人数据较少的内容。</td>
-</tr>
-<tr>
-<td style="text-align:center">3、</td>
-<td style="text-align:center">域主要是大型公共和企业网络的首选。</td>
-<td style="text-align:center">工作组主要是小型局域网的首选，例如学校，学院，建筑物等。</td>
-</tr>
-<tr>
-<td style="text-align:center">4、</td>
-<td style="text-align:center">由于安全性，域用于传输和共享敏感的重要数据。</td>
-<td style="text-align:center">由于安全性较低，工作组用于共享个人数据。</td>
-</tr>
-<tr>
-<td style="text-align:center">5、</td>
-<td style="text-align:center">域对于大量设备可以更好地工作。</td>
-<td style="text-align:center">工作组对较少的计算机更好地工作。</td>
-</tr>
-<tr>
-<td style="text-align:center">6、</td>
-<td style="text-align:center">域名由域控制器根据IP地址提供。</td>
-<td style="text-align:center">在工作组中，没有任何依赖于硬件组件和服务器的名称分配。</td>
-</tr>
-<tr>
-<td style="text-align:center">7、</td>
-<td style="text-align:center">可以从集中式存储中的域中恢复数据。</td>
-<td style="text-align:center">由于每个设备的本地存储，因此无法在工作组中进行数据恢复。</td>
-</tr>
-<tr>
-<td style="text-align:center">8、</td>
-<td style="text-align:center">可以使用一个或多个不同网络域的设备并向其中添加所有预期的设备来形成域。</td>
-<td style="text-align:center">同一网络中的设备只能添加到工作组中。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="dcdomain-controller">DC（Domain Controller）</h3>
-<p>在域管理模式下，负责响应Windows Server域中的安全身份验证请求的服务器称为“域控制器（Domain Controller，简写为DC）。网络管理员通过在<code>域控制器</code>上集中管理大量的pc机。</p>
-<p>域控制器中包含了由这个域的账户、密码、属于这个域的计算机等信息构成的<code>数据库</code>。当电脑联入网络时，域控制器首先要鉴别这台电脑是否是属于这个域的，用户使用的登录账号是否存在、密码是否正确。如果以上信息有一样不正确，那么域控制器就会拒绝这个用户从这台电脑登录。</p>
-<h3 id="adactive-directory">AD（Active Directory）</h3>
-<p>Active Directory（AD）是Microsoft专有的<code>目录服务</code>。它在Windows Server上运行，用于管理网络上的设备和资源。</p>
-<p>目录是一种分层结构，用于存储有关网络上对象的信息。而目录服务，例如Active Directory域服务（AD DS），提供了用于<code>存储目录数据</code>，并使网络用户和管理员可以<code>使用此数据</code>的方法。</p>
-<p>域内所有的计算机共享一个集中式的目录数据库（又称为AD数据库），它包含着整个域内的<code>对象</code>（用户账户、计算机账户、打印机、共享文件等）和安全信息等等，而活动目录负责目录数据库的操作（增删修改）。</p>
-<p>所以建立域控制器服务器的过程，其实就是安装AD的过程。</p>
-<h3 id="域-树-林-组织单位">域、树、林、组织单位</h3>
-<p>Active Directory域服务使用由域，树和林组成的分层布局来协调网络元素。</p>
-<ul>
-<li>
-<p>域</p>
-<p>域是一组对象。如用户或设备，共享相同AD数据库。域具有域名系统（DNS）结构。</p>
-</li>
-<li>
-<p>树</p>
-<p>树是是组合在一起的一个或多个域。树结构使用连续的名称空间来收集逻辑层次结构中的域集合。可以将树视为信任关系，其中在两个域之间共享安全连接或信任。</p>
-</li>
-<li>
-<p>林</p>
-<p>林是有一棵或多棵域树组成的，每棵域树独享连续的命名空间，不同域树之间没有命名空间的连续性。林中第一棵域树的根域也整个林的根域，同时也是林的名称。</p>
-</li>
-<li>
-<p>组织单位</p>
-<p>组织用户，组和设备。每个域可以包含自己的OU。但是，OU不能具有单独的名称空间，因为域中的每个用户或对象都必须是唯一的。例如，无法创建具有相同用户名的用户帐户。</p>
-</li>
-</ul>
-<p><strong>参考链接：</strong></p>
-<p>https://www.geeksforgeeks.org/difference-between-domain-and-workgroup/</p>
-<p>https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview</p>
-<p>https://blog.csdn.net/qq_39101049/article/details/99678671</p>
 ]]></content>
     </entry>
 </feed>
